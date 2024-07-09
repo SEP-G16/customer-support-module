@@ -8,7 +8,7 @@ import ActivityCard from "./components/ActivityCard/ActivityCard"; // Ensure the
 import MealCard from "./components/MealCard/MealCard"; // Ensure the component name starts with a capital letter
 import MenuCard from "./components/MenuCard"; // Ensure the component name starts with a capital letter
 import ReviewCard from "./components/ReviewCard/ReviewCard"; // Ensure the component name starts with a capital letter
-import Review from "./components/Reviews"; // Ensure the component name starts with a capital letter
+import Review from "./components/Reviews"; 
 import ImageBox from './components/ImageBox/ImageBox';
 import Menu from './pages/Menu/Menu';
 import AvailabilityBar from './components/AvailabilityBar';
