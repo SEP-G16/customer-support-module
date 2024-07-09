@@ -14,14 +14,15 @@ import Menu from './pages/Menu/Menu';
 import AvailabilityBar from './components/AvailabilityBar';
 import CheckAvailability from './pages/Booking/CheckAvailability';
 import Home from './pages/Welcome/Home';
-import ReviewPage from './pages/Review/Review';
+//import ReviewPage from './pages/Review/Review';
+import MenuPage from './pages/Menu/Menu';
 
 const Spacer = ({ height }) => <div style={{ height: `${height}px` }} />;
 
 function App() {
    return (
     <div className="centered-div">
-      <ReviewPage/>
+      <MenuPage/>
     </div>
 
 

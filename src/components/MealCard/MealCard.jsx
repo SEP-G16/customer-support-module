@@ -1,29 +1,28 @@
 import * as React from "react";
 import styled from "styled-components";
-import food from "./pizza.jpg";
 
-function MealCard() {
+
+function MealCard({ foodName, imageSrc, price, description }) {
   return (
     <Div>
       <Div2>
         <Column>
-          <Img src={food} alt="Food" />
+          <Img src={imageSrc} alt={foodName} />
         </Column>
         <Column2>
           <Div3>
             <Div4>
               <span style={{ letterSpacing: '1px', fontFamily: 'Marcellus, serif', fontSize: 20 }}>
-                Pepperoni Pizza..............................................$12
+                {foodName}..............................................${price}
               </span>
             </Div4>
-            <Div5>Lorem ipsum</Div5>
+            <Div5>{description}</Div5>
           </Div3>
         </Column2>
       </Div2>
     </Div>
   );
 }
-
 const Div = styled.div`
   width: 100%;
   max-width: 650px;
