@@ -1,0 +1,116 @@
+import React from "react";
+import { Stack, Typography } from "@mui/material";
+import styled from "styled-components";
+
+const Div = styled.div`
+  background-color: rgba(255, 255, 255, 1);
+  max-width: 407px;
+  font-size: 12px;
+  color: #000;
+  font-weight: 400;
+  padding: 42px 34px;
+`;
+
+const Img = styled.img`
+  aspect-ratio: 1.2;
+  object-fit: auto;
+  object-position: center;
+  width: 100%;
+`;
+
+const Title = styled(Typography)`
+  text-align: center;
+  margin-top: 25px;
+  font-size: 24px;
+  font-family: Marcellus, sans-serif;
+`;
+
+const InfoContainer = styled(Stack)`
+  display: flex;
+  margin-top: 23px;
+  gap: 20px;
+`;
+
+const InfoItem = styled(Stack)`
+  background: linear-gradient(0deg, #fff 0%, #fff 100%),
+    linear-gradient(0deg, #fff 0%, #fff 100%),
+    linear-gradient(0deg, #fff 0%, #fff 100%), #fff;
+  display: flex;
+  gap: 7px;
+  white-space: nowrap;
+  flex: 1;
+  padding: 10px 0;
+`;
+
+const InfoIcon = styled.img`
+  aspect-ratio: 1.1; /* Adjust as per your icon aspect ratio */
+  object-fit: auto;
+  object-position: center;
+  width: 23px;
+`;
+
+const InfoText = styled(Typography)`
+  font-family: Marcellus, sans-serif;
+`;
+
+const Description = styled(Typography)`
+  margin-top: 41px;
+  font-size: 14px;
+  font-family: Marcellus, sans-serif;
+`;
+
+const DiscoverMore = styled(Typography)`
+  font-family: Marcellus, sans-serif;
+  text-decoration-line: underline;
+  margin-top: 31px;
+`;
+
+function RoomCard() {
+  return (
+    <Div>
+      <Img
+        loading="lazy"
+        src="./room.jpg" // Replace with actual path relative to your component
+        alt="Room Image"
+      />
+      <Title variant="h4">Standard Room</Title>
+      <InfoContainer direction="row" spacing={2}>
+        <InfoItem>
+          <InfoIcon
+            loading="lazy"
+            src="./maximize.png" // Replace with actual path relative to your component
+            alt="Area icon"
+          />
+          <InfoText>80m2</InfoText>
+        </InfoItem>
+        <InfoItem>
+          <InfoIcon
+            loading="lazy"
+            src="./user.png" // Replace with actual path relative to your component
+            alt="Guest icon"
+          />
+          <InfoText>2 Guests</InfoText>
+        </InfoItem>
+        <InfoItem>
+          <InfoIcon
+            loading="lazy"
+            src="./bed.png" // Replace with actual path relative to your component
+            alt="Bed icon"
+          />
+          <InfoText>1 King Bed</InfoText>
+        </InfoItem>
+      </InfoContainer>
+      <Description>
+        Experience ultimate comfort and relaxation in our Standard Room,
+        featuring a breathtaking beach view. Perfect for unwinding after a
+        sun-soaked day, this room provides everything you need for a delightful
+        beachfront getaway.
+      </Description>
+      <DiscoverMore>
+        <span style={{ textDecoration: "underline" }}>Discover More</span> &gt;
+      </DiscoverMore>
+    </Div>
+  );
+}
+
+export default RoomCard;
