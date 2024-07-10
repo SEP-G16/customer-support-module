@@ -12,7 +12,7 @@ function AvailabilityBar() {
   });
 
   const [showPopup, setShowPopup] = useState(false);
-  const [available, setAvailable] = useState(true); // Initially set to true for demonstration
+  const [available, setAvailable] = useState(true);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,9 +21,7 @@ function AvailabilityBar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    // Simulate availability logic (replace with actual logic)
-    setAvailable(false); // false - Simulate rooms not available
-                         // true - stimulate rooms available
+    setAvailable(false); 
 
     if (available) {
       setShowPopup(true);
@@ -54,7 +52,6 @@ function AvailabilityBar() {
             }}
             required
             InputProps={{
-              style: { padding: "8px", width: "120px", color: "white", borderColor: "#b99d75", fontSize: "14px" },
               disableUnderline: true,
             }}
             variant="outlined"
@@ -75,7 +72,6 @@ function AvailabilityBar() {
             }}
             required
             InputProps={{
-              style: { padding: "8px", width: "120px", color: "white", borderColor: "#b99d75", fontSize: "14px" },
               disableUnderline: true,
             }}
             variant="outlined"
@@ -91,10 +87,9 @@ function AvailabilityBar() {
             value={formData.room}
             onChange={handleChange}
             InputLabelProps={{
-              style: { color: "white" },
+              style: { color: "white" ,borderRadius: "0px"},
             }}
             InputProps={{
-              style: { color: "white", borderColor: "#b99d75" },
               disableUnderline: true,
             }}
             variant="outlined"
@@ -119,7 +114,6 @@ function AvailabilityBar() {
               style: { color: "white" },
             }}
             InputProps={{
-              style: { color: "white", borderColor: "#b99d75" },
               disableUnderline: true,
             }}
             variant="outlined"
@@ -144,7 +138,6 @@ function AvailabilityBar() {
               style: { color: "white" },
             }}
             InputProps={{
-              style: { color: "white", borderColor: "#b99d75" },
               disableUnderline: true,
             }}
             variant="outlined"
@@ -165,7 +158,6 @@ function AvailabilityBar() {
         </ButtonGridItem>
       </GridContainer>
 
-      {/* Popup Dialog */}
       <Dialog open={showPopup} onClose={handleClosePopup}>
         <DialogTitle>Availability</DialogTitle>
         <DialogContent>
@@ -187,8 +179,10 @@ function AvailabilityBar() {
 
 const Container = styled.div`
   background-color: #53624e;
-  padding: 36px 47px;
+  padding: 10px 47px;
   width: 75%;
+  border: 1px solid #b99d75;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   @media (max-width: 991px) {
     padding: 20px;
     width: 90%;
@@ -209,7 +203,6 @@ const GridItem = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  border: 2px solid #b99d75;
   padding: 10px;
 `;
 
@@ -257,8 +250,26 @@ const StyledButton = styled(MuiButton)`
 const StyledTextField = styled(TextField)`
   && {
     margin-bottom: 10px;
-    input {
-      font-size: 10px;
+    width: 120px;
+    & .MuiOutlinedInput-root {
+      border-radius: 0px;
+      & fieldset {
+        border-color: #b99d75;
+      }
+      &:hover fieldset {
+        border-color: #b99d75;
+      }
+      &.Mui-focused fieldset {
+        border-color: #b99d75;
+      }
+    }
+    & .MuiInputBase-input {
+      color: white;
+      padding: 8px;
+      font-size: 14px;
+    }
+    & .MuiInputLabel-root {
+      color: white;
     }
   }
 `;
