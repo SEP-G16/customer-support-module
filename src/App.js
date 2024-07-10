@@ -16,16 +16,27 @@ import AvailabilityBar from './components/AvailabilityBar';
 import CheckAvailability from './pages/Booking/CheckAvailability';
 import Home from './pages/Welcome/Home';
 import ReviewPage from './pages/Review/Review';
+import Booking from './pages/Booking/Booking';
 
 const Spacer = ({ height }) => <div style={{ height: `${height}px` }} />;
 
-function App() {
-   return (
-    <div className="centered-div">
-      <ReviewPage/>
-    </div>
-
-
+const App = () => {
+  return (
+    <Router>
+      <Header />
+      <div className="centered-div">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/review" element={<ReviewPage />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/checkAvailability" element={<CheckAvailability />} />
+          <Route path="/book" element={<Booking />} />
+          
+          
+          {/* Add other routes here as needed */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 export default App;
