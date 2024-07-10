@@ -10,6 +10,9 @@ import ActivityCard from '../../components/ActivityCard/ActivityCard'; // Assumi
 import ImageBox from '../../components/ImageBox/ImageBox';
 import LotusIcon from './lotus.png'; // Assuming the correct path to your icon
 import ResortIcon from './hotel.png'; // Assuming the correct path to your icon
+import pool from "./pool.jpg";
+import spa from "./spa.jpg";
+import gym from "./gym.jpg";
 
 const CustomTextContent = () => {
   return (
@@ -62,9 +65,21 @@ const CheckAvailability = () => {
         </TextSection>
         <ActivityCardsWrapper>
           <ActivityCards>
-            <ActivityCard />
-            <ActivityCard />
-            <ActivityCard />
+          <ActivityCard
+            img={pool}
+            title="Dive into Luxury With Our Infinity Pool"
+            description="Immerse yourself in crystal-clear waters with breathtaking views that stretch to the horizon. Relax poolside with a refreshing cocktail and let the tranquil ambiance whisk you away to paradise."
+          />
+          <ActivityCard
+            img={spa}
+            title="Rejuvenate at Our Luxurious Spa"
+            description="Indulge in soothing treatments and therapies designed to pamper your senses and rejuvenate your spirit. Escape into a world of tranquility, leaving you refreshed and revitalized."
+          />
+          <ActivityCard
+            img={gym}
+            title="Energize at Our Modern Fitness Center"
+            description="Stay fit with top-notch equipment and inspiring views. Maintain your routine or start anew in our state-of-the-art gym."
+          />
           </ActivityCards>
         </ActivityCardsWrapper>
       </ContentContainer>
