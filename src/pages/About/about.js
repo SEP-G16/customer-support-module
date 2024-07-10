@@ -1,43 +1,38 @@
-
 import React from 'react';
 import styled from 'styled-components';
-import {Stack, Typography, Rating } from '@mui/material';
+import { Stack, Typography, Rating } from '@mui/material';
 
 import Footer from '../../components/Footer';
 import ImageBox from '../../components/ImageBox/ImageBox';
-import lobby from './resort.jpg'; 
+import lobby from './resort.jpg';
 
 const CustomTextContent = () => {
-    return (
-      <Stack spacing={2} style={{ marginTop: '-200px' }}> {/* Adjust the marginTop value as needed */}
-        <Typography
-          variant="h1"
-          fontFamily="Marcellus, serif"
-          style={{
-            color: 'white',
-            padding: '0px',
-            marginBottom: '0px',
-            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
-          }}
-        >
-          About Us
-        </Typography>
-      </Stack>
-    );
-  };
-  
+  return (
+    <Stack spacing={2} style={{ marginTop: '-200px' }}> {/* Adjust the marginTop value as needed */}
+      <Typography
+        variant="h1"
+        fontFamily="Marcellus, serif"
+        style={{
+          color: 'white',
+          padding: '0px',
+          marginBottom: '0px',
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)",
+        }}
+      >
+        About Us
+      </Typography>
+    </Stack>
+  );
+};
 
 function AboutUs() {
   return (
-    
     <div>
-        
-      <MainContainer>
-      
       <ImageBox
         imageSrc={lobby}
         TextContentComponent={<CustomTextContent />}
       />
+      <MainContainer>
         <ContentContainer>
           <Typography variant="h4" gutterBottom>
             Welcome to Our Hotel
@@ -64,12 +59,6 @@ const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-`;
-
-const ImageBoxContainer = styled.div`
-  width: 100%;
-  max-width: 800px;
-  margin-bottom: 20px;
 `;
 
 const ContentContainer = styled.div`

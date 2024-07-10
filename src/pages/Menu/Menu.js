@@ -43,7 +43,7 @@ const MenuPage = () => {
 
   return (
     <Container>
-      <Header />
+      
       <ImageBox
         imageSrc={Dining}
         TextContentComponent={<CustomTextContent />}
