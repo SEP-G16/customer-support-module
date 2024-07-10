@@ -7,6 +7,7 @@ import ImageBox from '../../components/ImageBox/ImageBox';
 import ReviewImage from './Reviews.jpg';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
 
+
 const CustomTextContent = () => {
   return (
     <Stack>
@@ -47,6 +48,7 @@ const Review = () => {
   };
 
   return (
+    
     <Container>
       <Header />
       <ImageBox imageSrc={ReviewImage} TextContentComponent={<CustomTextContent />} />

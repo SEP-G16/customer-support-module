@@ -2,18 +2,17 @@ import * as React from "react";
 import styled from "styled-components";
 import MealCard from "./MealCard/MealCard"; // Import the MealCard component
 
-function MenuCard() {
+
+function MenuCard({title, children}) {
   return (
     <MenuContainer>
       <MenuHeader>
         <GoldLine />
-        <HeaderText>APPETIZERS</HeaderText>
+        <HeaderText>{title}</HeaderText>
         <GoldLine />
       </MenuHeader>
       <MealCardsContainer>
-        <MealCard />
-        <MealCard />
-        <MealCard />
+        {children}
       </MealCardsContainer>
     </MenuContainer>
   );

@@ -33,42 +33,37 @@ const Header = () => {
       <Stack
         direction="row"
         spacing={2}
-        sx={{ width: { xs: '100%', md: '20%' }, alignItems: 'center', justifyContent: 'center' }}
+        sx={{ alignItems: 'center' }}
       >
         <OptionsContainer>
-          <Link href="#" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link href="/" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
             Home
           </Link>
-          <Link href="#" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link href="/about-us" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
             About Us
           </Link>
-          <Link href="#" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link href="/contact" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
             Contact Us
           </Link>
         </OptionsContainer>
       </Stack>
+      <Typography variant="h4" component="div" sx={{ textAlign: "center", fontFamily: 'Marcellus, serif', color: "white", fontSize: { xs: '1.5rem', md: '2rem' } }}>
+        Ceylon Resort
+      </Typography>
       <Stack
         direction="row"
         spacing={2}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ width: { xs: '100%', md: '65%' } }}
-      >
-        <Typography variant="h4" component="div" sx={{ textAlign: "center", fontFamily: 'Marcellus, serif', color: "white", fontSize: { xs: '1.5rem', md: '2rem' } }}>
-          Ceylon Resort
-        </Typography>
-      </Stack>
-      <Stack
-        direction="row"
-        spacing={2}
-        sx={{ width: { xs: '100%', md: '20%' }, alignItems: 'center', justifyContent: 'center' }}
+        sx={{ alignItems: 'center', marginRight: { xs: '10px', md: '40px' } }} // Adjust the margin-right
       >
         <OptionsContainer>
-          <Link href="#booking" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link href="/book" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
             Booking
           </Link>
-          <Link href="#menu" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
-            Menu
+          <Link href="/menu" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+            Dining
+          </Link>
+          <Link href="/review" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+            Reviews
           </Link>
         </OptionsContainer>
       </Stack>
