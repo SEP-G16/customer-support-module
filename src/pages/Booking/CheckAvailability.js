@@ -12,6 +12,10 @@ import ResortIcon from './hotel.png'; // Assuming the correct path to your icon
 import room from './room.jpg';
 import luxury from './luxury.jpg';
 import suite from './suite.jpg';
+import pool from "./pool.jpg";
+import spa from "./spa.jpg";
+import gym from "./gym.jpg";
+
 
 const CustomTextContent = () => {
   return (
@@ -40,7 +44,6 @@ const CustomTextContent = () => {
 const CheckAvailability = () => {
   return (
     <Container>
-      <Header />
       <ImageBox
         imageSrc={Booking}
         TextContentComponent={<CustomTextContent />}
@@ -91,9 +94,26 @@ const CheckAvailability = () => {
             Dive, Rejuvenate, and Energize with Us
           </Typography>
         </TextSection>
-        {/* Example of ActivityCards section */}
+        <ActivityCardsWrapper>
+          <ActivityCards>
+          <ActivityCard
+            img={pool}
+            title="Dive into Luxury With Our Infinity Pool"
+            description="Immerse yourself in crystal-clear waters with breathtaking views that stretch to the horizon. Relax poolside with a refreshing cocktail and let the tranquil ambiance whisk you away to paradise."
+          />
+          <ActivityCard
+            img={spa}
+            title="Rejuvenate at Our Luxurious Spa"
+            description="Indulge in soothing treatments and therapies designed to pamper your senses and rejuvenate your spirit. Escape into a world of tranquility, leaving you refreshed and revitalized."
+          />
+          <ActivityCard
+            img={gym}
+            title="Energize at Our Modern Fitness Center"
+            description="Stay fit with top-notch equipment and inspiring views. Maintain your routine or start anew in our state-of-the-art gym."
+          />
+          </ActivityCards>
+        </ActivityCardsWrapper>
       </ContentContainer>
-      <Footer />
     </Container>
   );
 };
