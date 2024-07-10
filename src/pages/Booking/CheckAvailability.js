@@ -5,14 +5,17 @@ import Booking from './Booking.jpg'; // Assuming Booking is the correct path to 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import AvailabilityBar from '../../components/AvailabilityBar';
-import RoomCard from '../../components/RoomCard/RoomCard';
-import ActivityCard from '../../components/ActivityCard/ActivityCard'; // Assuming ActivityCard component is defined
+import MyComponent from '../../components/RoomCard/RoomCard'; // Import MyComponent
 import ImageBox from '../../components/ImageBox/ImageBox';
 import LotusIcon from './lotus.png'; // Assuming the correct path to your icon
 import ResortIcon from './hotel.png'; // Assuming the correct path to your icon
+import room from './room.jpg';
+import luxury from './luxury.jpg';
+import suite from './suite.jpg';
 import pool from "./pool.jpg";
 import spa from "./spa.jpg";
 import gym from "./gym.jpg";
+
 
 const CustomTextContent = () => {
   return (
@@ -50,9 +53,37 @@ const CheckAvailability = () => {
       </AvailabilityBarWrapper>
       <ContentContainer>
         <RoomCards>
-          <RoomCard />
-          <RoomCard />
-          <RoomCard />
+          {/* Example of using MyComponent for multiple room cards */}
+          <MyComponentWrapper>
+            <MyComponent
+              roomImage={room}
+              roomType="Standard Room"
+              roomSize="80m2"
+              guests="2 Guests"
+              bedType="1 King Bed"
+              description="Experience ultimate comfort and relaxation in our Standard Room, featuring a breathtaking beach view. Perfect for unwinding after a sun-soaked day, this room provides everything you need for a delightful beachfront getaway."
+            />
+          </MyComponentWrapper>
+          <MyComponentWrapper>
+            <MyComponent
+              roomImage={luxury}
+              roomType="Deluxe Room"
+              roomSize="100m2"
+              guests="3 Guests"
+              bedType="2 Queen Beds"
+              description="Indulge in luxury with our Deluxe Room, offering spacious accommodations and modern amenities. Ideal for families or couples looking for extra comfort and style during their stay."
+            />
+          </MyComponentWrapper>
+          <MyComponentWrapper>
+            <MyComponent
+              roomImage={suite}
+              roomType="Suite"
+              roomSize="120m2"
+              guests="4 Guests"
+              bedType="2 Twin Beds"
+              description="Discover the epitome of luxury in our Suite, featuring expansive living space, stunning ocean views, and premium amenities. Perfect for those seeking a lavish retreat and unparalleled comfort."
+            />
+          </MyComponentWrapper>
         </RoomCards>
         <TextSection>
           <Img src={LotusIcon} alt="Lotus icon" />
@@ -106,6 +137,11 @@ const RoomCards = styled.div`
   justify-content: space-around;
   margin-bottom: 40px;
   gap: 50px;
+`;
+
+const MyComponentWrapper = styled.div`
+  flex: 1;
+  min-width: 300px; /* Adjust as necessary */
 `;
 
 const TextSection = styled.div`
