@@ -58,6 +58,7 @@ function AvailabilityBar() {
               disableUnderline: true,
             }}
             variant="outlined"
+            
           />
         </GridItem>
         <GridItem>
