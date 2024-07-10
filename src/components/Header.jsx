@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const HeaderContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
-  padding: 30px;
+  padding: 20px 30px; /* Adjust padding */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,29 +12,32 @@ const HeaderContainer = styled.div`
   top: 0;
   width: 100%;
   z-index: 1000;
+
+  @media (max-width: 768px) {
+    padding: 15px 20px; /* Adjust padding for smaller screens */
+  }
+
+  @media (max-width: 480px) {
+    padding: 10px; /* Further adjust padding for smaller screens */
+  }
 `;
 
 const OptionsContainer = styled.div`
   display: flex;
-  gap: 40px;
+  gap: 30px; /* Adjust gap between options */
 
   @media (max-width: 768px) {
-    gap: 20px;
-  }
-
-  @media (max-width: 480px) {
-    gap: 10px;
+    gap: 10px; /* Reduce gap on smaller screens */
+    padding-right: 20px; /* Add right padding on smaller screens */
+    flex-wrap: wrap; /* Allow items to wrap */
+    justify-content: center; /* Center items when they wrap */
   }
 `;
 
 const Header = () => {
   return (
     <HeaderContainer>
-      <Stack
-        direction="row"
-        spacing={2}
-        sx={{ alignItems: 'center' }}
-      >
+      <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
         <OptionsContainer>
           <Link href="/" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
             Home
@@ -50,13 +53,9 @@ const Header = () => {
       <Typography variant="h4" component="div" sx={{ textAlign: "center", fontFamily: 'Marcellus, serif', color: "white", fontSize: { xs: '1.5rem', md: '2rem' } }}>
         Ceylon Resort
       </Typography>
-      <Stack
-        direction="row"
-        spacing={2}
-        sx={{ alignItems: 'center', marginRight: { xs: '10px', md: '40px' } }} // Adjust the margin-right
-      >
+      <Stack direction="row" spacing={2} sx={{ alignItems: 'center', marginRight: { xs: '10px', md: '40px' } }}>
         <OptionsContainer>
-          <Link href="/checkcheckAvailability" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link href="/checkAvailability" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
             Booking
           </Link>
           <Link href="/menu" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
