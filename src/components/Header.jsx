@@ -56,7 +56,7 @@ const Header = () => {
         sx={{ alignItems: 'center', marginRight: { xs: '10px', md: '40px' } }} // Adjust the margin-right
       >
         <OptionsContainer>
-          <Link href="/checkcheckAvailability" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link href="/checkAvailability" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
             Booking
           </Link>
           <Link href="/menu" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>

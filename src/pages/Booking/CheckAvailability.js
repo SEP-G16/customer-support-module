@@ -5,6 +5,7 @@ import Booking from './Booking.jpg'; // Assuming Booking is the correct path to 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import AvailabilityBar from '../../components/AvailabilityBar';
+import ActivityCard from '../../components/ActivityCard/ActivityCard';
 import MyComponent from '../../components/RoomCard/RoomCard'; // Import MyComponent
 import ImageBox from '../../components/ImageBox/ImageBox';
 import LotusIcon from './lotus.png'; // Assuming the correct path to your icon
@@ -13,7 +14,7 @@ import room from './room.jpg';
 import luxury from './luxury.jpg';
 import suite from './suite.jpg';
 import pool from "./pool.jpg";
-import spa from "./spa.jpg";
+import spa from "./spa.png";
 import gym from "./gym.jpg";
 
 

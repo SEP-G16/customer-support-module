@@ -6,7 +6,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 
 // Replace '/path/to/background/image.jpg' with your actual image path
-import backgroundImage from './vacation.jpg';
+import backgroundImage from './room.jpg';
 
 const ContactUsPage = () => {
   return (
