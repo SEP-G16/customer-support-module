@@ -16,8 +16,7 @@ import AvailabilityBar from './components/AvailabilityBar';
 import CheckAvailability from './pages/Booking/CheckAvailability';
 import Home from './pages/Welcome/Home';
 import ReviewPage from './pages/Review/Review';
-import About from './pages/About/about';
-
+import Booking from './pages/Booking/Booking';
 
 const Spacer = ({ height }) => <div style={{ height: `${height}px` }} />;
 
@@ -29,9 +28,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/review" element={<ReviewPage />} />
-          <Route path="/about-us" element={<About />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/book" element={<CheckAvailability />} />
+          <Route path="/checkAvailability" element={<CheckAvailability />} />
+          <Route path="/book" element={<Booking />} />
           
           
           {/* Add other routes here as needed */}
