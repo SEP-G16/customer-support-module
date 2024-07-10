@@ -7,6 +7,7 @@ import Footer from '../../components/Footer';
 import AvailabilityBar from '../../components/AvailabilityBar';
 import ActivityCard from '../../components/ActivityCard/ActivityCard';
 import MyComponent from '../../components/RoomCard/RoomCard'; // Import MyComponent
+import ActivityCard from '../../components/ActivityCard/ActivityCard';
 import ImageBox from '../../components/ImageBox/ImageBox';
 import LotusIcon from './lotus.png'; // Assuming the correct path to your icon
 import ResortIcon from './hotel.png'; // Assuming the correct path to your icon
