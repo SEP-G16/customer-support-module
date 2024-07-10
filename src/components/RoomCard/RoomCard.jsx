@@ -9,12 +9,13 @@ const CardContainer = styled.div`
   background-color: rgba(255, 255, 255, 1);
   display: flex;
   flex-direction: column;
-  max-width: 407px;
+  width: 300px;  /* Fixed width */
+  height: 400px; /* Fixed height */
   font-size: 12px;
   color: #000;
   font-weight: 400;
-  padding: 20px 34px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 40px 40px 20px 40px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 `;
 
 const RoomImage = styled.img`
@@ -57,12 +58,6 @@ const Description = styled.div`
   font-family: Marcellus, serif;
 `;
 
-const DiscoverMore = styled.div`
-  text-align: center;
-  margin-top: 20px;
-  font-family: Marcellus, serif;
-  text-decoration: underline;
-`;
 
 function MyComponent({
   roomImage,
@@ -104,10 +99,6 @@ function MyComponent({
       {/* Description */}
       <Description>{description}</Description>
 
-      {/* Discover More */}
-      <DiscoverMore>
-        <span>Discover More &gt;</span>
-      </DiscoverMore>
     </CardContainer>
   );
 }

@@ -12,6 +12,8 @@ const HeaderContainer = styled.div`
   top: 0;
   width: 100%;
   z-index: 1000;
+  overflow-x: hidden;
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
     padding: 15px 20px; /* Adjust padding for smaller screens */
@@ -25,11 +27,11 @@ const HeaderContainer = styled.div`
 const OptionsContainer = styled.div`
   display: flex;
   gap: 30px; /* Adjust gap between options */
+  flex-wrap: wrap;
 
   @media (max-width: 768px) {
     gap: 10px; /* Reduce gap on smaller screens */
     padding-right: 20px; /* Add right padding on smaller screens */
-    flex-wrap: wrap; /* Allow items to wrap */
     justify-content: center; /* Center items when they wrap */
   }
 `;
