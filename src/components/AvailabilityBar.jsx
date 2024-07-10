@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Button as MuiButton, TextField, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from "@mui/material";
+import { Button as MuiButton, TextField, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Typography, ButtonBase } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function AvailabilityBar() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,8 @@ function AvailabilityBar() {
 
   const [showPopup, setShowPopup] = useState(false);
   const [available, setAvailable] = useState(true);
+  const [roomAvailability, setRoomAvailability] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,7 +24,14 @@ function AvailabilityBar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
-    setAvailable(false); 
+    setAvailable(true); // Simulated availability check
+
+    // Simulate room availability data
+    const availabilityData = {
+      "Deluxe rooms": 2,
+      "Standard rooms": 4
+    };
+    setRoomAvailability(availabilityData);
 
     if (available) {
       setShowPopup(true);
@@ -33,6 +43,14 @@ function AvailabilityBar() {
   const handleClosePopup = () => {
     setShowPopup(false);
   };
+
+  const handleRoomClick = (roomType) => {
+    // Destructure formData to get room, adults, and children
+    const { room, adults, children } = formData;
+    // Navigate to booking page and pass form data including room, adults, and children
+    navigate("/book", { state: { formData: { ...formData, room: roomType, adults, children } } });
+  };
+  
 
   return (
     <Container>
@@ -55,7 +73,6 @@ function AvailabilityBar() {
               disableUnderline: true,
             }}
             variant="outlined"
-            
           />
         </GridItem>
         <GridItem>
@@ -88,7 +105,7 @@ function AvailabilityBar() {
             value={formData.room}
             onChange={handleChange}
             InputLabelProps={{
-              style: { color: "white" ,borderRadius: "0px"},
+              style: { color: "white" },
             }}
             InputProps={{
               disableUnderline: true,
@@ -163,7 +180,13 @@ function AvailabilityBar() {
         <DialogTitle>Availability</DialogTitle>
         <DialogContent>
           {available ? (
-            <Typography variant="body1">Rooms are available!</Typography>
+            <RoomContainer>
+              {Object.entries(roomAvailability).map(([roomType, count]) => (
+                <RoomBox key={roomType} onClick={() => handleRoomClick(roomType)}>
+                  <Typography variant="body1">{`${roomType}: ${count} rooms available`}</Typography>
+                </RoomBox>
+              ))}
+            </RoomContainer>
           ) : (
             <Typography variant="body1">Rooms are not available for the selected dates.</Typography>
           )}
@@ -272,6 +295,25 @@ const StyledTextField = styled(TextField)`
     & .MuiInputLabel-root {
       color: white;
     }
+  }
+`;
+
+const RoomContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const RoomBox = styled(ButtonBase)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b99d75;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  &:hover {
+    background-color: #a38863;
   }
 `;
 
