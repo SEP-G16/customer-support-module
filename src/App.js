@@ -9,7 +9,7 @@ import CheckAvailability from './pages/Booking/CheckAvailability';
 import Booking from './pages/Booking/Booking';
 import About from './pages/About/about'; // Adjusted import path for 'about.jsx'
 import ContactUs from './pages/ContactUs/ContactUs'; // Adjusted import path for 'ContactUs.jsx'
-import About from './pages/About/about';
+
 
 const Spacer = ({ height }) => <div style={{ height: `${height}px` }} />;
 
@@ -27,8 +27,7 @@ const App = () => {
           <Route path="/book" element={<Booking />} />
           <Route path="/about-us" element={<About />} /> 
           <Route path="/contact" element={<ContactUs/>} />
-          <Route path="/book" element={<CheckAvailability />} />
-          <Route path="/about-us" element={<About />} />
+          
         
         </Routes>
       </div>
