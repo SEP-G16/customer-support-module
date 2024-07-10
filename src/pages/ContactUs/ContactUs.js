@@ -5,11 +5,14 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 
+// Replace '/path/to/background/image.jpg' with your actual image path
+import backgroundImage from './vacation.jpg';
+
 const ContactUsPage = () => {
   return (
     <ContactUsPageContainer>
       <ContactFormSection>
-        <Typography variant='h4' style={{ paddingLeft: '200px', paddingBottom: '20px' }}>Contact Us</Typography>
+        <Typography variant='h4'>Contact Us</Typography>
         <ContactForm>
           <input type="text" placeholder="Name" />
           <input type="email" placeholder="Email" />
@@ -53,7 +56,7 @@ const ContactUsPageContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-image: url('/path/to/background/image.jpg');
+  background-image: url(${backgroundImage}); /* Set background image */
   background-size: cover;
   padding: 50px;
   height: 100vh; /* Adjust as needed */
@@ -64,6 +67,7 @@ const ContactFormSection = styled.div`
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 0px;
+  text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 `;
 
@@ -85,7 +89,7 @@ const ContactForm = styled.form`
     background-color: #b99d75;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.5s ease;
 
     &:hover {
       background-color: #0056b3;
@@ -106,7 +110,7 @@ const SocialMediaLink = styled(Link)`
   color: #007bff;
   text-decoration: none;
   font-weight: bold;
-  transition: color 0.5s ease;
+  transition: color 0.8s ease;
 
   &:hover {
     color: #0056b3;
