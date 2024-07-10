@@ -49,7 +49,6 @@ function AboutUs() {
           </RatingSection>
         </ContentContainer>
       </MainContainer>
-      <Footer />
     </div>
   );
 }
