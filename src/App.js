@@ -15,13 +15,14 @@ import AvailabilityBar from './components/AvailabilityBar';
 import CheckAvailability from './pages/Booking/CheckAvailability';
 import Home from './pages/Welcome/Home';
 import ReviewPage from './pages/Review/Review';
+import Booking from './pages/Booking/Booking';
 
 const Spacer = ({ height }) => <div style={{ height: `${height}px` }} />;
 
 function App() {
    return (
     <div className="centered-div">
-      <ReviewPage/>
+      <Booking/>
     </div>
 
 
