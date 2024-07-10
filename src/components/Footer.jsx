@@ -12,6 +12,7 @@ const FooterContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  overflow-x: hidden;
 
   @media (max-width: 768px) {
     padding: 0px;

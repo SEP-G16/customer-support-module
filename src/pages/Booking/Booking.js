@@ -7,6 +7,7 @@ import Footer from '../../components/Footer';
 import RoomCard from '../../components/RoomCard/RoomCard';
 import ImageBox from '../../components/ImageBox/ImageBox';
 import RoomDetails from '../../components/RoomCard/RoomCard';
+import Room from './room.jpg';
 
 const CustomTextContent = () => {
   return (
@@ -53,15 +54,19 @@ const BookingPage = () => {
       />
       <Content>
         <LeftSection>
-        <Typography variant='h4' fontFamily="Marcellus, serif" style={{paddingLeft:'150px', paddingTop:'0px', paddingBottom:'30px'}}>
+        <Typography variant='h4' fontFamily="Marcellus, serif" style={{paddingTop:'0px', paddingBottom:'30px'}}>
           Your Room
           </Typography>
-          {/* Display room details here */}
-          <RoomDetails/>
+          <RoomDetails roomImage={Room}
+              roomType="Standard Room"
+              roomSize="80m2"
+              guests="2 Guests"
+              bedType="1 King Bed"
+              description="Experience ultimate comfort and relaxation in our Standard Room, featuring a breathtaking beach view. Perfect for unwinding after a sun-soaked day, this room provides everything you need for a delightful beachfront getaway."/>
         </LeftSection>
         <RightSection>
           {/* Reservation form */}
-          <Typography variant='h4' fontFamily="Marcellus, serif" style={{paddingLeft:'130px', paddingTop:'30px', paddingBottom:'30px'}}>
+          <Typography variant='h4' fontFamily="Marcellus, serif" style={{ paddingTop:'30px', paddingBottom:'30px'}}>
           Book Your Stay
           </Typography>
           
@@ -198,7 +203,6 @@ const BookingPage = () => {
                     borderColor: 'black',
                   }, }}}
             />
-            <Box>
             <TextField
             fontFamily="Marcellus, serif"
               label="Number of Adults"
@@ -245,9 +249,8 @@ const BookingPage = () => {
                     borderColor: 'black',
                   }, }}}
             />
-            </Box>
             <Typography variant="h4" fontFamily="Marcellus, serif">Total Cost: {calculateTotalCost()} USD</Typography>
-            <Button variant="contained" type="submit" sx={{ mt: 2, backgroundColor: 'black', borderRadius: '0px', padding: '10px', marginLeft: '180px', marginTop:'50px',marginBottom:'30px',fontSize: '1.4rem', // Adjust font size
+            <Button variant="contained" type="submit" sx={{ mt: 2, backgroundColor: 'black', borderRadius: '0px', padding: '10px', marginTop:'50px',marginBottom:'30px',fontSize: '1.4rem', // Adjust font size
      // Change font family // Adjust font size
     fontFamily: 'Marcellus, serif',}}>
 
@@ -263,6 +266,7 @@ const BookingPage = () => {
 const Container = styled.div`
   /* Your container styles here */
   font-family: 'Marcellus', serif;
+  overflow-x: hidden;
 `;
 
 const Content = styled.div`
@@ -272,25 +276,36 @@ const Content = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    align-items: center;  // Centers content on smaller screens
   }
 `;
 
+
 const LeftSection = styled.div`
   flex: 1;
-  padding-left: 200px;
-  padding-right: 100px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 50px 0;  // Adjusted padding for better centering
+  margin-right: 20px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const RightSection = styled.div`
   flex: 1;
-  padding-left: 50px;
-  
+  padding: 50px;  // Adjusted padding for better centering
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Form = styled.form`
-  /* Form styles here */
+  width: 100%;  // Ensures form takes full width of its container
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 

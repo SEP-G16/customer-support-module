@@ -112,7 +112,6 @@ const MenuContainer = styled(Stack)`
   width: 100%;
   max-width: 1400px;
   margin-top: 20px;
-  border: 1px solid green;
   overflow-x: hidden;
 
   @media (max-width: 800px) {
