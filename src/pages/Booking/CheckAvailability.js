@@ -152,6 +152,25 @@ const ActivityCardsWrapper = styled.div`
   margin-top: 0px;
 `;
 
+const ActivityCards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  marginLeft: 20px;
+  marginRight: 20px;
+  gap: 30px;
+  margin-bottom: 40px;
+  display: flex;
+
+  @media (max-width: 480px) {
+    gap: 10px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0px;
+  }
+`;
+
 const AvailabilityBarWrapper = styled.div`
   position: relative;
   top: -70px; /* Adjust as needed to overlap with ImageBox */
