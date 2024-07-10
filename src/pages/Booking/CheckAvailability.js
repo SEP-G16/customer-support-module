@@ -38,7 +38,6 @@ const CustomTextContent = () => {
 const CheckAvailability = () => {
   return (
     <Container>
-      <Header />
       <ImageBox
         imageSrc={Booking}
         TextContentComponent={<CustomTextContent />}
@@ -69,7 +68,6 @@ const CheckAvailability = () => {
           </ActivityCards>
         </ActivityCardsWrapper>
       </ContentContainer>
-      <Footer />
     </Container>
   );
 };
@@ -130,7 +128,6 @@ const ActivityCards = styled.div`
   marginRight: 20px;
   gap: 30px;
   margin-bottom: 40px;
-  border: 1px solid green;
   display: flex;
 
   @media (max-width: 480px) {

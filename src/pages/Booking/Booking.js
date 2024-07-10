@@ -46,7 +46,7 @@ const BookingPage = () => {
 
   return (
     <Container>
-      <Header />
+      
       <ImageBox
         imageSrc={Booking}
         TextContentComponent={<CustomTextContent />}
@@ -256,8 +256,6 @@ const BookingPage = () => {
           </Form>
         </RightSection>
       </Content>
-      
-      <Footer />
     </Container>
   );
 };
