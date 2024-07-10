@@ -17,6 +17,7 @@ import CheckAvailability from './pages/Booking/CheckAvailability';
 import Home from './pages/Welcome/Home';
 import ReviewPage from './pages/Review/Review';
 import Booking from './pages/Booking/Booking';
+import About from './pages/About/about';
 
 const Spacer = ({ height }) => <div style={{ height: `${height}px` }} />;
 
@@ -30,7 +31,8 @@ const App = () => {
           <Route path="/review" element={<ReviewPage />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/checkAvailability" element={<CheckAvailability />} />
-          <Route path="/book" element={<Booking />} />
+          <Route path="/book" element={<CheckAvailability />} />
+          <Route path="/about-us" element={<About />} />
           
           
           {/* Add other routes here as needed */}
