@@ -157,7 +157,7 @@ const Review = () => {
           ))}
         </RightSection>
       </Content>
-      <Footer />
+      
     </Container>
   );
 };

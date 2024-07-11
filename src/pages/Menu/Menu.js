@@ -93,7 +93,7 @@ const MenuPage = () => {
       
   
      
-      <Footer />
+    
     </Container>
   );
 };
