@@ -37,14 +37,15 @@ function AvailabilityBar() {
   const [formData, setFormData] = useState({
     checkIn: '',
     checkOut: '',
-    room: '1', // Default room type
+    room: 'Standard rooms', // Default room type
     adults: '1',
     children: '0',
+    rooms: '1', // Default number of rooms
     roomImage: roomImages["Standard rooms"], // Default room image
     roomDescription: roomDescriptions["Standard rooms"], // Default room description
-    roomSize: roomSizes["Standard rooms"], //default room size
-    guest: guests["Standard rooms"],
-    bedType: bedTypes["Standard rooms"],
+    roomSize: roomSizes["Standard rooms"], // Default room size
+    guest: guests["Standard rooms"], // Default guest information
+    bedType: bedTypes["Standard rooms"], // Default bed type
   });
 
   const [showPopup, setShowPopup] = useState(false);
@@ -55,7 +56,7 @@ function AvailabilityBar() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'room') {
+    if (name === 'room' || name === 'rooms') {
       setFormData({
         ...formData,
         [name]: value,
@@ -98,14 +99,13 @@ function AvailabilityBar() {
   };
 
   const handleRoomClick = (roomType) => {
-    const { room, adults, children, ...rest } = formData;
+    const { room, adults, children, rooms, ...rest } = formData;
     navigate("/book", {
       state: {
-        formData: { ...rest, room: roomType, adults, children, roomImage: roomImages[roomType], roomDescription: roomDescriptions[roomType], roomSize: roomSizes[roomType], guest: guests[roomType], bedType: bedTypes[roomType]}
+        formData: { ...rest, room: roomType, adults, children, rooms, roomImage: roomImages[roomType], roomDescription: roomDescriptions[roomType], roomSize: roomSizes[roomType], guest: guests[roomType], bedType: bedTypes[roomType]}
       }
     });
   };
-
 
   return (
     <Container>
@@ -156,8 +156,8 @@ function AvailabilityBar() {
             select
             fullWidth
             label=""
-            name="room"
-            value={formData.room}
+            name="rooms"
+            value={formData.rooms}
             onChange={handleChange}
             InputLabelProps={{
               style: { color: "white" },
@@ -232,35 +232,32 @@ function AvailabilityBar() {
       </GridContainer>
 
       <Dialog open={showPopup} onClose={handleClosePopup} maxWidth="sm" fullWidth>
-  <DialogTitle>Room Availability</DialogTitle>
-  <DialogContent>
-    <DialogContentWrapper>
-      {available ? (
-        <RoomContainer>
-          {Object.entries(roomAvailability).map(([roomType, count]) => (
-            <RoomBox key={roomType} onClick={() => handleRoomClick(roomType)}>
-              <RoomImage src={roomImages[roomType]} alt={roomType} />
-              <RoomContent>
-                <Typography variant="h6">{roomType}</Typography>
-                <Typography variant="body2">{`${count} rooms available`}</Typography>
-              </RoomContent>
-            </RoomBox>
-          ))}
-        </RoomContainer>
-      ) : (
-        <Typography variant="body1">Rooms are not available for the selected dates.</Typography>
-      )}
-    </DialogContentWrapper>
-  </DialogContent>
-  <DialogActions>
-    <MuiButton onClick={handleClosePopup} color="primary">
-      Close
-    </MuiButton>
-  </DialogActions>
-</Dialog>
-
-
-
+        <DialogTitle>Room Availability</DialogTitle>
+        <DialogContent>
+          <DialogContentWrapper>
+            {available ? (
+              <RoomContainer>
+                {Object.entries(roomAvailability).map(([roomType, count]) => (
+                  <RoomBox key={roomType} onClick={() => handleRoomClick(roomType)}>
+                    <RoomImage src={roomImages[roomType]} alt={roomType} />
+                    <RoomContent>
+                      <Typography variant="h6">{roomType}</Typography>
+                      <Typography variant="body2">{`${count} rooms available`}</Typography>
+                    </RoomContent>
+                  </RoomBox>
+                ))}
+              </RoomContainer>
+            ) : (
+              <Typography variant="body1">Rooms are not available for the selected dates.</Typography>
+            )}
+          </DialogContentWrapper>
+        </DialogContent>
+        <DialogActions>
+          <MuiButton onClick={handleClosePopup} color="primary">
+            Close
+          </MuiButton>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
@@ -369,13 +366,11 @@ const RoomContainer = styled.div`
   align-items: flex-end; /* Aligns all content to the right */
 `;
 
-
 const DialogContentWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
 `;
-
 
 const RoomBox = styled(ButtonBase)`
   display: flex;
@@ -409,6 +404,5 @@ const RoomContent = styled(Box)`
   width: 100%;
   text-align: right; /* Aligns the content to the right */
 `;
-
 
 export default AvailabilityBar;

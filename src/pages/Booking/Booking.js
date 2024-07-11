@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { Typography, TextField, Button, Box, Stack } from '@mui/material';
+import { Typography, TextField, Button, Box } from '@mui/material';
 import ImageBox from '../../components/ImageBox/ImageBox';
 import RoomDetails from '../../components/RoomCard/RoomCard';
 import Booking from './woman.jpg';
 import Room from './room.jpg';
-
-// const CustomTextContent = () => {
-//   return (
-//     <Stack sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-//       <Typography variant="h2" align="center" sx={{ color: 'white', maxWidth: '80%' }}>
-//         Stay with us to indulge in luxury and relaxation.
-//       </Typography>
-//     </Stack>
-//   );
-// };
 
 const BookingPage = () => {
   const location = useLocation();
@@ -28,18 +18,20 @@ const BookingPage = () => {
     numRooms: 1,
     numAdults: 1,
     numChildren: 0,
-    room: '' // Default room type
+    room: '', // Default room type
   };
 
   const [formData, setFormData] = useState(initialFormData);
   const [numAdults, setNumAdults] = useState(initialFormData.numAdults);
   const [numChildren, setNumChildren] = useState(initialFormData.numChildren);
+  const [numRooms, setNumRooms] = useState(initialFormData.numRooms);
 
   useEffect(() => {
     // Update state variables with formData from location state
     setFormData(location.state?.formData || initialFormData);
     setNumAdults(location.state?.formData?.adults || initialFormData.numAdults);
     setNumChildren(location.state?.formData?.children || initialFormData.numChildren);
+    setNumRooms(location.state?.formData?.rooms || initialFormData.numRooms);
   }, [location.state?.formData]);
 
   const handleInputChange = (e) => {
@@ -49,7 +41,7 @@ const BookingPage = () => {
 
   const calculateTotalCost = () => {
     const baseCostPerNight = 150; // Example base cost per night
-    const totalCost = baseCostPerNight * formData.numRooms;
+    const totalCost = baseCostPerNight * numRooms;
     return totalCost;
   };
 
@@ -62,14 +54,11 @@ const BookingPage = () => {
   return (
     <Container>
       <ImageBoxWrapper>
-        <ImageBox
-          imageSrc={Booking}
-          //TextContentComponent={<CustomTextContent />}
-        />
+        <ImageBox imageSrc={Booking} />
       </ImageBoxWrapper>
       <Content>
         <LeftSection>
-          <Typography variant='h4' fontFamily="Marcellus, serif" style={{ paddingTop: '0px', paddingBottom: '30px' }}>
+          <Typography variant='h4' fontFamily="Marcellus, serif">
             Your Room
           </Typography>
           <RoomDetails
@@ -83,7 +72,7 @@ const BookingPage = () => {
         </LeftSection>
         <RightSection>
           {/* Reservation form */}
-          <Typography variant='h4' fontFamily="Marcellus, serif" style={{ paddingTop: '30px', paddingBottom: '30px' }}>
+          <Typography variant='h4' fontFamily="Marcellus, serif">
             Book Your Stay
           </Typography>
           <Form onSubmit={handleFormSubmit}>
@@ -95,7 +84,7 @@ const BookingPage = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
+              sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
               name="email"
@@ -105,7 +94,7 @@ const BookingPage = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
+              sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
               name="phone"
@@ -115,7 +104,7 @@ const BookingPage = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
+              sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
               name="checkIn"
@@ -127,7 +116,7 @@ const BookingPage = () => {
               fullWidth
               required
               InputLabelProps={{ shrink: true }}
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
+              sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
               name="checkOut"
@@ -139,22 +128,22 @@ const BookingPage = () => {
               fullWidth
               required
               InputLabelProps={{ shrink: true }}
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
+              sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
               name="numRooms"
               label="Number of Rooms"
               type="number"
               variant="outlined"
-              value={formData.numRooms}
-              onChange={handleInputChange}
+              value={numRooms}
+              onChange={(e) => setNumRooms(parseInt(e.target.value))}
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
+              sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
-              fontFamily="Marcellus, serif"
+              name="numAdults"
               label="Number of Adults"
               type="number"
               variant="outlined"
@@ -163,24 +152,10 @@ const BookingPage = () => {
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
-              sx={{
-                marginBottom: 2, borderRadius: '0px', width: '487px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '0px', // Square borders
-                  '& fieldset': {
-                    borderColor: 'black', // Border color
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'black',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'black',
-                  },
-                }
-              }}
+              sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
-              fontFamily="Marcellus, serif"
+              name="numChildren"
               label="Number of Children"
               type="number"
               variant="outlined"
@@ -189,27 +164,25 @@ const BookingPage = () => {
               fullWidth
               required
               InputProps={{ inputProps: { min: 0 } }}
-              sx={{
-                marginBottom: 2, borderRadius: '0px', width: '487px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '0px', // Square borders
-                  '& fieldset': {
-                    borderColor: 'black', // Border color
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'black',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'black',
-                  },
-                }
-              }}
+              sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
-            <Typography variant="h4" fontFamily="Marcellus, serif">Total Cost: {calculateTotalCost()} USD</Typography>
-            <Button variant="contained" type="submit" sx={{
-              mt: 2, backgroundColor: 'black', borderRadius: '0px', padding: '10px', marginTop: '50px', marginBottom: '30px', fontSize: '1.4rem', // Adjust font size
-              fontFamily: 'Marcellus, serif',
-            }}>
+            <Typography variant="h4" fontFamily="Marcellus, serif">
+              Total Cost: {calculateTotalCost()} USD
+            </Typography>
+            <Button
+              variant="contained"
+              type="submit"
+              sx={{
+                mt: 2,
+                backgroundColor: 'black',
+                borderRadius: '0px',
+                padding: '10px',
+                marginTop: '50px',
+                marginBottom: '30px',
+                fontSize: '1.4rem', // Adjust font size
+                fontFamily: 'Marcellus, serif',
+              }}
+            >
               Book Your Stay
             </Button>
           </Form>
@@ -246,13 +219,13 @@ const Content = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    align-items: center;  // Centers content on smaller screens
+    align-items: center; // Centers content on smaller screens
   }
 `;
 
 const LeftSection = styled.div`
   flex: 1;
-  padding: 50px 0;  // Adjusted padding for better centering
+  padding: 50px 0; // Adjusted padding for better centering
   margin-right: 20px;
   align-items: center;
   display: flex;
@@ -263,7 +236,7 @@ const LeftSection = styled.div`
 
 const RightSection = styled.div`
   flex: 1;
-  padding: 50px;  // Adjusted padding for better centering
+  padding: 50px; // Adjusted padding for better centering
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -271,7 +244,7 @@ const RightSection = styled.div`
 `;
 
 const Form = styled.form`
-  width: 100%;  // Ensures form takes full width of its container
+  width: 100%; // Ensures form takes full width of its container
   display: flex;
   flex-direction: column;
   align-items: center;
