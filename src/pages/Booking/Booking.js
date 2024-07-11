@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { Typography, TextField, Button, Box } from '@mui/material';
 import Booking from './woman.jpg'; // Assuming Booking is the correct path to your image
 import RoomDetails from '../../components/RoomCard/RoomCard';
-import ImageBox from '../../components/ImageBox/ImageBox';
-import { useLocation } from 'react-router-dom';
+import Room from './room.jpg';
 
 const CustomTextContent = () => {
   return (
@@ -67,14 +66,20 @@ const BookingPage = () => {
       />
       <Content>
         <LeftSection>
-          <Typography variant='h4' style={{ paddingLeft: '150px', paddingTop: '0px', paddingBottom: '30px' }}>
-            Your Room
+        <Typography variant='h4' fontFamily="Marcellus, serif" style={{paddingTop:'0px', paddingBottom:'30px'}}>
+          Your Room
           </Typography>
-          <RoomDetails />
+          <RoomDetails roomImage={Room}
+              roomType="Standard Room"
+              roomSize="80m2"
+              guests="2 Guests"
+              bedType="1 King Bed"
+              description="Experience ultimate comfort and relaxation in our Standard Room, featuring a breathtaking beach view. Perfect for unwinding after a sun-soaked day, this room provides everything you need for a delightful beachfront getaway."/>
         </LeftSection>
         <RightSection>
-          <Typography variant='h4' style={{ paddingLeft: '130px', paddingTop: '30px', paddingBottom: '30px' }}>
-            Book Your Stay
+          {/* Reservation form */}
+          <Typography variant='h4' fontFamily="Marcellus, serif" style={{ paddingTop:'30px', paddingBottom:'30px'}}>
+          Book Your Stay
           </Typography>
           <Form onSubmit={handleFormSubmit}>
             <TextField
@@ -143,34 +148,57 @@ const BookingPage = () => {
               InputProps={{ inputProps: { min: 1 } }}
               sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
             />
-            <Box>
-              <TextField
-                name="numAdults"
-                label="Number of Adults"
-                type="number"
-                variant="outlined"
-                value={formData.numAdults}
-                onChange={handleInputChange}
-                fullWidth
-                required
-                InputProps={{ inputProps: { min: 1 } }}
-                sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
-              />
-              <TextField
-                name="numChildren"
-                label="Number of Children"
-                type="number"
-                variant="outlined"
-                value={formData.numChildren}
-                onChange={handleInputChange}
-                fullWidth
-                required
-                InputProps={{ inputProps: { min: 0 } }}
-                sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
-              />
-            </Box>
-            <Typography variant="h4">Total Cost: {calculateTotalCost()} USD</Typography>
-            <Button variant="contained" type="submit" sx={{ mt: 2, backgroundColor: 'black', borderRadius: '0px', padding: '10px', marginLeft: '180px', marginTop: '50px', marginBottom: '30px', fontSize: '1.4rem' }}>
+            <TextField
+            fontFamily="Marcellus, serif"
+              label="Number of Adults"
+              type="number"
+              variant="outlined"
+              value={numAdults}
+              onChange={(e) => setNumAdults(parseInt(e.target.value))}
+              fullWidth
+              required
+              InputProps={{ inputProps: { min: 1 } }}
+              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px',
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '0px', // Square borders
+                  '& fieldset': {
+                    borderColor: 'black', // Border color
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'black',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'black',
+                  }, }}}
+            />
+            <TextField
+            fontFamily="Marcellus, serif"
+              label="Number of Children"
+              type="number"
+              variant="outlined"
+              value={numChildren}
+              onChange={(e) => setNumChildren(parseInt(e.target.value))}
+              fullWidth
+              required
+              InputProps={{ inputProps: { min: 0 } }}
+              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px',
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '0px', // Square borders
+                  '& fieldset': {
+                    borderColor: 'black', // Border color
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'black',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'black',
+                  }, }}}
+            />
+            <Typography variant="h4" fontFamily="Marcellus, serif">Total Cost: {calculateTotalCost()} USD</Typography>
+            <Button variant="contained" type="submit" sx={{ mt: 2, backgroundColor: 'black', borderRadius: '0px', padding: '10px', marginTop:'50px',marginBottom:'30px',fontSize: '1.4rem', // Adjust font size
+     // Change font family // Adjust font size
+    fontFamily: 'Marcellus, serif',}}>
+
               Book Your Stay
             </Button>
           </Form>
@@ -182,6 +210,7 @@ const BookingPage = () => {
 
 const Container = styled.div`
   font-family: 'Marcellus', serif;
+  overflow-x: hidden;
 `;
 
 const Content = styled.div`
@@ -191,24 +220,36 @@ const Content = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
+    align-items: center;  // Centers content on smaller screens
   }
 `;
 
+
 const LeftSection = styled.div`
   flex: 1;
-  padding-left: 200px;
-  padding-right: 100px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 50px 0;  // Adjusted padding for better centering
+  margin-right: 20px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const RightSection = styled.div`
   flex: 1;
-  padding-left: 50px;
+  padding: 50px;  // Adjusted padding for better centering
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Form = styled.form`
-  /* Form styles here */
+  width: 100%;  // Ensures form takes full width of its container
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export default BookingPage;

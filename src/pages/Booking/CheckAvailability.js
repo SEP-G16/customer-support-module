@@ -119,7 +119,7 @@ const CheckAvailability = () => {
 
 const Container = styled.div`
   background-color: white;
-  overflow-x: hidden;
+  overflow: hidden;
 `;
 
 const ContentContainer = styled.div`
@@ -129,14 +129,22 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
 `;
 
 const RoomCards = styled.div`
   display: flex;
   justify-content: space-around;
   margin-bottom: 40px;
-  gap: 50px;
+  margin-top: 40px;
+  gap: 40px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
+
 
 const MyComponentWrapper = styled.div`
   flex: 1;

@@ -51,7 +51,7 @@ const Card = styled.div`
 
 const Img = styled.img`
   width: 100%;
-  border-radius: 5px; /* Example border radius */
+  border-radius: 0px; /* Example border radius */
 `;
 
 const Title = styled.div`
