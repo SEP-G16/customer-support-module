@@ -1,53 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Typography, Stack, TextField, Button, Box } from '@mui/material';
+import { Typography, TextField, Button, Box } from '@mui/material';
 import Booking from './woman.jpg'; // Assuming Booking is the correct path to your image
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import RoomCard from '../../components/RoomCard/RoomCard';
-import ImageBox from '../../components/ImageBox/ImageBox';
 import RoomDetails from '../../components/RoomCard/RoomCard';
 import Room from './room.jpg';
 
 const CustomTextContent = () => {
   return (
-      <Stack sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        
-      </Stack>
-    
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      {/* Customize your text content here */}
+      <Typography variant="body1">
+        Your custom text content goes here.
+      </Typography>
+    </Box>
   );
 };
 
 const BookingPage = () => {
-    // State for form inputs
-    const [name, setName] = useState('John Doe');
-    const [email, setEmail] = useState('john.doe@example.com');
-    const [phone, setPhone] = useState('123-456-7890');
-    const [checkIn, setCheckIn] = useState('2024-07-10');
-    const [checkOut, setCheckOut] = useState('2024-07-15');
-    const [numRooms, setNumRooms] = useState(2);
-    const [numAdults, setNumAdults] = useState(2);
-    const [numChildren, setNumChildren] = useState(1);
-  
-    // Calculate total cost based on selected options
-    const calculateTotalCost = () => {
-      // Replace with your calculation logic based on room details and dates
-      // Example calculation:
-      const baseCostPerNight = 150; // Example base cost per room per night
-      const totalCost = baseCostPerNight * numRooms;
-      return totalCost;
-    };
-  
-    // Handle form submission
-    const handleFormSubmit = (event) => {
-      event.preventDefault();
-      // Handle form submission logic here, like sending data to backend
-      console.log(name, email, phone, checkIn, checkOut, numRooms, numAdults, numChildren);
-    };
+  const location = useLocation();
+  const initialFormData = location.state?.formData || {
+    name: '',
+    email: '',
+    phone: '',
+    checkIn: '',
+    checkOut: '',
+    numRooms: 1,
+    numAdults: 1,
+    numChildren: 0,
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
+
+  useEffect(() => {
+    // Update state variables with formData from location state
+    setFormData({
+      ...initialFormData,
+      name: '',
+      email: '',
+      phone: '',
+    });
+  }, [initialFormData]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const calculateTotalCost = () => {
+    const baseCostPerNight = 150; // Example base cost per night
+    const totalCost = baseCostPerNight * formData.numRooms;
+    return totalCost;
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission logic, e.g., send formData to backend
+    console.log(formData);
+  };
 
   return (
     <Container>
-      
       <ImageBox
         imageSrc={Booking}
         TextContentComponent={<CustomTextContent />}
@@ -69,139 +81,72 @@ const BookingPage = () => {
           <Typography variant='h4' fontFamily="Marcellus, serif" style={{ paddingTop:'30px', paddingBottom:'30px'}}>
           Book Your Stay
           </Typography>
-          
           <Form onSubmit={handleFormSubmit}>
             <TextField
-            fontFamily="Marcellus, serif"
+              name="name"
               label="Name"
               variant="outlined"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={formData.name}
+              onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '0px', // Square borders
-                  '& fieldset': {
-                    borderColor: 'black', // Border color
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'black',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'black',
-                  }, }}}
+              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
             />
             <TextField
-            fontFamily="Marcellus, serif"
+              name="email"
               label="Email"
               variant="outlined"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formData.email}
+              onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '0px', // Square borders
-                  '& fieldset': {
-                    borderColor: 'black', // Border color
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'black',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'black',
-                  }, }}}
+              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
             />
             <TextField
-            fontFamily="Marcellus, serif"
+              name="phone"
               label="Phone"
               variant="outlined"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              value={formData.phone}
+              onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '0px', // Square borders
-                  '& fieldset': {
-                    borderColor: 'black', // Border color
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'black',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'black',
-                  }, }}}
+              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
             />
             <TextField
-            fontFamily="Marcellus, serif"
+              name="checkIn"
               label="Check-in Date"
               type="date"
               variant="outlined"
-              value={checkIn}
-              onChange={(e) => setCheckIn(e.target.value)}
+              value={formData.checkIn}
+              onChange={handleInputChange}
               fullWidth
               required
               InputLabelProps={{ shrink: true }}
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '0px', // Square borders
-                  '& fieldset': {
-                    borderColor: 'black', // Border color
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'black',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'black',
-                  }, }}}
+              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
             />
             <TextField
-            fontFamily="Marcellus, serif"
+              name="checkOut"
               label="Check-out Date"
               type="date"
               variant="outlined"
-              value={checkOut}
-              onChange={(e) => setCheckOut(e.target.value)}
+              value={formData.checkOut}
+              onChange={handleInputChange}
               fullWidth
               required
               InputLabelProps={{ shrink: true }}
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '0px', // Square borders
-                  '& fieldset': {
-                    borderColor: 'black', // Border color
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'black',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'black',
-                  }, }}}
+              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
             />
             <TextField
-            fontFamily="Marcellus, serif"
+              name="numRooms"
               label="Number of Rooms"
               type="number"
               variant="outlined"
-              value={numRooms}
-              onChange={(e) => setNumRooms(parseInt(e.target.value))}
+              value={formData.numRooms}
+              onChange={handleInputChange}
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
-              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px',
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '0px', // Square borders
-                  '& fieldset': {
-                    borderColor: 'black', // Border color
-                  },
-                  '&:hover fieldset': {
-                    borderColor: 'black',
-                  },
-                  '&.Mui-focused fieldset': {
-                    borderColor: 'black',
-                  }, }}}
+              sx={{ marginBottom: 2, borderRadius: '0px', width: '487px' }}
             />
             <TextField
             fontFamily="Marcellus, serif"
@@ -264,7 +209,6 @@ const BookingPage = () => {
 };
 
 const Container = styled.div`
-  /* Your container styles here */
   font-family: 'Marcellus', serif;
   overflow-x: hidden;
 `;
@@ -307,6 +251,5 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
 `;
-
 
 export default BookingPage;
