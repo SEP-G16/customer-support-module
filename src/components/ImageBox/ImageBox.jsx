@@ -1,15 +1,12 @@
 import React from 'react';
-import { Typography } from '@mui/material';
 import styled from 'styled-components';
 
-
-const ImageBox = ({ imageSrc, TextContentComponent }) => {
+const ImageBox = ({ imageSrc, TextContentComponent, ButtonComponent }) => {
   return (
     <Container>
-    <Image src={imageSrc} alt="Background" />
-      <TextContainer>
-      {TextContentComponent}
-      </TextContainer>
+      <Image src={imageSrc} alt="Background" />
+      <TextContainer>{TextContentComponent}</TextContainer>
+      {ButtonComponent && <ButtonContainer>{ButtonComponent}</ButtonContainer>}
       <GradientOverlay />
     </Container>
   );
@@ -56,10 +53,29 @@ const TextContainer = styled.div`
   max-width: 1000px; /* Example maximum width */
   padding: 0px;
   text-align: center;
+  margin-top: 20px; /* Adjust the margin as needed */
+  margin-bottom: 10px; /* Adjust the margin as needed */
   z-index: 3; /* Ensure the text is above both the image and gradient overlay */
-
   @media (max-width: 768px) {
     padding: 50px; /* Adjust padding for smaller screens */
+  }
+`;
+
+const ButtonContainer = styled.div`
+  position: absolute;
+  bottom: 50px; /* Adjust the position as needed */
+  display: flex;
+  width: 600px;
+  max-width: 100%;
+  gap: 10px;
+  font-size: 32px;
+  white-space: nowrap;
+  justify-content: space-between;
+  margin: 0 28px;
+  z-index: 4;
+  @media (max-width: 991px) {
+    flex-wrap: wrap;
+    white-space: initial;
   }
 `;
 
