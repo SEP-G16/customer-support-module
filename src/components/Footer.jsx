@@ -56,7 +56,7 @@ const Footer = () => {
           </Typography>
           <Link href="/about-us" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>About Us</Link>
           <Link href="#" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>Terms & Conditions</Link>
-          <Link href="#" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>Our Location</Link>
+          <Link href="https://maps.app.goo.gl/hgNDHg4Utkv9QpNAA" target="_blank" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>Our Location</Link>
           <Link href="/contact" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>Contact Us</Link>
         </Stack>
         <Stack
