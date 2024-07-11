@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Button as MuiButton, TextField, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Typography, ButtonBase } from "@mui/material";
+import { Button as MuiButton, TextField, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Typography, ButtonBase, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import room from "./room.jpg";
+import suite from "./suite.jpg";
+import deluxe from "./luxury.jpg";
+
+// Define a mapping of room types to image paths
+const roomImages = {
+  "Standard rooms": room,
+  "Deluxe rooms": deluxe,
+  "Suite rooms": suite,
+};
 
 function AvailabilityBar() {
   const [formData, setFormData] = useState({
@@ -28,8 +38,9 @@ function AvailabilityBar() {
 
     // Simulate room availability data
     const availabilityData = {
-      "Deluxe rooms": 2,
-      "Standard rooms": 4
+      "Standard rooms": 4,
+      "Deluxe rooms": 2, 
+      "Suite rooms": 3
     };
     setRoomAvailability(availabilityData);
 
@@ -50,7 +61,6 @@ function AvailabilityBar() {
     // Navigate to booking page and pass form data including room, adults, and children
     navigate("/book", { state: { formData: { ...formData, room: roomType, adults, children } } });
   };
-  
 
   return (
     <Container>
@@ -176,27 +186,36 @@ function AvailabilityBar() {
         </ButtonGridItem>
       </GridContainer>
 
-      <Dialog open={showPopup} onClose={handleClosePopup}>
-        <DialogTitle>Availability</DialogTitle>
-        <DialogContent>
-          {available ? (
-            <RoomContainer>
-              {Object.entries(roomAvailability).map(([roomType, count]) => (
-                <RoomBox key={roomType} onClick={() => handleRoomClick(roomType)}>
-                  <Typography variant="body1">{`${roomType}: ${count} rooms available`}</Typography>
-                </RoomBox>
-              ))}
-            </RoomContainer>
-          ) : (
-            <Typography variant="body1">Rooms are not available for the selected dates.</Typography>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <MuiButton onClick={handleClosePopup} color="primary">
-            Close
-          </MuiButton>
-        </DialogActions>
-      </Dialog>
+      <Dialog open={showPopup} onClose={handleClosePopup} maxWidth="sm" fullWidth>
+  <DialogTitle>Room Availability</DialogTitle>
+  <DialogContent>
+    <DialogContentWrapper>
+      {available ? (
+        <RoomContainer>
+          {Object.entries(roomAvailability).map(([roomType, count]) => (
+            <RoomBox key={roomType} onClick={() => handleRoomClick(roomType)}>
+              <RoomImage src={roomImages[roomType]} alt={roomType} />
+              <RoomContent>
+                <Typography variant="h6">{roomType}</Typography>
+                <Typography variant="body2">{`${count} rooms available`}</Typography>
+              </RoomContent>
+            </RoomBox>
+          ))}
+        </RoomContainer>
+      ) : (
+        <Typography variant="body1">Rooms are not available for the selected dates.</Typography>
+      )}
+    </DialogContentWrapper>
+  </DialogContent>
+  <DialogActions>
+    <MuiButton onClick={handleClosePopup} color="primary">
+      Close
+    </MuiButton>
+  </DialogActions>
+</Dialog>
+
+
+
     </Container>
   );
 }
@@ -302,19 +321,49 @@ const RoomContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: flex-end; /* Aligns all content to the right */
 `;
+
+
+const DialogContentWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+`;
+
 
 const RoomBox = styled(ButtonBase)`
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: #b99d75;
-  color: #fff;
-  padding: 10px;
+  width: 100%;
+  border: 1px solid #b99d75;
   border-radius: 5px;
+  overflow: hidden;
+  text-align: left;
+  transition: background-color 0.3s;
+  padding: 10px;
+
   &:hover {
-    background-color: #a38863;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
+
+const RoomImage = styled.img`
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-right: 200px; /* Adds a gap between image and content */
+`;
+
+const RoomContent = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  text-align: right; /* Aligns the content to the right */
+`;
+
 
 export default AvailabilityBar;
