@@ -6,20 +6,45 @@ import room from "./room.jpg";
 import suite from "./suite.jpg";
 import deluxe from "./luxury.jpg";
 
-// Define a mapping of room types to image paths
 const roomImages = {
   "Standard rooms": room,
   "Deluxe rooms": deluxe,
   "Suite rooms": suite,
 };
 
+const roomDescriptions = {
+  "Standard rooms": "Experience ultimate comfort and relaxation in our Standard Room, featuring a breathtaking beach view. Perfect for unwinding after a sun-soaked day, this room provides everything you need for a delightful beachfront getaway.",
+  "Deluxe rooms": "Indulge in luxury with our Deluxe Room, offering spacious accommodations and modern amenities. Ideal for families or couples looking for extra comfort and style during their stay.",
+  "Suite rooms": "Discover the epitome of luxury in our Suite, featuring expansive living space, stunning ocean views, and premium amenities. Perfect for those seeking a lavish retreat and unparalleled comfort.",
+};
+const roomSizes = {
+  "Standard rooms": "80m2",
+  "Deluxe rooms": "100m2",
+  "Suite rooms": "120m2",
+};
+const guests = {
+  "Standard rooms": "2 Guests",
+  "Deluxe rooms": "3 Guests",
+  "Suite rooms": "4 Guests",
+};
+const bedTypes = {
+  "Standard rooms": "1 King Bed",
+  "Deluxe rooms": "2 Queen Beds",
+  "Suite rooms": "2 Twin Beds",
+};
+
 function AvailabilityBar() {
   const [formData, setFormData] = useState({
     checkIn: '',
     checkOut: '',
-    room: '1',
+    room: '1', // Default room type
     adults: '1',
     children: '0',
+    roomImage: roomImages["Standard rooms"], // Default room image
+    roomDescription: roomDescriptions["Standard rooms"], // Default room description
+    roomSize: roomSizes["Standard rooms"], //default room size
+    guest: guests["Standard rooms"],
+    bedType: bedTypes["Standard rooms"],
   });
 
   const [showPopup, setShowPopup] = useState(false);
@@ -28,7 +53,24 @@ function AvailabilityBar() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === 'room') {
+      setFormData({
+        ...formData,
+        [name]: value,
+        roomImage: roomImages[value], // Update room image based on selected room type
+        roomDescription: roomDescriptions[value], // Update room description based on selected room type
+        roomSize: roomSizes[value],
+        guest: guests[value],
+        bedType: bedTypes[value]
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -56,11 +98,14 @@ function AvailabilityBar() {
   };
 
   const handleRoomClick = (roomType) => {
-    // Destructure formData to get room, adults, and children
-    const { room, adults, children } = formData;
-    // Navigate to booking page and pass form data including room, adults, and children
-    navigate("/book", { state: { formData: { ...formData, room: roomType, adults, children } } });
+    const { room, adults, children, ...rest } = formData;
+    navigate("/book", {
+      state: {
+        formData: { ...rest, room: roomType, adults, children, roomImage: roomImages[roomType], roomDescription: roomDescriptions[roomType], roomSize: roomSizes[roomType], guest: guests[roomType], bedType: bedTypes[roomType]}
+      }
+    });
   };
+
 
   return (
     <Container>
