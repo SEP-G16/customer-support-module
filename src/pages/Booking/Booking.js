@@ -6,6 +6,7 @@ import ImageBox from '../../components/ImageBox/ImageBox';
 import RoomDetails from '../../components/RoomCard/RoomCard';
 import Booking from './woman.jpg';
 import Room from './room.jpg';
+import { AxiosInstance } from '../../axios.config';
 
 const BookingPage = () => {
   const location = useLocation();
@@ -15,23 +16,23 @@ const BookingPage = () => {
     phone: '',
     checkIn: '',
     checkOut: '',
-    numRooms: 1,
-    numAdults: 1,
-    numChildren: 0,
+    roomCount: 1,
+    adultCount: 1,
+    childrenCount: 0,
     room: '', // Default room type
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [numAdults, setNumAdults] = useState(initialFormData.numAdults);
-  const [numChildren, setNumChildren] = useState(initialFormData.numChildren);
-  const [numRooms, setNumRooms] = useState(initialFormData.numRooms);
+  const [adultCount, setadultCount] = useState(initialFormData.adultCount);
+  const [childrenCount, setchildrenCount] = useState(initialFormData.childrenCount);
+  const [roomCount, setroomCount] = useState(initialFormData.roomCount);
 
   useEffect(() => {
     // Update state variables with formData from location state
     setFormData(location.state?.formData || initialFormData);
-    setNumAdults(location.state?.formData?.adults || initialFormData.numAdults);
-    setNumChildren(location.state?.formData?.children || initialFormData.numChildren);
-    setNumRooms(location.state?.formData?.rooms || initialFormData.numRooms);
+    setadultCount(location.state?.formData?.adults || initialFormData.adultCount);
+    setchildrenCount(location.state?.formData?.children || initialFormData.childrenCount);
+    setroomCount(location.state?.formData?.rooms || initialFormData.roomCount);
   }, [location.state?.formData]);
 
   const handleInputChange = (e) => {
@@ -41,14 +42,34 @@ const BookingPage = () => {
 
   const calculateTotalCost = () => {
     const baseCostPerNight = 150; // Example base cost per night
-    const totalCost = baseCostPerNight * numRooms;
+    const totalCost = baseCostPerNight * roomCount;
     return totalCost;
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     // Handle form submission logic, e.g., send formData to backend
     console.log(formData);
+
+    /////////////////////////////////////////////////////Navigate after this
+    try{
+      await AxiosInstance.post("/api/booking/temp/add", {
+        customerName: formData.name,
+        customerNic: "200202500190",
+        email: formData.email,
+        phoneNo: formData.phoneNo,
+        roomType: {
+          id: formData.roomTypeId
+        },
+        adultCount: formData.adultCount,
+        childrenCount: formData.childrenCount,
+        roomCount: formData.roomCount,
+        checkinDate: formData.checkIn,
+        checkoutDate: formData.checkOut,
+      });
+    }catch(e){
+      
+    }
   };
 
   return (
@@ -131,36 +152,36 @@ const BookingPage = () => {
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
-              name="numRooms"
+              name="roomCount"
               label="Number of Rooms"
               type="number"
               variant="outlined"
-              value={numRooms}
-              onChange={(e) => setNumRooms(parseInt(e.target.value))}
+              value={roomCount}
+              onChange={(e) => setroomCount(parseInt(e.target.value))}
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
-              name="numAdults"
+              name="adultCount"
               label="Number of Adults"
               type="number"
               variant="outlined"
-              value={numAdults}
-              onChange={(e) => setNumAdults(parseInt(e.target.value))}
+              value={adultCount}
+              onChange={(e) => setadultCount(parseInt(e.target.value))}
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
-              name="numChildren"
+              name="childrenCount"
               label="Number of Children"
               type="number"
               variant="outlined"
-              value={numChildren}
-              onChange={(e) => setNumChildren(parseInt(e.target.value))}
+              value={childrenCount}
+              onChange={(e) => setchildrenCount(parseInt(e.target.value))}
               fullWidth
               required
               InputProps={{ inputProps: { min: 0 } }}
