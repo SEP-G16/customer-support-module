@@ -6,6 +6,8 @@ import ImageBox from '../../components/ImageBox/ImageBox';
 import RoomDetails from '../../components/RoomCard/RoomCard';
 import Booking from './woman.jpg';
 import Room from './room.jpg';
+import { Link } from 'react-router-dom'; 
+
 
 const BookingPage = () => {
   const location = useLocation();
@@ -15,9 +17,9 @@ const BookingPage = () => {
     phone: '',
     checkIn: '',
     checkOut: '',
-    roomCount: 1,
-    adultCount: 1,
-    childrenCount: 0,
+    numRooms: 1,
+    numAdults: 1,
+    numChildren: 0,
     room: '', // Default room type
   };
 
@@ -25,13 +27,50 @@ const BookingPage = () => {
   const [numAdults, setNumAdults] = useState(initialFormData.numAdults);
   const [numChildren, setNumChildren] = useState(initialFormData.numChildren);
   const [numRooms, setNumRooms] = useState(initialFormData.numRooms);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormDataValid, setIsFormDataValid] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [errors, setErrors] = useState({});
+
+useEffect(() => {
+  const isValid = Object.values(formData).every((value) => value !== '' && value !== null);
+  setIsFormValid(isValid);
+}, [formData]); // Run the validation whenever the formData state changes
+
+useEffect(() => {
+  const validateFormData = () => {
+    const { name, email, phone, checkIn, checkOut, numRooms, numAdults, numChildren, room } = formData;
+    const errors = {};
+
+    // Validate phone number
+    if (phone && !/^\d{10}$/.test(phone)) {
+      errors.phone = 'Phone number must be 10 digits';
+    }
+
+    // Validate number of rooms, adults, and children
+    if (numRooms <= 0){errors.numRooms = 'Select at least one room';} 
+    if (numAdults <= 0) errors.numAdults = 'Number of adults must be greater than 0';
+    if (numChildren <= 0) errors.numChildren = 'Number of children cannot be negative';
+
+    // Validate dates
+    if (checkIn && checkOut && new Date(checkOut) <= new Date(checkIn)) {
+      errors.checkOut = 'Check-out date must be after check-in date';
+    }
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  setIsFormDataValid(validateFormData());
+}, [formData]);
+
 
   useEffect(() => {
     // Update state variables with formData from location state
     setFormData(location.state?.formData || initialFormData);
-    setadultCount(location.state?.formData?.adults || initialFormData.adultCount);
-    setchildrenCount(location.state?.formData?.children || initialFormData.childrenCount);
-    setroomCount(location.state?.formData?.rooms || initialFormData.roomCount);
+    setNumAdults(location.state?.formData?.adults || initialFormData.numAdults);
+    setNumChildren(location.state?.formData?.children || initialFormData.numChildren);
+    setNumRooms(location.state?.formData?.rooms || initialFormData.numRooms);
   }, [location.state?.formData]);
 
   const handleInputChange = (e) => {
@@ -41,15 +80,27 @@ const BookingPage = () => {
 
   const calculateTotalCost = () => {
     const baseCostPerNight = 150; // Example base cost per night
-    const totalCost = baseCostPerNight * roomCount;
+    const totalCost = baseCostPerNight * numRooms;
     return totalCost;
   };
-
+  
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    // Handle form submission logic, e.g., send formData to backend
-    console.log(formData);
+    // Check if the form is valid
+    if (isFormValid) {
+      // Show the success popup
+      setShowPopup(true);
+      // Automatically hide the popup and redirect after a short delay
+      setTimeout(() => {
+        setShowPopup(false);
+        // Navigate to the home page after 2 seconds
+        window.location.href = '/';
+      }, 2000);
+    } else {
+      alert("Please fill all the required fields.");
+    }
   };
+  
 
   return (
     <Container>
@@ -140,12 +191,23 @@ const BookingPage = () => {
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
-              name="roomCount"
+              name="numRooms"
               label="Number of Rooms"
               type="number"
               variant="outlined"
               value={numRooms}
-              onChange={(e) => setNumRooms(parseInt(e.target.value))}
+              onChange={(e) => {
+                const value = parseInt(e.target.value, 10);
+                if (value > 0) {
+                  setNumRooms(value);
+                  setFormData({ ...formData, numRooms: value }); // Update form data
+                } else {
+                  setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    numRooms: 'Number of rooms must be greater than 0',
+                  }));
+                }
+              }}
               fullWidth
               required 
               error={!!errors.numRooms}
@@ -154,24 +216,24 @@ const BookingPage = () => {
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
-              name="adultCount"
+              name="numAdults"
               label="Number of Adults"
               type="number"
               variant="outlined"
-              value={adultCount}
-              onChange={(e) => setadultCount(parseInt(e.target.value))}
+              value={numAdults}
+              onChange={(e) => setNumAdults(parseInt(e.target.value))}
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
-              name="childrenCount"
+              name="numChildren"
               label="Number of Children"
               type="number"
               variant="outlined"
-              value={childrenCount}
-              onChange={(e) => setchildrenCount(parseInt(e.target.value))}
+              value={numChildren}
+              onChange={(e) => setNumChildren(parseInt(e.target.value))}
               fullWidth
               required
               InputProps={{ inputProps: { min: 0 } }}
