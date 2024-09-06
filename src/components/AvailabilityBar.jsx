@@ -1,25 +1,66 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Button as MuiButton, TextField, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Typography, ButtonBase, Box } from "@mui/material";
+import {
+  Button as MuiButton,
+  TextField,
+  MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Typography,
+  ButtonBase,
+  Box,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import room from "./room.jpg";
 import suite from "./suite.jpg";
 import deluxe from "./luxury.jpg";
+import { AxiosInstance } from "../axios.config";
 
-// Define a mapping of room types to image paths
 const roomImages = {
   "Standard rooms": room,
   "Deluxe rooms": deluxe,
   "Suite rooms": suite,
 };
 
+const roomDescriptions = {
+  "Standard rooms":
+    "Experience ultimate comfort and relaxation in our Standard Room, featuring a breathtaking beach view. Perfect for unwinding after a sun-soaked day, this room provides everything you need for a delightful beachfront getaway.",
+  "Deluxe rooms":
+    "Indulge in luxury with our Deluxe Room, offering spacious accommodations and modern amenities. Ideal for families or couples looking for extra comfort and style during their stay.",
+  "Suite rooms":
+    "Discover the epitome of luxury in our Suite, featuring expansive living space, stunning ocean views, and premium amenities. Perfect for those seeking a lavish retreat and unparalleled comfort.",
+};
+const roomSizes = {
+  "Standard rooms": "80m2",
+  "Deluxe rooms": "100m2",
+  "Suite rooms": "120m2",
+};
+const guests = {
+  "Standard rooms": "2 Guests",
+  "Deluxe rooms": "3 Guests",
+  "Suite rooms": "4 Guests",
+};
+const bedTypes = {
+  "Standard rooms": "1 King Bed",
+  "Deluxe rooms": "2 Queen Beds",
+  "Suite rooms": "2 Twin Beds",
+};
+
 function AvailabilityBar() {
   const [formData, setFormData] = useState({
-    checkIn: '',
-    checkOut: '',
-    room: '1',
-    adults: '1',
-    children: '0',
+    checkIn: "",
+    checkOut: "",
+    room: "Standard rooms", // Default room type
+    adults: "1",
+    children: "0",
+    rooms: "1", // Default number of rooms
+    roomImage: roomImages["Standard rooms"], // Default room image
+    roomDescription: roomDescriptions["Standard rooms"], // Default room description
+    roomSize: roomSizes["Standard rooms"], // Default room size
+    guest: guests["Standard rooms"], // Default guest information
+    bedType: bedTypes["Standard rooms"], // Default bed type
   });
 
   const [showPopup, setShowPopup] = useState(false);
@@ -28,26 +69,47 @@ function AvailabilityBar() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (name === "room" || name === "rooms") {
+      setFormData({
+        ...formData,
+        [name]: value,
+        roomImage: roomImages[value], // Update room image based on selected room type
+        roomDescription: roomDescriptions[value], // Update room description based on selected room type
+        roomSize: roomSizes[value],
+        guest: guests[value],
+        bedType: bedTypes[value],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     setAvailable(true); // Simulated availability check
-
-    // Simulate room availability data
-    const availabilityData = {
-      "Standard rooms": 4,
-      "Deluxe rooms": 2, 
-      "Suite rooms": 3
-    };
-    setRoomAvailability(availabilityData);
-
-    if (available) {
-      setShowPopup(true);
-    } else {
-      alert("Rooms are not available for the selected dates.");
+    try {
+      let response = await AxiosInstance.get(`/api/room-type/available-count?from=${formData.checkIn}&to=${formData.checkOut}`); 
+      let [standardMap, deluxeMap, suiteMap] = response.data;
+      const availabilityData = {
+        "Standard rooms": {roomTypeId : standardMap.roomTypeId, roomCount: standardMap.roomCount},
+        "Deluxe rooms": {roomTypeId : deluxeMap.roomTypeId, roomCount: deluxeMap.roomCount},
+        "Suite rooms": {roomTypeId : suiteMap.roomTypeId, roomCount: suiteMap.roomCount},
+      };
+      // Simulate room availability data
+      setRoomAvailability(availabilityData);
+      if (available) {
+        setShowPopup(true);
+      } else {
+        alert("Rooms are not available for the selected dates.");
+      }
+    } catch (error) {
+      alert("An unexpected error occurred");
     }
   };
 
@@ -56,10 +118,24 @@ function AvailabilityBar() {
   };
 
   const handleRoomClick = (roomType) => {
-    // Destructure formData to get room, adults, and children
-    const { room, adults, children } = formData;
-    // Navigate to booking page and pass form data including room, adults, and children
-    navigate("/book", { state: { formData: { ...formData, room: roomType, adults, children } } });
+    const { room, adults, children, rooms, ...rest } = formData;
+    navigate("/book", {
+      state: {
+        formData: {
+          ...rest,
+          room: roomType,
+          roomTypeId: roomAvailability[roomType].roomTypeId,
+          adults,
+          children,
+          rooms,
+          roomImage: roomImages[roomType],
+          roomDescription: roomDescriptions[roomType],
+          roomSize: roomSizes[roomType],
+          guest: guests[roomType],
+          bedType: bedTypes[roomType],
+        },
+      },
+    });
   };
 
   return (
@@ -111,8 +187,8 @@ function AvailabilityBar() {
             select
             fullWidth
             label=""
-            name="room"
-            value={formData.room}
+            name="rooms"
+            value={formData.rooms}
             onChange={handleChange}
             InputLabelProps={{
               style: { color: "white" },
@@ -186,36 +262,43 @@ function AvailabilityBar() {
         </ButtonGridItem>
       </GridContainer>
 
-      <Dialog open={showPopup} onClose={handleClosePopup} maxWidth="sm" fullWidth>
-  <DialogTitle>Room Availability</DialogTitle>
-  <DialogContent>
-    <DialogContentWrapper>
-      {available ? (
-        <RoomContainer>
-          {Object.entries(roomAvailability).map(([roomType, count]) => (
-            <RoomBox key={roomType} onClick={() => handleRoomClick(roomType)}>
-              <RoomImage src={roomImages[roomType]} alt={roomType} />
-              <RoomContent>
-                <Typography variant="h6">{roomType}</Typography>
-                <Typography variant="body2">{`${count} rooms available`}</Typography>
-              </RoomContent>
-            </RoomBox>
-          ))}
-        </RoomContainer>
-      ) : (
-        <Typography variant="body1">Rooms are not available for the selected dates.</Typography>
-      )}
-    </DialogContentWrapper>
-  </DialogContent>
-  <DialogActions>
-    <MuiButton onClick={handleClosePopup} color="primary">
-      Close
-    </MuiButton>
-  </DialogActions>
-</Dialog>
-
-
-
+      <Dialog
+        open={showPopup}
+        onClose={handleClosePopup}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>Room Availability</DialogTitle>
+        <DialogContent>
+          <DialogContentWrapper>
+            {available ? (
+              <RoomContainer>
+                {Object.entries(roomAvailability).map(([roomType, map]) => (
+                  <RoomBox
+                    key={roomType}
+                    onClick={() => handleRoomClick(roomType)}
+                  >
+                    <RoomImage src={roomImages[roomType]} alt={roomType} />
+                    <RoomContent>
+                      <Typography variant="h6">{roomType}</Typography>
+                      <Typography variant="body2">{`${map.roomCount} rooms available`}</Typography>
+                    </RoomContent>
+                  </RoomBox>
+                ))}
+              </RoomContainer>
+            ) : (
+              <Typography variant="body1">
+                Rooms are not available for the selected dates.
+              </Typography>
+            )}
+          </DialogContentWrapper>
+        </DialogContent>
+        <DialogActions>
+          <MuiButton onClick={handleClosePopup} color="primary">
+            Close
+          </MuiButton>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
@@ -324,13 +407,11 @@ const RoomContainer = styled.div`
   align-items: flex-end; /* Aligns all content to the right */
 `;
 
-
 const DialogContentWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
 `;
-
 
 const RoomBox = styled(ButtonBase)`
   display: flex;
@@ -364,6 +445,5 @@ const RoomContent = styled(Box)`
   width: 100%;
   text-align: right; /* Aligns the content to the right */
 `;
-
 
 export default AvailabilityBar;
