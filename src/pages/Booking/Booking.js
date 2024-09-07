@@ -6,8 +6,9 @@ import ImageBox from '../../components/ImageBox/ImageBox';
 import RoomDetails from '../../components/RoomCard/RoomCard';
 import Booking from './woman.jpg';
 import Room from './room.jpg';
+import { AxiosInstance } from '../../axios.config';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'; 
-
 
 const BookingPage = () => {
   const location = useLocation();
@@ -83,7 +84,28 @@ useEffect(() => {
     const totalCost = baseCostPerNight * numRooms;
     return totalCost;
   };
-  
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    // Handle form submission logic, e.g., send formData to backend
+    console.log(formData);
+    try{
+      await AxiosInstance.post("/api/booking/temp/add", {
+        customerName: formData.name,
+        customerNic: "200202500190",
+        email: formData.email,
+        phoneNo: formData.phone,
+        roomType: {
+          id: formData.roomTypeId
+        },
+        adultCount: formData.adultCount,
+        childrenCount: formData.childrenCount,
+        roomCount: formData.roomCount,
+        checkinDate: formData.checkIn,
+        checkoutDate: formData.checkOut,
+      });
+    }catch(e){
+       
   const handleFormSubmit = (event) => {
     event.preventDefault();
     // Check if the form is valid
