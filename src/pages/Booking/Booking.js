@@ -174,6 +174,7 @@ useEffect(() => {
               fullWidth
               required
               InputLabelProps={{ shrink: true }}
+              inputProps={{ min: new Date().toISOString().split('T')[0] }} 
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
@@ -188,6 +189,7 @@ useEffect(() => {
               error={!!errors.checkOut}
               helperText={errors.checkOut}
               InputLabelProps={{ shrink: true }}
+              inputProps={{ min: new Date().toISOString().split('T')[0] }} 
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
