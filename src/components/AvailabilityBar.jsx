@@ -141,47 +141,55 @@ function AvailabilityBar() {
   return (
     <Container>
       <GridContainer>
+      <GridItem>
+  <ItemLabel>Check In</ItemLabel>
+  <StyledTextField
+    fullWidth
+    label=""
+    name="checkIn"
+    type="date"
+    value={formData.checkIn}
+    onChange={handleChange}
+    InputLabelProps={{
+      shrink: true,
+      style: { color: "white" },
+    }}
+    required
+    InputProps={{
+      disableUnderline: true,
+      inputProps: {
+        min: new Date().toISOString().split("T")[0], // Set the minimum selectable date to today
+      },
+    }}
+    variant="outlined"
+  />
+</GridItem>
+
         <GridItem>
-          <ItemLabel>Check In</ItemLabel>
-          <StyledTextField
-            fullWidth
-            label=""
-            name="checkIn"
-            type="date"
-            value={formData.checkIn}
-            onChange={handleChange}
-            InputLabelProps={{
-              shrink: true,
-              style: { color: "white" },
-            }}
-            required
-            InputProps={{
-              disableUnderline: true,
-            }}
-            variant="outlined"
-          />
-        </GridItem>
-        <GridItem>
-          <ItemLabel>Check Out</ItemLabel>
-          <StyledTextField
-            fullWidth
-            label=""
-            name="checkOut"
-            type="date"
-            value={formData.checkOut}
-            onChange={handleChange}
-            InputLabelProps={{
-              shrink: true,
-              style: { color: "white" },
-            }}
-            required
-            InputProps={{
-              disableUnderline: true,
-            }}
-            variant="outlined"
-          />
-        </GridItem>
-        <GridItem>
+  <ItemLabel>Check Out</ItemLabel>
+  <StyledTextField
+    fullWidth
+    label=""
+    name="checkOut"
+    type="date"
+    value={formData.checkOut}
+    onChange={handleChange}
+    InputLabelProps={{
+      shrink: true,
+      style: { color: "white" },
+    }}
+    required
+    InputProps={{
+      disableUnderline: true,
+      inputProps: {
+        min: new Date().toISOString().split("T")[0], // This sets the minimum date to today's date
+      },
+    }}
+    variant="outlined"
+  />
+</GridItem>
+
+        {/* <GridItem>
           <ItemLabel>Rooms</ItemLabel>
           <StyledTextField
             select
@@ -204,8 +212,8 @@ function AvailabilityBar() {
               </MenuItem>
             ))}
           </StyledTextField>
-        </GridItem>
-        <GridItem>
+        </GridItem> */}
+        {/* <GridItem>
           <ItemLabel>Adults</ItemLabel>
           <StyledTextField
             select
@@ -228,8 +236,8 @@ function AvailabilityBar() {
               </MenuItem>
             ))}
           </StyledTextField>
-        </GridItem>
-        <GridItem>
+        </GridItem> */}
+        {/* <GridItem>
           <ItemLabel>Children</ItemLabel>
           <StyledTextField
             select
@@ -252,7 +260,7 @@ function AvailabilityBar() {
               </MenuItem>
             ))}
           </StyledTextField>
-        </GridItem>
+        </GridItem> */}
         <ButtonGridItem>
           <ButtonWrapper>
             <StyledButton type="button" onClick={handleSubmit}>
@@ -306,7 +314,7 @@ function AvailabilityBar() {
 const Container = styled.div`
   background-color: #53624e;
   padding: 10px 47px;
-  width: 75%;
+  width: 35%;
   border: 1px solid #b99d75;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   @media (max-width: 991px) {

@@ -76,7 +76,7 @@ const CheckAvailability = () => {
           <MyComponentWrapper>
             <MyComponent
               roomImage={suite}
-              roomType="Suite"
+              roomType="Suite Room"
               roomSize="120m2"
               guests="4 Guests"
               bedType="2 Twin Beds"
