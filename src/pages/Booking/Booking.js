@@ -7,6 +7,7 @@ import RoomDetails from '../../components/RoomCard/RoomCard';
 import Booking from './woman.jpg';
 import Room from './room.jpg';
 import { AxiosInstance } from '../../axios.config';
+import { useNavigate } from 'react-router-dom';
 
 const BookingPage = () => {
   const location = useLocation();
@@ -46,6 +47,8 @@ const BookingPage = () => {
     return totalCost;
   };
 
+  
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     // Handle form submission logic, e.g., send formData to backend
@@ -57,7 +60,7 @@ const BookingPage = () => {
         customerName: formData.name,
         customerNic: "200202500190",
         email: formData.email,
-        phoneNo: formData.phoneNo,
+        phoneNo: formData.phone,
         roomType: {
           id: formData.roomTypeId
         },
