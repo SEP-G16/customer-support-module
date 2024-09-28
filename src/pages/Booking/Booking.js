@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import { Typography, TextField, Button, Box } from '@mui/material';
-import ImageBox from '../../components/ImageBox/ImageBox';
-import RoomDetails from '../../components/RoomCard/RoomCard';
-import Booking from './woman.jpg';
-import Room from './room.jpg';
-import { AxiosInstance } from '../../axios.config';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import styled from "styled-components";
+import { Typography, TextField, Button, Box } from "@mui/material";
+import ImageBox from "../../components/ImageBox/ImageBox";
+import RoomDetails from "../../components/RoomCard/RoomCard";
+import Booking from "./woman.jpg";
+import { AxiosInstance } from "../../axios.config";
+import './Booking.css';
 
 const BookingPage = () => {
   const location = useLocation();
   const initialFormData = location.state?.formData || {
-    name: '',
-    email: '',
-    phone: '',
-    checkIn: '',
-    checkOut: '',
+    name: "",
+    email: "",
+    phone: "",
+    checkIn: "",
+    checkOut: "",
     roomCount: 1,
     adultCount: 1,
     childrenCount: 0,
-    room: '', // Default room type
+    room: "", // Default room type
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -47,22 +46,20 @@ const BookingPage = () => {
     return totalCost;
   };
 
-  
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     // Handle form submission logic, e.g., send formData to backend
     console.log(formData);
 
     /////////////////////////////////////////////////////Navigate after this
-    try{
+    try {
       await AxiosInstance.post("/api/booking/temp/add", {
         customerName: formData.name,
         customerNic: "200202500190",
         email: formData.email,
         phoneNo: formData.phone,
         roomType: {
-          id: formData.roomTypeId
+          id: formData.roomTypeId,
         },
         adultCount: formData.adultCount,
         childrenCount: formData.childrenCount,
@@ -70,19 +67,17 @@ const BookingPage = () => {
         checkinDate: formData.checkIn,
         checkoutDate: formData.checkOut,
       });
-    }catch(e){
-      
-    }
+    } catch (e) {}
   };
 
   return (
-    <Container>
-      <ImageBoxWrapper>
+    <div className="container">
+      <div className="image-box-wrapper">
         <ImageBox imageSrc={Booking} />
-      </ImageBoxWrapper>
-      <Content>
-        <LeftSection>
-          <Typography variant='h4' fontFamily="Marcellus, serif">
+      </div>
+      <div className="content">
+        <div className="left-section">
+          <Typography variant="h4" fontFamily="Marcellus, serif">
             Your Room
           </Typography>
           <RoomDetails
@@ -93,13 +88,13 @@ const BookingPage = () => {
             bedType={formData.bedType}
             description={formData.roomDescription}
           />
-        </LeftSection>
-        <RightSection>
+        </div>
+        <div className="right-section">
           {/* Reservation form */}
-          <Typography variant='h4' fontFamily="Marcellus, serif">
+          <Typography variant="h4" fontFamily="Marcellus, serif">
             Book Your Stay
           </Typography>
-          <Form onSubmit={handleFormSubmit}>
+          <form className="form" onSubmit={handleFormSubmit}>
             <TextField
               name="name"
               label="Name"
@@ -108,7 +103,7 @@ const BookingPage = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="email"
@@ -118,7 +113,7 @@ const BookingPage = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="phone"
@@ -128,7 +123,7 @@ const BookingPage = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="checkIn"
@@ -140,7 +135,7 @@ const BookingPage = () => {
               fullWidth
               required
               InputLabelProps={{ shrink: true }}
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="checkOut"
@@ -152,7 +147,7 @@ const BookingPage = () => {
               fullWidth
               required
               InputLabelProps={{ shrink: true }}
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="roomCount"
@@ -164,7 +159,7 @@ const BookingPage = () => {
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="adultCount"
@@ -176,7 +171,7 @@ const BookingPage = () => {
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="childrenCount"
@@ -188,7 +183,7 @@ const BookingPage = () => {
               fullWidth
               required
               InputProps={{ inputProps: { min: 0 } }}
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <Typography variant="h4" fontFamily="Marcellus, serif">
               Total Cost: {calculateTotalCost()} USD
@@ -198,80 +193,22 @@ const BookingPage = () => {
               type="submit"
               sx={{
                 mt: 2,
-                backgroundColor: 'black',
-                borderRadius: '0px',
-                padding: '10px',
-                marginTop: '50px',
-                marginBottom: '30px',
-                fontSize: '1.4rem', // Adjust font size
-                fontFamily: 'Marcellus, serif',
+                backgroundColor: "black",
+                borderRadius: "0px",
+                padding: "10px",
+                marginTop: "50px",
+                marginBottom: "30px",
+                fontSize: "1.4rem", // Adjust font size
+                fontFamily: "Marcellus, serif",
               }}
             >
               Book Your Stay
             </Button>
-          </Form>
-        </RightSection>
-      </Content>
-    </Container>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
-
-const Container = styled.div`
-  font-family: 'Marcellus', serif;
-  overflow-x: hidden;
-`;
-
-const ImageBoxWrapper = styled.div`
-  position: relative;
-  overflow: hidden;
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
-    z-index: 1; /* Ensure the overlay is above the image */
-  }
-`;
-
-const Content = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center; // Centers content on smaller screens
-  }
-`;
-
-const LeftSection = styled.div`
-  flex: 1;
-  padding: 50px 0; // Adjusted padding for better centering
-  margin-right: 20px;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const RightSection = styled.div`
-  flex: 1;
-  padding: 50px; // Adjusted padding for better centering
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Form = styled.form`
-  width: 100%; // Ensures form takes full width of its container
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
 export default BookingPage;

@@ -5,7 +5,7 @@ import Footer from './components/Footer'; // Ensure correct import path
 import Home from './pages/Welcome/Home';
 import ReviewPage from './pages/Review/Review';
 import Menu from './pages/Menu/Menu';
-import CheckAvailability from './pages/Booking/CheckAvailability';
+import CheckAvailability from './pages/CheckAvailability/CheckAvailability';
 import Booking from './pages/Booking/Booking';
 import About from './pages/About/about'; // Adjusted import path for 'about.jsx'
 import ContactUs from './pages/ContactUs/ContactUs'; // Adjusted import path for 'ContactUs.jsx'
