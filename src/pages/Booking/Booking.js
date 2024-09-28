@@ -23,7 +23,7 @@ const BookingPage = () => {
     numChildren: 0,
     room: '', // Default room type
   };
-
+}
   const [formData, setFormData] = useState(initialFormData);
   const [numAdults, setNumAdults] = useState(initialFormData.numAdults);
   const [numChildren, setNumChildren] = useState(initialFormData.numChildren);
@@ -105,6 +105,8 @@ useEffect(() => {
         checkoutDate: formData.checkOut,
       });
     }catch(e){
+      console.error(e); 
+    }
        
   const handleFormSubmit = (event) => {
     event.preventDefault();
