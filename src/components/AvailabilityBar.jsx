@@ -109,6 +109,7 @@ function AvailabilityBar() {
         alert("Rooms are not available for the selected dates.");
       }
     } catch (error) {
+      console.error(error);
       alert("An unexpected error occurred");
     }
   };
