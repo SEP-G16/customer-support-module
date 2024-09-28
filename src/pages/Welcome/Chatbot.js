@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './Chatbot.css'; // Import the CSS file
 
 const Chatbot = () => {
   useEffect(() => {
@@ -20,26 +21,8 @@ const Chatbot = () => {
       document.head.appendChild(link);
     }
 
-    // Add custom styles
-    const style = document.createElement('style');
-    style.innerHTML = `
-      
-      df-messenger {
-        z-index: 999;
-        position: fixed;
-        --df-messenger-font-color: #000000;
-        --df-messenger-font-family: Lato;
-        --df-messenger-chat-background: #fef8e6;
-        --df-messenger-message-user-background: #f4b400;
-        --df-messenger-message-bot-background: #f4c7c3;
-        bottom: 16px;
-        right: 16px;
-      }
-    `;
-    document.head.appendChild(style);
-
     return () => {
-      document.head.removeChild(style);
+      // Cleanup logic if needed
     };
   }, []);
 
@@ -53,7 +36,6 @@ const Chatbot = () => {
       <df-messenger-chat-bubble chat-title="Ceylon Resort Chatbot">
       </df-messenger-chat-bubble>
     </df-messenger>
-    
   );
 };
 
