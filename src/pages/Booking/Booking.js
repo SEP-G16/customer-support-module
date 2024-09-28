@@ -6,6 +6,9 @@ import ImageBox from '../../components/ImageBox/ImageBox';
 import RoomDetails from '../../components/RoomCard/RoomCard';
 import Booking from './woman.jpg';
 import Room from './room.jpg';
+import { AxiosInstance } from '../../axios.config';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 
 const BookingPage = () => {
   const location = useLocation();
@@ -25,6 +28,43 @@ const BookingPage = () => {
   const [numAdults, setNumAdults] = useState(initialFormData.numAdults);
   const [numChildren, setNumChildren] = useState(initialFormData.numChildren);
   const [numRooms, setNumRooms] = useState(initialFormData.numRooms);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormDataValid, setIsFormDataValid] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [errors, setErrors] = useState({});
+
+useEffect(() => {
+  const isValid = Object.values(formData).every((value) => value !== '' && value !== null);
+  setIsFormValid(isValid);
+}, [formData]); // Run the validation whenever the formData state changes
+
+useEffect(() => {
+  const validateFormData = () => {
+    const { name, email, phone, checkIn, checkOut, numRooms, numAdults, numChildren, room } = formData;
+    const errors = {};
+
+    // Validate phone number
+    if (phone && !/^\d{10}$/.test(phone)) {
+      errors.phone = 'Phone number must be 10 digits';
+    }
+
+    // Validate number of rooms, adults, and children
+    if (numRooms <= 0){errors.numRooms = 'Select at least one room';} 
+    if (numAdults <= 0) errors.numAdults = 'Number of adults must be greater than 0';
+    if (numChildren <= 0) errors.numChildren = 'Number of children cannot be negative';
+
+    // Validate dates
+    if (checkIn && checkOut && new Date(checkOut) <= new Date(checkIn)) {
+      errors.checkOut = 'Check-out date must be after check-in date';
+    }
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  setIsFormDataValid(validateFormData());
+}, [formData]);
+
 
   useEffect(() => {
     // Update state variables with formData from location state
@@ -45,14 +85,52 @@ const BookingPage = () => {
     return totalCost;
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     // Handle form submission logic, e.g., send formData to backend
     console.log(formData);
+    try{
+      await AxiosInstance.post("/api/booking/temp/add", {
+        customerName: formData.name,
+        customerNic: "200202500190",
+        email: formData.email,
+        phoneNo: formData.phone,
+        roomType: {
+          id: formData.roomTypeId
+        },
+        adultCount: formData.adultCount,
+        childrenCount: formData.childrenCount,
+        roomCount: formData.roomCount,
+        checkinDate: formData.checkIn,
+        checkoutDate: formData.checkOut,
+      });
+    }catch(e){
+       
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    // Check if the form is valid
+    if (isFormValid) {
+      // Show the success popup
+      setShowPopup(true);
+      // Automatically hide the popup and redirect after a short delay
+      setTimeout(() => {
+        setShowPopup(false);
+        // Navigate to the home page after 2 seconds
+        window.location.href = '/';
+      }, 2000);
+    } else {
+      alert("Please fill all the required fields.");
+    }
   };
+  
 
   return (
     <Container>
+      {showPopup && (
+        <Popup>
+          You have successfully booked a room! Our team will confirm your reservation very soon.
+        </Popup>
+      )}
       <ImageBoxWrapper>
         <ImageBox imageSrc={Booking} />
       </ImageBoxWrapper>
@@ -97,14 +175,16 @@ const BookingPage = () => {
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
             <TextField
-              name="phone"
-              label="Phone"
-              variant="outlined"
-              value={formData.phone}
-              onChange={handleInputChange}
-              fullWidth
-              required
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+               name="phone"
+               label="Phone"
+               variant="outlined"
+               value={formData.phone}
+               onChange={handleInputChange}
+               fullWidth
+               required
+               error={!!errors.phone}
+               helperText={errors.phone}
+               sx={{ marginBottom: 2, borderRadius: '0px' }} 
             />
             <TextField
               name="checkIn"
@@ -127,6 +207,8 @@ const BookingPage = () => {
               onChange={handleInputChange}
               fullWidth
               required
+              error={!!errors.checkOut}
+              helperText={errors.checkOut}
               InputLabelProps={{ shrink: true }}
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
@@ -136,9 +218,22 @@ const BookingPage = () => {
               type="number"
               variant="outlined"
               value={numRooms}
-              onChange={(e) => setNumRooms(parseInt(e.target.value))}
+              onChange={(e) => {
+                const value = parseInt(e.target.value, 10);
+                if (value > 0) {
+                  setNumRooms(value);
+                  setFormData({ ...formData, numRooms: value }); // Update form data
+                } else {
+                  setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    numRooms: 'Number of rooms must be greater than 0',
+                  }));
+                }
+              }}
               fullWidth
-              required
+              required 
+              error={!!errors.numRooms}
+              helperText={errors.numRooms}
               InputProps={{ inputProps: { min: 1 } }}
               sx={{ marginBottom: 2, borderRadius: '0px' }}
             />
@@ -170,21 +265,30 @@ const BookingPage = () => {
               Total Cost: {calculateTotalCost()} USD
             </Typography>
             <Button
-              variant="contained"
               type="submit"
+              disabled={!isFormValid}
               sx={{
-                mt: 2,
-                backgroundColor: 'black',
-                borderRadius: '0px',
-                padding: '10px',
-                marginTop: '50px',
-                marginBottom: '30px',
-                fontSize: '1.4rem', // Adjust font size
-                fontFamily: 'Marcellus, serif',
-              }}
-            >
+                  mt: 2,
+                  borderRadius: '0px',
+                  padding: '10px',
+                  marginTop: '50px',
+                  marginBottom: '30px',
+                  fontSize: '1.4rem', // Adjust font size
+                  fontFamily: 'Marcellus, serif',
+                  color: '#fff',
+                  transition: 'color 0.3s ease', // Smooth transition for color change
+                  border: '3px solid rgba(185, 157, 117, 1)', // Example border style
+                  backgroundColor: '#53624e', // CamelCase for background-color
+                  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
+                  '&:hover': {
+                    color: '#B99D75',
+                    backgroundColor: '#53624e', // Corrected hover color syntax
+                  },
+                }}
+              >
               Book Your Stay
-            </Button>
+              </Button>
+
           </Form>
         </RightSection>
       </Content>
@@ -249,5 +353,37 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
 `;
+
+const StyledLink = styled(Link)`
+  font-family: Marcellus, serif;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 50px 12px;
+  transition: color 0.3s ease; /* Smooth transition for color change */
+  border: 3px solid rgba(185, 157, 117, 1); /* Example border style */
+  background-color: #53624e;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  &:hover {
+    color: #B99D75; 
+  }
+  @media (max-width: 991px) {
+    white-space: initial;
+    padding: 0 20px;
+  }
+`;
+
+const Popup = styled.div`
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  z-index: 1000;
+  font-family: 'Marcellus', serif;
+`;
+
 
 export default BookingPage;

@@ -1,10 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Button as MuiButton, TextField, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Typography, ButtonBase, Box } from "@mui/material";
+import {
+  Button as MuiButton,
+  TextField,
+  MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Typography,
+  ButtonBase,
+  Box,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import room from "./room.jpg";
 import suite from "./suite.jpg";
 import deluxe from "./luxury.jpg";
+import { AxiosInstance } from "../axios.config";
 
 const roomImages = {
   "Standard rooms": room,
@@ -13,9 +25,12 @@ const roomImages = {
 };
 
 const roomDescriptions = {
-  "Standard rooms": "Experience ultimate comfort and relaxation in our Standard Room, featuring a breathtaking beach view. Perfect for unwinding after a sun-soaked day, this room provides everything you need for a delightful beachfront getaway.",
-  "Deluxe rooms": "Indulge in luxury with our Deluxe Room, offering spacious accommodations and modern amenities. Ideal for families or couples looking for extra comfort and style during their stay.",
-  "Suite rooms": "Discover the epitome of luxury in our Suite, featuring expansive living space, stunning ocean views, and premium amenities. Perfect for those seeking a lavish retreat and unparalleled comfort.",
+  "Standard rooms":
+    "Experience ultimate comfort and relaxation in our Standard Room, featuring a breathtaking beach view. Perfect for unwinding after a sun-soaked day, this room provides everything you need for a delightful beachfront getaway.",
+  "Deluxe rooms":
+    "Indulge in luxury with our Deluxe Room, offering spacious accommodations and modern amenities. Ideal for families or couples looking for extra comfort and style during their stay.",
+  "Suite rooms":
+    "Discover the epitome of luxury in our Suite, featuring expansive living space, stunning ocean views, and premium amenities. Perfect for those seeking a lavish retreat and unparalleled comfort.",
 };
 const roomSizes = {
   "Standard rooms": "80m2",
@@ -35,12 +50,12 @@ const bedTypes = {
 
 function AvailabilityBar() {
   const [formData, setFormData] = useState({
-    checkIn: '',
-    checkOut: '',
-    room: 'Standard rooms', // Default room type
-    adults: '1',
-    children: '0',
-    rooms: '1', // Default number of rooms
+    checkIn: "",
+    checkOut: "",
+    room: "Standard rooms", // Default room type
+    adults: "1",
+    children: "0",
+    rooms: "1", // Default number of rooms
     roomImage: roomImages["Standard rooms"], // Default room image
     roomDescription: roomDescriptions["Standard rooms"], // Default room description
     roomSize: roomSizes["Standard rooms"], // Default room size
@@ -56,7 +71,7 @@ function AvailabilityBar() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    if (name === 'room' || name === 'rooms') {
+    if (name === "room" || name === "rooms") {
       setFormData({
         ...formData,
         [name]: value,
@@ -64,7 +79,7 @@ function AvailabilityBar() {
         roomDescription: roomDescriptions[value], // Update room description based on selected room type
         roomSize: roomSizes[value],
         guest: guests[value],
-        bedType: bedTypes[value]
+        bedType: bedTypes[value],
       });
     } else {
       setFormData({
@@ -74,23 +89,27 @@ function AvailabilityBar() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     setAvailable(true); // Simulated availability check
-
-    // Simulate room availability data
-    const availabilityData = {
-      "Standard rooms": 4,
-      "Deluxe rooms": 2, 
-      "Suite rooms": 3
-    };
-    setRoomAvailability(availabilityData);
-
-    if (available) {
-      setShowPopup(true);
-    } else {
-      alert("Rooms are not available for the selected dates.");
+    try {
+      let response = await AxiosInstance.get(`/api/room-type/available-count?from=${formData.checkIn}&to=${formData.checkOut}`); 
+      let [standardMap, deluxeMap, suiteMap] = response.data;
+      const availabilityData = {
+        "Standard rooms": {roomTypeId : standardMap.roomTypeId, roomCount: standardMap.roomCount},
+        "Deluxe rooms": {roomTypeId : deluxeMap.roomTypeId, roomCount: deluxeMap.roomCount},
+        "Suite rooms": {roomTypeId : suiteMap.roomTypeId, roomCount: suiteMap.roomCount},
+      };
+      // Simulate room availability data
+      setRoomAvailability(availabilityData);
+      if (available) {
+        setShowPopup(true);
+      } else {
+        alert("Rooms are not available for the selected dates.");
+      }
+    } catch (error) {
+      alert("An unexpected error occurred");
     }
   };
 
@@ -102,55 +121,75 @@ function AvailabilityBar() {
     const { room, adults, children, rooms, ...rest } = formData;
     navigate("/book", {
       state: {
-        formData: { ...rest, room: roomType, adults, children, rooms, roomImage: roomImages[roomType], roomDescription: roomDescriptions[roomType], roomSize: roomSizes[roomType], guest: guests[roomType], bedType: bedTypes[roomType]}
-      }
+        formData: {
+          ...rest,
+          room: roomType,
+          roomTypeId: roomAvailability[roomType].roomTypeId,
+          adults,
+          children,
+          rooms,
+          roomImage: roomImages[roomType],
+          roomDescription: roomDescriptions[roomType],
+          roomSize: roomSizes[roomType],
+          guest: guests[roomType],
+          bedType: bedTypes[roomType],
+        },
+      },
     });
   };
 
   return (
     <Container>
       <GridContainer>
+      <GridItem>
+  <ItemLabel>Check In</ItemLabel>
+  <StyledTextField
+    fullWidth
+    label=""
+    name="checkIn"
+    type="date"
+    value={formData.checkIn}
+    onChange={handleChange}
+    InputLabelProps={{
+      shrink: true,
+      style: { color: "white" },
+    }}
+    required
+    InputProps={{
+      disableUnderline: true,
+      inputProps: {
+        min: new Date().toISOString().split("T")[0], // Set the minimum selectable date to today
+      },
+    }}
+    variant="outlined"
+  />
+</GridItem>
+
         <GridItem>
-          <ItemLabel>Check In</ItemLabel>
-          <StyledTextField
-            fullWidth
-            label=""
-            name="checkIn"
-            type="date"
-            value={formData.checkIn}
-            onChange={handleChange}
-            InputLabelProps={{
-              shrink: true,
-              style: { color: "white" },
-            }}
-            required
-            InputProps={{
-              disableUnderline: true,
-            }}
-            variant="outlined"
-          />
-        </GridItem>
-        <GridItem>
-          <ItemLabel>Check Out</ItemLabel>
-          <StyledTextField
-            fullWidth
-            label=""
-            name="checkOut"
-            type="date"
-            value={formData.checkOut}
-            onChange={handleChange}
-            InputLabelProps={{
-              shrink: true,
-              style: { color: "white" },
-            }}
-            required
-            InputProps={{
-              disableUnderline: true,
-            }}
-            variant="outlined"
-          />
-        </GridItem>
-        <GridItem>
+  <ItemLabel>Check Out</ItemLabel>
+  <StyledTextField
+    fullWidth
+    label=""
+    name="checkOut"
+    type="date"
+    value={formData.checkOut}
+    onChange={handleChange}
+    InputLabelProps={{
+      shrink: true,
+      style: { color: "white" },
+    }}
+    required
+    InputProps={{
+      disableUnderline: true,
+      inputProps: {
+        min: new Date().toISOString().split("T")[0], // This sets the minimum date to today's date
+      },
+    }}
+    variant="outlined"
+  />
+</GridItem>
+
+        {/* <GridItem>
           <ItemLabel>Rooms</ItemLabel>
           <StyledTextField
             select
@@ -173,8 +212,8 @@ function AvailabilityBar() {
               </MenuItem>
             ))}
           </StyledTextField>
-        </GridItem>
-        <GridItem>
+        </GridItem> */}
+        {/* <GridItem>
           <ItemLabel>Adults</ItemLabel>
           <StyledTextField
             select
@@ -197,8 +236,8 @@ function AvailabilityBar() {
               </MenuItem>
             ))}
           </StyledTextField>
-        </GridItem>
-        <GridItem>
+        </GridItem> */}
+        {/* <GridItem>
           <ItemLabel>Children</ItemLabel>
           <StyledTextField
             select
@@ -221,7 +260,7 @@ function AvailabilityBar() {
               </MenuItem>
             ))}
           </StyledTextField>
-        </GridItem>
+        </GridItem> */}
         <ButtonGridItem>
           <ButtonWrapper>
             <StyledButton type="button" onClick={handleSubmit}>
@@ -231,24 +270,34 @@ function AvailabilityBar() {
         </ButtonGridItem>
       </GridContainer>
 
-      <Dialog open={showPopup} onClose={handleClosePopup} maxWidth="sm" fullWidth>
+      <Dialog
+        open={showPopup}
+        onClose={handleClosePopup}
+        maxWidth="sm"
+        fullWidth
+      >
         <DialogTitle>Room Availability</DialogTitle>
         <DialogContent>
           <DialogContentWrapper>
             {available ? (
               <RoomContainer>
-                {Object.entries(roomAvailability).map(([roomType, count]) => (
-                  <RoomBox key={roomType} onClick={() => handleRoomClick(roomType)}>
+                {Object.entries(roomAvailability).map(([roomType, map]) => (
+                  <RoomBox
+                    key={roomType}
+                    onClick={() => handleRoomClick(roomType)}
+                  >
                     <RoomImage src={roomImages[roomType]} alt={roomType} />
                     <RoomContent>
                       <Typography variant="h6">{roomType}</Typography>
-                      <Typography variant="body2">{`${count} rooms available`}</Typography>
+                      <Typography variant="body2">{`${map.roomCount} rooms available`}</Typography>
                     </RoomContent>
                   </RoomBox>
                 ))}
               </RoomContainer>
             ) : (
-              <Typography variant="body1">Rooms are not available for the selected dates.</Typography>
+              <Typography variant="body1">
+                Rooms are not available for the selected dates.
+              </Typography>
             )}
           </DialogContentWrapper>
         </DialogContent>
@@ -265,7 +314,7 @@ function AvailabilityBar() {
 const Container = styled.div`
   background-color: #53624e;
   padding: 10px 47px;
-  width: 75%;
+  width: 35%;
   border: 1px solid #b99d75;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   @media (max-width: 991px) {

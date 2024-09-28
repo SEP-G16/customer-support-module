@@ -25,7 +25,6 @@ const ImagesRow = styled.div`
   display: flex;
   gap: 50px;
   flex-wrap: wrap;
-  paddingTop: 50px;
   justify-content: center;
 
   @media (max-width: 768px) {
@@ -46,6 +45,14 @@ const ImageWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: calc(50% - 10px); /* Two images per row */
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%; /* One image per row */
   }
 `;
 
