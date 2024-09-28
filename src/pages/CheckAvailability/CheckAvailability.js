@@ -106,7 +106,7 @@ const CheckAvailability = () => {
           </div>
         </div>
         <div className="text-section">
-          <img src={LotusIcon} alt="Lotus icon" />
+          <img src={LotusIcon} alt="Lotus icon" style={{ width: "75px", height: "auto", objectFit: "contain" }} />
           <Typography
             variant="h3"
             fontFamily="Marcellus, serif"
