@@ -7,8 +7,8 @@ import {
   Button,
   Rating,
 } from "@mui/material";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import ImageBox from "../../components/ImageBox/ImageBox";
 import ReviewImage from "./Reviews.jpg";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";

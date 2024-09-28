@@ -1,10 +1,10 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { Stack, Typography } from "@mui/material";
-import Header from "../../components/Header";
+import Header from "../../components/Header/Header";
 import ImageBox from "../../components/ImageBox/ImageBox";
-import MenuCard from "../../components/MenuCard";
-import Footer from "../../components/Footer";
+import MenuCard from "../../components/MenuCard/MenuCard";
+import Footer from "../../components/Footer/Footer";
 import Dining from "./dining.jpg";
 import MealCard from "../../components/MealCard/MealCard";
 import pizza from "./ChickenPizza.jpg";

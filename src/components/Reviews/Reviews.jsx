@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import ReviewCard from "./ReviewCard/ReviewCard"; // Import the ReviewCard component
+import ReviewCard from "../ReviewCard/ReviewCard"; // Import the ReviewCard component
 
 function Reviews({Review}) {
   return (

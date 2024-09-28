@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/Header'; // Ensure correct import path
-import Footer from './components/Footer'; // Ensure correct import path
+import Header from './components/Header/Header'; // Ensure correct import path
+import Footer from './components/Footer/Footer'; // Ensure correct import path
 import Home from './pages/Welcome/Home';
 import ReviewPage from './pages/Review/Review';
 import Menu from './pages/Menu/Menu';

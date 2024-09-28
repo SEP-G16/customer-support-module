@@ -1,7 +1,8 @@
-import React from "react";
+import * as React from "react";
+import styled from "styled-components";
 import Door from "./Images/door.jpg";
 import Table from "./Images/table.jpg";
-import './DetailSection.css'; 
+import './DetailSection.css'; // Import the CSS file
 
 function DetailSection() {
   return (
@@ -10,7 +11,7 @@ function DetailSection() {
       <div className="image-description-row">
         <div className="row">
           <div className="img-container">
-            <img src={Door} alt="Left" className="img" />
+            <img src={Door} alt="Left" />
           </div>
           <div className="description">
             <h3 className="title">We Ensure Your Comfort and Safety</h3>
@@ -31,7 +32,7 @@ function DetailSection() {
             </p>
           </div>
           <div className="img-container">
-            <img src={Table} alt="Right" className="img" />
+            <img src={Table} alt="Right" />
           </div>
         </div>
       </div>

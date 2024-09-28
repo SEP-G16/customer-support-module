@@ -1,7 +1,7 @@
 import React from "react";
 import { Typography, Stack } from "@mui/material";
 import Booking from "./Booking.jpg"; // Assuming Booking is the correct path to your image
-import AvailabilityBar from "../../components/AvailabilityBar";
+import AvailabilityBar from "../../components/AvailabilityBar/AvailabilityBar";
 import ActivityCard from "../../components/ActivityCard/ActivityCard";
 import MyComponent from "../../components/RoomCard/RoomCard"; // Import MyComponent
 import ImageBox from "../../components/ImageBox/ImageBox";

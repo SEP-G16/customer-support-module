@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import MealCard from "./MealCard/MealCard"; // Import the MealCard component
+//import MealCard from ".components/MealCard/MealCard"; // Import the MealCard component
 
 
 function MenuCard({title, children}) {
