@@ -7,20 +7,21 @@ import Buttons from '../../components/Buttons';
 import ImageTextSection from './ImageSection';
 import DetailSection from './DetailsSection';
 import ChatBot from './Chatbot';
+import './Home.css'; // Import the CSS file
 
 const CustomTextContent = () => {
   return (
     <Stack spacing={2}>
-        <Typography variant="h1" fontFamily="Marcellus, serif" style={{ color: 'white', padding: '0px', marginBottom: '15px', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)" }}>
-          WELCOME TO CEYLON RESORT
-        </Typography>
+      <Typography variant="h1" fontFamily="Marcellus, serif" className="custom-text">
+        WELCOME TO CEYLON RESORT
+      </Typography>
     </Stack>
   );
 };
 
 const Home = () => {
   return (
-    <Container>
+    <Container className="container">
       <ImageBox
         imageSrc={Welcome}
         TextContentComponent={<CustomTextContent />}
@@ -33,10 +34,6 @@ const Home = () => {
   );
 };
 
-const Container = styled.div`
-  background-color: white;
-  overflow: hidden;
-  align-items: center;
-`;
+const Container = styled.div``; // Keep the styled component definition empty as it's not needed
 
 export default Home;
