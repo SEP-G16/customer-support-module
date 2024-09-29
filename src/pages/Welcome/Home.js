@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Typography, Stack } from '@mui/material';
 import Welcome from './Welcome.jpg';
 import ImageBox from '../../components/ImageBox/ImageBox';
-import Buttons from '../../components/Buttons';
+import Buttons from '../../components/Buttons/Buttons';
 import ImageTextSection from './ImageSection';
 import DetailSection from './DetailsSection';
 import ChatBot from './Chatbot';
