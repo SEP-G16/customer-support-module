@@ -28,8 +28,8 @@ const Chatbot = () => {
 
   return (
     <df-messenger
-      project-id="teak-frame-426021-r1"
-      agent-id="0b9b9440-133f-42ad-a915-05d5ce5cefe8"
+      project-id="useful-melody-436610-a7"
+      agent-id="8e123a53-a8ed-4e2b-9c81-fc9a10160f34"
       language-code="en"
       max-query-length="-1"
     >

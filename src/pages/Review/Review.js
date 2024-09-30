@@ -5,10 +5,8 @@ import {
   Box,
   TextField,
   Button,
-  Rating,
 } from "@mui/material";
 import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 import ImageBox from "../../components/ImageBox/ImageBox";
 import ReviewImage from "./Reviews.jpg";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
@@ -54,13 +52,12 @@ const Review = () => {
     name: "",
     date: "",
     feedback: "",
-    rating: 0,
   });
 
   useEffect(() => {
     async function getReviews() {
       try {
-        let response = await AxiosInstance.get("/review/temp/all");
+        let response = await AxiosInstance.get("/api/review/all?limit=4");
         setReviews(response.data);
       } catch (error) {
         console.error(error);
@@ -74,19 +71,12 @@ const Review = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleRatingChange = (event, newValue) => {
-    setFormData({ ...formData, rating: newValue });
-  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await sendData(formData);
-    const newReview = {
-      ...formData,
-      months: new Date().getMonth() - new Date(formData.date).getMonth(),
-    };
-    setReviews([...reviews, newReview]);
-    setFormData({ name: "", date: "", feedback: "", rating: 0 });
+    
   };
 
   const sendData = async (data) => {
@@ -195,16 +185,7 @@ const Review = () => {
                   },
                 }}
               />
-              <Typography variant="body1" gutterBottom>
-                Rating:
-              </Typography>
-              <Rating
-                name="rating"
-                value={formData.rating}
-                onChange={handleRatingChange}
-                precision={0.5}
-                required
-              />
+              
             </Stack>
             <Button
               type="submit"
