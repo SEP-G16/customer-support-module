@@ -96,6 +96,7 @@ function AvailabilityBar() {
     try {
       let response = await AxiosInstance.get(`/api/room-type/available-count?from=${formData.checkIn}&to=${formData.checkOut}`); 
       let [standardMap, deluxeMap, suiteMap] = response.data;
+      console.log(response);
       const availabilityData = {
         "Standard rooms": {roomTypeId : standardMap.roomTypeId, roomCount: standardMap.roomCount},
         "Deluxe rooms": {roomTypeId : deluxeMap.roomTypeId, roomCount: deluxeMap.roomCount},
@@ -109,6 +110,7 @@ function AvailabilityBar() {
         alert("Rooms are not available for the selected dates.");
       }
     } catch (error) {
+      console.error(error);
       alert("An unexpected error occurred");
     }
   };

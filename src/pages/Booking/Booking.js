@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import { Typography, TextField, Button, Box } from '@mui/material';
-import ImageBox from '../../components/ImageBox/ImageBox';
-import RoomDetails from '../../components/RoomCard/RoomCard';
-import Booking from './woman.jpg';
-import Room from './room.jpg';
-import { AxiosInstance } from '../../axios.config';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom'; 
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import styled from "styled-components";
+import { Typography, TextField, Button, Box } from "@mui/material";
+import ImageBox from "../../components/ImageBox/ImageBox";
+import RoomDetails from "../../components/RoomCard/RoomCard";
+import Booking from "./woman.jpg";
+import Room from "./room.jpg";
+import { AxiosInstance } from "../../axios.config";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const BookingPage = () => {
   const location = useLocation();
   const initialFormData = location.state?.formData || {
-    name: '',
-    email: '',
-    phone: '',
-    checkIn: '',
-    checkOut: '',
+    name: "",
+    email: "",
+    phone: "",
+    checkIn: "",
+    checkOut: "",
     numRooms: 1,
     numAdults: 1,
     numChildren: 0,
-    room: '', // Default room type
+    room: "", // Default room type
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -33,44 +33,61 @@ const BookingPage = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [errors, setErrors] = useState({});
 
-useEffect(() => {
-  const isValid = Object.values(formData).every((value) => value !== '' && value !== null);
-  setIsFormValid(isValid);
-}, [formData]); // Run the validation whenever the formData state changes
+  useEffect(() => {
+    const isValid = Object.values(formData).every(
+      (value) => value !== "" && value !== null
+    );
+    setIsFormValid(isValid);
+  }, [formData]); // Run the validation whenever the formData state changes
 
-useEffect(() => {
-  const validateFormData = () => {
-    const { name, email, phone, checkIn, checkOut, numRooms, numAdults, numChildren, room } = formData;
-    const errors = {};
+  useEffect(() => {
+    const validateFormData = () => {
+      const {
+        name,
+        email,
+        phone,
+        checkIn,
+        checkOut,
+        numRooms,
+        numAdults,
+        numChildren,
+        room,
+      } = formData;
+      const errors = {};
 
-    // Validate phone number
-    if (phone && !/^\d{10}$/.test(phone)) {
-      errors.phone = 'Phone number must be 10 digits';
-    }
+      // Validate phone number
+      if (phone && !/^\d{10}$/.test(phone)) {
+        errors.phone = "Phone number must be 10 digits";
+      }
 
-    // Validate number of rooms, adults, and children
-    if (numRooms <= 0){errors.numRooms = 'Select at least one room';} 
-    if (numAdults <= 0) errors.numAdults = 'Number of adults must be greater than 0';
-    if (numChildren <= 0) errors.numChildren = 'Number of children cannot be negative';
+      // Validate number of rooms, adults, and children
+      if (numRooms <= 0) {
+        errors.numRooms = "Select at least one room";
+      }
+      if (numAdults <= 0)
+        errors.numAdults = "Number of adults must be greater than 0";
+      if (numChildren <= 0)
+        errors.numChildren = "Number of children cannot be negative";
 
-    // Validate dates
-    if (checkIn && checkOut && new Date(checkOut) <= new Date(checkIn)) {
-      errors.checkOut = 'Check-out date must be after check-in date';
-    }
+      // Validate dates
+      if (checkIn && checkOut && new Date(checkOut) <= new Date(checkIn)) {
+        errors.checkOut = "Check-out date must be after check-in date";
+      }
 
-    setErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
+      setErrors(errors);
+      return Object.keys(errors).length === 0;
+    };
 
-  setIsFormDataValid(validateFormData());
-}, [formData]);
-
+    setIsFormDataValid(validateFormData());
+  }, [formData]);
 
   useEffect(() => {
     // Update state variables with formData from location state
     setFormData(location.state?.formData || initialFormData);
     setNumAdults(location.state?.formData?.adults || initialFormData.numAdults);
-    setNumChildren(location.state?.formData?.children || initialFormData.numChildren);
+    setNumChildren(
+      location.state?.formData?.children || initialFormData.numChildren
+    );
     setNumRooms(location.state?.formData?.rooms || initialFormData.numRooms);
   }, [location.state?.formData]);
 
@@ -89,14 +106,14 @@ useEffect(() => {
     event.preventDefault();
     // Handle form submission logic, e.g., send formData to backend
     console.log(formData);
-    try{
+    try {
       await AxiosInstance.post("/api/booking/temp/add", {
         customerName: formData.name,
         customerNic: "200202500190",
         email: formData.email,
         phoneNo: formData.phone,
         roomType: {
-          id: formData.roomTypeId
+          id: formData.roomTypeId,
         },
         adultCount: formData.adultCount,
         childrenCount: formData.childrenCount,
@@ -104,31 +121,34 @@ useEffect(() => {
         checkinDate: formData.checkIn,
         checkoutDate: formData.checkOut,
       });
-    }catch(e){
-       
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    // Check if the form is valid
-    if (isFormValid) {
-      // Show the success popup
-      setShowPopup(true);
-      // Automatically hide the popup and redirect after a short delay
-      setTimeout(() => {
-        setShowPopup(false);
-        // Navigate to the home page after 2 seconds
-        window.location.href = '/';
-      }, 2000);
-    } else {
-      alert("Please fill all the required fields.");
+    } catch (e) {
+      console.error(e);
     }
   };
-  
+
+  // const handleFormSubmit = (event) => {
+  //   event.preventDefault();
+  //   // Check if the form is valid
+  //   if (isFormValid) {
+  //     // Show the success popup
+  //     setShowPopup(true);
+  //     // Automatically hide the popup and redirect after a short delay
+  //     setTimeout(() => {
+  //       setShowPopup(false);
+  //       // Navigate to the home page after 2 seconds
+  //       window.location.href = '/';
+  //     }, 2000);
+  //   } else {
+  //     alert("Please fill all the required fields.");
+  //   }
+  // };
 
   return (
     <Container>
       {showPopup && (
         <Popup>
-          You have successfully booked a room! Our team will confirm your reservation very soon.
+          You have successfully booked a room! Our team will confirm your
+          reservation very soon.
         </Popup>
       )}
       <ImageBoxWrapper>
@@ -136,7 +156,7 @@ useEffect(() => {
       </ImageBoxWrapper>
       <Content>
         <LeftSection>
-          <Typography variant='h4' fontFamily="Marcellus, serif">
+          <Typography variant="h4" fontFamily="Marcellus, serif">
             Your Room
           </Typography>
           <RoomDetails
@@ -150,7 +170,7 @@ useEffect(() => {
         </LeftSection>
         <RightSection>
           {/* Reservation form */}
-          <Typography variant='h4' fontFamily="Marcellus, serif">
+          <Typography variant="h4" fontFamily="Marcellus, serif">
             Book Your Stay
           </Typography>
           <Form onSubmit={handleFormSubmit}>
@@ -162,7 +182,7 @@ useEffect(() => {
               onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="email"
@@ -172,19 +192,19 @@ useEffect(() => {
               onChange={handleInputChange}
               fullWidth
               required
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
-               name="phone"
-               label="Phone"
-               variant="outlined"
-               value={formData.phone}
-               onChange={handleInputChange}
-               fullWidth
-               required
-               error={!!errors.phone}
-               helperText={errors.phone}
-               sx={{ marginBottom: 2, borderRadius: '0px' }} 
+              name="phone"
+              label="Phone"
+              variant="outlined"
+              value={formData.phone}
+              onChange={handleInputChange}
+              fullWidth
+              required
+              error={!!errors.phone}
+              helperText={errors.phone}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="checkIn"
@@ -196,7 +216,7 @@ useEffect(() => {
               fullWidth
               required
               InputLabelProps={{ shrink: true }}
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="checkOut"
@@ -210,7 +230,7 @@ useEffect(() => {
               error={!!errors.checkOut}
               helperText={errors.checkOut}
               InputLabelProps={{ shrink: true }}
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="numRooms"
@@ -226,16 +246,16 @@ useEffect(() => {
                 } else {
                   setErrors((prevErrors) => ({
                     ...prevErrors,
-                    numRooms: 'Number of rooms must be greater than 0',
+                    numRooms: "Number of rooms must be greater than 0",
                   }));
                 }
               }}
               fullWidth
-              required 
+              required
               error={!!errors.numRooms}
               helperText={errors.numRooms}
               InputProps={{ inputProps: { min: 1 } }}
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="numAdults"
@@ -247,7 +267,7 @@ useEffect(() => {
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <TextField
               name="numChildren"
@@ -259,7 +279,7 @@ useEffect(() => {
               fullWidth
               required
               InputProps={{ inputProps: { min: 0 } }}
-              sx={{ marginBottom: 2, borderRadius: '0px' }}
+              sx={{ marginBottom: 2, borderRadius: "0px" }}
             />
             <Typography variant="h4" fontFamily="Marcellus, serif">
               Total Cost: {calculateTotalCost()} USD
@@ -268,27 +288,26 @@ useEffect(() => {
               type="submit"
               disabled={!isFormValid}
               sx={{
-                  mt: 2,
-                  borderRadius: '0px',
-                  padding: '10px',
-                  marginTop: '50px',
-                  marginBottom: '30px',
-                  fontSize: '1.4rem', // Adjust font size
-                  fontFamily: 'Marcellus, serif',
-                  color: '#fff',
-                  transition: 'color 0.3s ease', // Smooth transition for color change
-                  border: '3px solid rgba(185, 157, 117, 1)', // Example border style
-                  backgroundColor: '#53624e', // CamelCase for background-color
-                  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
-                  '&:hover': {
-                    color: '#B99D75',
-                    backgroundColor: '#53624e', // Corrected hover color syntax
-                  },
-                }}
-              >
+                mt: 2,
+                borderRadius: "0px",
+                padding: "10px",
+                marginTop: "50px",
+                marginBottom: "30px",
+                fontSize: "1.4rem", // Adjust font size
+                fontFamily: "Marcellus, serif",
+                color: "#fff",
+                transition: "color 0.3s ease", // Smooth transition for color change
+                border: "3px solid rgba(185, 157, 117, 1)", // Example border style
+                backgroundColor: "#53624e", // CamelCase for background-color
+                boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5)",
+                "&:hover": {
+                  color: "#B99D75",
+                  backgroundColor: "#53624e", // Corrected hover color syntax
+                },
+              }}
+            >
               Book Your Stay
-              </Button>
-
+            </Button>
           </Form>
         </RightSection>
       </Content>
@@ -297,7 +316,7 @@ useEffect(() => {
 };
 
 const Container = styled.div`
-  font-family: 'Marcellus', serif;
+  font-family: "Marcellus", serif;
   overflow-x: hidden;
 `;
 
@@ -305,7 +324,7 @@ const ImageBoxWrapper = styled.div`
   position: relative;
   overflow: hidden;
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -364,7 +383,7 @@ const StyledLink = styled(Link)`
   background-color: #53624e;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   &:hover {
-    color: #B99D75; 
+    color: #b99d75;
   }
   @media (max-width: 991px) {
     white-space: initial;
@@ -382,8 +401,7 @@ const Popup = styled.div`
   padding: 20px;
   border-radius: 5px;
   z-index: 1000;
-  font-family: 'Marcellus', serif;
+  font-family: "Marcellus", serif;
 `;
-
 
 export default BookingPage;
