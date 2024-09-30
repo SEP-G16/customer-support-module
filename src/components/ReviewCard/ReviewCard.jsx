@@ -1,10 +1,9 @@
 // ReviewCard.js
 import React from 'react';
 import { Stack, Typography } from '@mui/material';
-import { FaUserCircle, FaStar } from 'react-icons/fa';
-import profile from './profile.png';
+import profile from './assets/images/profile.png';
 
-function ReviewCard({ name, months, rating, feedback }) { // Assuming 'feedback' matches the key in formData
+function ReviewCard({ name, months, feedback }) { // Assuming 'feedback' matches the key in formData
   return (
     <Stack
       direction="column"
@@ -27,11 +26,6 @@ function ReviewCard({ name, months, rating, feedback }) { // Assuming 'feedback'
           <Typography variant="body2" color="textSecondary" fontFamily="Marcellus, serif">
             {months} months ago
           </Typography>
-        </Stack>
-        <Stack direction="row" spacing={1}>
-          {[...Array(4)].map((star, index) => (
-            <FaStar key={index} size={20} color={index < rating ? '#FFD700' : '#ccc'} />
-          ))}
         </Stack>
       </Stack>
 

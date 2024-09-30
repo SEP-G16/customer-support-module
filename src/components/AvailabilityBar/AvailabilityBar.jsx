@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
   Button as MuiButton,
   TextField,
-  MenuItem,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -13,10 +12,11 @@ import {
   Box,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import room from "./room.jpg";
-import suite from "./suite.jpg";
-import deluxe from "./luxury.jpg";
-import { AxiosInstance } from "../axios.config";
+import room from "./assets/images/room.jpg";
+import suite from "./assets/images/suite.jpg";
+import deluxe from "./assets/images/luxury.jpg";
+import { AxiosInstance } from "../../axios.config";
+
 
 const roomImages = {
   "Standard rooms": room,
@@ -109,6 +109,7 @@ function AvailabilityBar() {
         alert("Rooms are not available for the selected dates.");
       }
     } catch (error) {
+      console.error(error);
       alert("An unexpected error occurred");
     }
   };
