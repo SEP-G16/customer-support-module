@@ -16,7 +16,8 @@ import { useNavigate } from "react-router-dom";
 import room from "./room.jpg";
 import suite from "./suite.jpg";
 import deluxe from "./luxury.jpg";
-import { AxiosInstance } from "../axios.config";
+import { AxiosInstance } from "../../axios.config";
+
 
 const roomImages = {
   "Standard rooms": room,

@@ -1,0 +1,63 @@
+.contact-us-page-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: url('./room.jpg'); 
+    background-size: cover;
+    background-position: center;
+    padding: 50px;
+    height: 100vh; 
+}
+
+.contact-form-section{
+    width: 40%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 0px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  
+    input,
+    textarea,
+    button {
+      padding: 10px; /* Same padding as in your CSS */
+      border: 1px solid black;
+      border-radius: 0px;
+      font-size: 16px;
+      width: 90%;
+    }
+  
+    button {
+      background-color: #b99d75;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.5s ease;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+}
+.contact-info-section{
+    width: 45%;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center; /* Center align text content */
+}
+.social-media-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.8s ease;
+}
+  
+.social-media-link:hover {
+    color: #0056b3;
+}

@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import {
   Typography,
   Stack,
   Box,
   TextField,
   Button,
-  Rating,
 } from "@mui/material";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../../components/Header/Header";
 import ImageBox from "../../components/ImageBox/ImageBox";
 import ReviewImage from "./Reviews.jpg";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import formatDate from "../../date.formatter";
 import { AxiosInstance } from "../../axios.config";
+import "./Review.css"; // Import the CSS file
 
 const CustomTextContent = () => {
   return (
@@ -54,13 +52,12 @@ const Review = () => {
     name: "",
     date: "",
     feedback: "",
-    rating: 0,
   });
 
   useEffect(() => {
     async function getReviews() {
       try {
-        let response = await AxiosInstance.get("/review/temp/all");
+        let response = await AxiosInstance.get("/api/review/all?limit=4");
         setReviews(response.data);
       } catch (error) {
         console.error(error);
@@ -74,42 +71,32 @@ const Review = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleRatingChange = (event, newValue) => {
-    setFormData({ ...formData, rating: newValue });
-  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await sendData(formData);
-    const newReview = {
-      ...formData,
-      months: new Date().getMonth() - new Date(formData.date).getMonth(),
-    };
-    setReviews([...reviews, newReview]);
-    setFormData({ name: "", date: "", feedback: "", rating: 0 });
+    
   };
 
   const sendData = async (data) => {
-    console.log(data);
     let reqBody = {
       name: data.name,
       date: formatDate(new Date(data.date)),
       feedback: data.feedback,
     };
-    console.log(reqBody);
-    let response = await AxiosInstance.post("/api/review/temp/add", reqBody);
-    console.log(response);
+    await AxiosInstance.post("/api/review/temp/add", reqBody);
   };
 
   return (
-    <Container>
+    <div className="container">
       <Header />
       <ImageBox
         imageSrc={ReviewImage}
         TextContentComponent={<CustomTextContent />}
       />
-      <Content>
-        <LeftSection>
+      <div className="content">
+        <div className="left-section">
           <Typography
             variant="h4"
             gutterBottom
@@ -133,9 +120,9 @@ const Review = () => {
                 sx={{
                   width: "487px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "0px", // Square borders
+                    borderRadius: "0px",
                     "& fieldset": {
-                      borderColor: "black", // Border color
+                      borderColor: "black",
                     },
                     "&:hover fieldset": {
                       borderColor: "black",
@@ -159,9 +146,9 @@ const Review = () => {
                 sx={{
                   width: "487px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "0px", // Square borders
+                    borderRadius: "0px",
                     "& fieldset": {
-                      borderColor: "black", // Border color
+                      borderColor: "black",
                     },
                     "&:hover fieldset": {
                       borderColor: "black",
@@ -185,9 +172,9 @@ const Review = () => {
                 sx={{
                   width: "487px",
                   "& .MuiOutlinedInput-root": {
-                    borderRadius: "0px", // Square borders
+                    borderRadius: "0px",
                     "& fieldset": {
-                      borderColor: "black", // Border color
+                      borderColor: "black",
                     },
                     "&:hover fieldset": {
                       borderColor: "black",
@@ -198,16 +185,7 @@ const Review = () => {
                   },
                 }}
               />
-              <Typography variant="body1" gutterBottom>
-                Rating:
-              </Typography>
-              <Rating
-                name="rating"
-                value={formData.rating}
-                onChange={handleRatingChange}
-                precision={0.5}
-                required
-              />
+              
             </Stack>
             <Button
               type="submit"
@@ -224,58 +202,23 @@ const Review = () => {
               Submit Your Feedback
             </Button>
           </form>
-        </LeftSection>
-        <RightSection>
+        </div>
+        <div className="right-section">
           <Typography
             variant="h4"
             gutterBottom
-            style={{ paddingBottom: "10px0", marginLeft: "300px" }}
+            style={{ paddingBottom: "10px", marginLeft: "300px" }}
           >
             Reviews
           </Typography>
-          <Underline />
+          <div className="underline" />
           {reviews.map((review, index) => (
             <ReviewCard key={index} {...review} />
           ))}
-        </RightSection>
-      </Content>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 };
-
-const Container = styled.div`
-  background-color: white;
-  overflow-x: hidden;
-`;
-
-const Content = styled(Box)`
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-
-  @media (max-width: 960px) {
-    flex-direction: column; /* Stack sections vertically on smaller screens */
-  }
-`;
-
-const LeftSection = styled(Box)`
-  flex: 1;
-  padding-right: 20px;
-`;
-
-const RightSection = styled(Box)`
-  flex: 1;
-  padding-left: 20px;
-
-  @media (max-width: 960px) {
-    margin-top: 40px; /* Remove top margin to stack directly below LeftSection */
-  }
-`;
-
-const Underline = styled.div`
-  width: 100%; /* Ensures the underline spans the full width of its container */
-  border-bottom: 1px solid black;
-  margin-bottom: 20px;
-`;
 
 export default Review;
