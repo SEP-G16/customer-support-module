@@ -1,39 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
-import styled from "styled-components";
-import { Typography, TextField, Button, Box } from "@mui/material";
+import { Typography, TextField, Button } from "@mui/material";
 import ImageBox from "../../components/ImageBox/ImageBox";
 import RoomDetails from "../../components/RoomCard/RoomCard";
-import Booking from "./woman.jpg";
+import Booking from "./assets/images/woman.jpg";
 import { AxiosInstance } from "../../axios.config";
-import './Booking.css';
+import './assets/styles/Booking.css';
 
 const BookingPage = () => {
   const location = useLocation();
-  const initialFormData = location.state?.formData || {
-    name: "",
-    email: "",
-    phone: "",
-    checkIn: "",
-    checkOut: "",
-    roomCount: 1,
-    adultCount: 1,
-    childrenCount: 0,
-    room: "", // Default room type
-  };
+
+  // Memoize the initialFormData
+  const initialFormData = useMemo(() => {
+    return location.state?.formData || {
+      name: "",
+      email: "",
+      phone: "",
+      checkIn: "",
+      checkOut: "",
+      roomCount: 1,
+      adultCount: 1,
+      childrenCount: 0,
+      room: "", // Default room type
+    };
+  }, [location.state?.formData]);
 
   const [formData, setFormData] = useState(initialFormData);
-  const [adultCount, setadultCount] = useState(initialFormData.adultCount);
-  const [childrenCount, setchildrenCount] = useState(initialFormData.childrenCount);
-  const [roomCount, setroomCount] = useState(initialFormData.roomCount);
+  const [adultCount, setAdultCount] = useState(initialFormData.adultCount);
+  const [childrenCount, setChildrenCount] = useState(initialFormData.childrenCount);
+  const [roomCount, setRoomCount] = useState(initialFormData.roomCount);
 
   useEffect(() => {
     // Update state variables with formData from location state
-    setFormData(location.state?.formData || initialFormData);
-    setadultCount(location.state?.formData?.adults || initialFormData.adultCount);
-    setchildrenCount(location.state?.formData?.children || initialFormData.childrenCount);
-    setroomCount(location.state?.formData?.rooms || initialFormData.roomCount);
-  }, [location.state?.formData]);
+    setFormData(initialFormData);
+    setAdultCount(initialFormData.adultCount);
+    setChildrenCount(initialFormData.childrenCount);
+    setRoomCount(initialFormData.roomCount);
+  }, [initialFormData]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -48,10 +51,7 @@ const BookingPage = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // Handle form submission logic, e.g., send formData to backend
-    console.log(formData);
-
-    /////////////////////////////////////////////////////Navigate after this
+    // Handle form submission logic
     try {
       await AxiosInstance.post("/api/booking/temp/add", {
         customerName: formData.name,
@@ -67,7 +67,9 @@ const BookingPage = () => {
         checkinDate: formData.checkIn,
         checkoutDate: formData.checkOut,
       });
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -90,7 +92,6 @@ const BookingPage = () => {
           />
         </div>
         <div className="right-section">
-          {/* Reservation form */}
           <Typography variant="h4" fontFamily="Marcellus, serif">
             Book Your Stay
           </Typography>
@@ -155,7 +156,7 @@ const BookingPage = () => {
               type="number"
               variant="outlined"
               value={roomCount}
-              onChange={(e) => setroomCount(parseInt(e.target.value))}
+              onChange={(e) => setRoomCount(parseInt(e.target.value))}
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
@@ -167,7 +168,7 @@ const BookingPage = () => {
               type="number"
               variant="outlined"
               value={adultCount}
-              onChange={(e) => setadultCount(parseInt(e.target.value))}
+              onChange={(e) => setAdultCount(parseInt(e.target.value))}
               fullWidth
               required
               InputProps={{ inputProps: { min: 1 } }}
@@ -179,7 +180,7 @@ const BookingPage = () => {
               type="number"
               variant="outlined"
               value={childrenCount}
-              onChange={(e) => setchildrenCount(parseInt(e.target.value))}
+              onChange={(e) => setChildrenCount(parseInt(e.target.value))}
               fullWidth
               required
               InputProps={{ inputProps: { min: 0 } }}
@@ -198,7 +199,7 @@ const BookingPage = () => {
                 padding: "10px",
                 marginTop: "50px",
                 marginBottom: "30px",
-                fontSize: "1.4rem", // Adjust font size
+                fontSize: "1.4rem",
                 fontFamily: "Marcellus, serif",
               }}
             >

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './Chatbot.css'; // Import the CSS file
+import './assets/styles/Chatbot.css'; // Import the CSS file
 
 const Chatbot = () => {
   useEffect(() => {
@@ -36,6 +36,7 @@ const Chatbot = () => {
       <df-messenger-chat-bubble chat-title="Ceylon Resort Chatbot">
       </df-messenger-chat-bubble>
     </df-messenger>
+    
   );
 };
 

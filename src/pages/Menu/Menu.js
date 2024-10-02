@@ -1,33 +1,31 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { Stack, Typography } from "@mui/material";
-import Header from "../../components/Header/Header";
 import ImageBox from "../../components/ImageBox/ImageBox";
 import MenuCard from "../../components/MenuCard/MenuCard";
-import Footer from "../../components/Footer/Footer";
-import Dining from "./dining.jpg";
+import Dining from "./assets/images/dining.jpg";
 import MealCard from "../../components/MealCard/MealCard";
-import pizza from "./ChickenPizza.jpg";
-import pepperonipizza from "./pepperoniPizza.jpg";
-import veggiepizza from "./veggiepizza.jpg";
-import steak from "./steak.jpg";
-import spaghetti from "./spaghetti.jpg";
-import alfredo from "./alfredo.jpg";
-import chococake from "./chococake.jpg";
-import cheesecake from "./cheesecake.jpg";
-import icecream from "./icecream.jpg";
-import coffee from "./coffee.jpg";
-import Tea from "./Tea.jpeg";
-import juice from "./juice.jpg";
-import ceasar from "./ceasar.jpg";
-import tomato from "./tomato.jpeg";
-import greek from "./greek.jpeg";
-import caprese from "./caprese.jpg";
-import chickennoodle from "./chickennoodle.jpg";
-import minestrone from "./minestrone.jpeg";
+import pizza from "./assets/images/ChickenPizza.jpg";
+import pepperonipizza from "./assets/images/pepperoniPizza.jpg";
+import veggiepizza from "./assets/images/veggiepizza.jpg";
+import steak from "./assets/images/steak.jpg";
+import spaghetti from "./assets/images/spaghetti.jpg";
+import alfredo from "./assets/images/alfredo.jpg";
+import chococake from "./assets/images/chococake.jpg";
+import cheesecake from "./assets/images/cheesecake.jpg";
+import icecream from "./assets/images/icecream.jpg";
+import coffee from "./assets/images/coffee.jpg";
+import Tea from "./assets/images/Tea.jpeg";
+import juice from "./assets/images/juice.jpg";
+import ceasar from "./assets/images/ceasar.jpg";
+import tomato from "./assets/images/tomato.jpeg";
+import greek from "./assets/images/greek.jpeg";
+import caprese from "./assets/images/caprese.jpg";
+import chickennoodle from "./assets/images/chickennoodle.jpg";
+import minestrone from "./assets/images/minestrone.jpeg";
 
 // Import the new CSS file
-import "./Menu.css";
+import "./assets/styles/Menu.css";
 
 const CustomTextContent = () => {
   return (
