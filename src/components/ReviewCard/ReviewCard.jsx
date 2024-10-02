@@ -27,6 +27,7 @@ function ReviewCard({ name, months, feedback }) { // Assuming 'feedback' matches
             {months} months ago
           </Typography>
         </Stack>
+      
       </Stack>
 
       {/* Display feedback/comment */}

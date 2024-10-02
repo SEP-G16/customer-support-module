@@ -4,7 +4,6 @@ import {
   Stack,
   TextField,
   Button,
-  Rating,
 } from "@mui/material";
 import Header from "../../components/Header/Header";
 import ImageBox from "../../components/ImageBox/ImageBox";
@@ -57,7 +56,9 @@ const Review = () => {
   useEffect(() => {
     async function getReviews() {
       try {
+        
         let response = await AxiosInstance.get("/api/review/all");
+
         setReviews(response.data);
       } catch (error) {
         console.error(error);
@@ -70,9 +71,14 @@ const Review = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await sendData(formData);
+    
   };
 
   const sendData = async (data) => {
