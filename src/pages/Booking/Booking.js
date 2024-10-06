@@ -115,7 +115,7 @@ const BookingPage = () => {
       </div>
       <div className="content">
         <div className="left-section">
-          <Typography variant="h4" fontFamily="Marcellus, serif">
+          <Typography variant="h4" fontFamily="Marcellus, serif" sx={{ mb: 4 }}>
             Your Room
           </Typography>
           <RoomDetails
@@ -128,49 +128,94 @@ const BookingPage = () => {
           />
         </div>
         <div className="right-section">
-          <Typography variant="h4" fontFamily="Marcellus, serif">
+          <Typography variant="h4" fontFamily="Marcellus, serif" sx={{ mb: 4 }} >
             Book Your Stay
           </Typography>
           <form className="form" onSubmit={handleFormSubmit}>
-            <TextField
-              name="name"
+          <TextField
+              id="outlined-basic"
               label="Name"
-              variant="standard"
+              variant="outlined"
               value={formData.name}
               onChange={handleInputChange}
-              fullWidth
               required
+              fullWidth
               error={!!errors.name} // Show error state
               inputRef={(el) => (inputRefs.current.name = el)} // Set ref for scrolling
-              sx={{ marginBottom: 2, borderRadius: "0px" }}
+              sx={{
+                marginBottom: 2,
+                padding: "12px 12px",
+                borderRadius: "0px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "transparent", // Removes the border
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "transparent", // Removes border on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "transparent", // Removes border when focused
+                  },
+                },
+              }}
             />
-            {errors.name && <FormHelperText error>{errors.name}</FormHelperText>}
+
 
             <TextField
               name="email"
               label="Email"
-              variant="standard"
+              variant="outlined"
               value={formData.email}
               onChange={handleInputChange}
               fullWidth
               required
               error={!!errors.email} // Show error state
               inputRef={(el) => (inputRefs.current.email = el)} // Set ref for scrolling
-              sx={{ marginBottom: 2, borderRadius: "0px" }}
+              sx={{
+                marginBottom: 2,
+                padding: "12px 12px",
+                borderRadius: "0px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "transparent", // Removes the border
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "transparent", // Removes border on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "transparent", // Removes border when focused
+                  },
+                },
+              }}
             />
             {errors.email && <FormHelperText error>{errors.email}</FormHelperText>}
 
             <TextField
               name="phone"
               label="Phone"
-              variant="standard"
+              variant="outlined"
               value={formData.phone}
               onChange={handleInputChange}
               fullWidth
               required
               error={!!errors.phone} // Show error state
               inputRef={(el) => (inputRefs.current.phone = el)} // Set ref for scrolling
-              sx={{ marginBottom: 2, borderRadius: "0px" }}
+              sx={{
+                marginBottom: 2,
+                padding: "12px 12px",
+                borderRadius: "0px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "transparent", // Removes the border
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "transparent", // Removes border on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "transparent", // Removes border when focused
+                  },
+                },
+              }}
             />
             {errors.phone && <FormHelperText error>{errors.phone}</FormHelperText>}
 
@@ -178,7 +223,7 @@ const BookingPage = () => {
               name="checkIn"
               label="Check-in Date"
               type="date"
-              variant="standard"
+              variant="outlined"
               value={formData.checkIn}
               onChange={handleInputChange}
               fullWidth
@@ -186,23 +231,56 @@ const BookingPage = () => {
               error={!!errors.checkIn} // Show error state
               inputRef={(el) => (inputRefs.current.checkIn = el)} // Set ref for scrolling
               InputLabelProps={{ shrink: true }}
-              sx={{ marginBottom: 2, borderRadius: "0px" }}
+              inputProps={{ min: new Date().toISOString().split("T")[0] }} // Disable past dates
+              sx={{
+                marginBottom: 2,
+                padding: "12px 12px",
+                borderRadius: "0px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "transparent", // Removes the border
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "transparent", // Removes border on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "transparent", // Removes border when focused
+                  },
+                },
+              }}
             />
             {errors.checkIn && <FormHelperText error>{errors.checkIn}</FormHelperText>}
+
 
             <TextField
               name="checkOut"
               label="Check-out Date"
               type="date"
-              variant="standard"
+              variant="outlined"
               value={formData.checkOut}
               onChange={handleInputChange}
               fullWidth
               required
-              error={!!errors.checkOut} // Show error state
-              inputRef={(el) => (inputRefs.current.checkOut = el)} // Set ref for scrolling
+              error={!!errors.checkIn} // Show error state
+              inputRef={(el) => (inputRefs.current.checkIn = el)} // Set ref for scrolling
               InputLabelProps={{ shrink: true }}
-              sx={{ marginBottom: 2, borderRadius: "0px" }}
+              inputProps={{ min: new Date().toISOString().split("T")[0] }} // Disable past dates
+              sx={{
+                marginBottom: 2,
+                padding: "12px 12px",
+                borderRadius: "0px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "transparent", // Removes the border
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "transparent", // Removes border on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "transparent", // Removes border when focused
+                  },
+                },
+              }}
             />
             {errors.checkOut && <FormHelperText error>{errors.checkOut}</FormHelperText>}
 
@@ -210,25 +288,53 @@ const BookingPage = () => {
               name="roomCount"
               label="Room Count"
               type="number"
-              variant="standard"
+              variant="outlined"
               value={roomCount}
-              onChange={(e) => setRoomCount(parseInt(e.target.value))}
+              onChange={(e) => setRoomCount(e.target.value)}
               fullWidth
-              InputProps={{ inputProps: { min: 1 } }}
-              sx={{ marginBottom: 2, borderRadius: "0px" }}
+              required
+              sx={{
+                marginBottom: 2,
+                padding: "12px 12px",
+                borderRadius: "0px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "transparent", // Removes the border
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "transparent", // Removes border on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "transparent", // Removes border when focused
+                  },
+                },
+              }}
             />
-
             <TextField
               name="adultCount"
               label="Number of Adults"
               type="number"
-              variant="standard"
+              variant="outlined"
               value={adultCount}
-              onChange={(e) => setAdultCount(parseInt(e.target.value))}
+              onChange={(e) => setAdultCount(e.target.value)}
               fullWidth
-              InputProps={{ inputProps: { min: 1 } }}
-              error={adultCount < 1} // Show error state for adult count
-              sx={{ marginBottom: 2, borderRadius: "0px" }}
+              required
+              sx={{
+                marginBottom: 2,
+                padding: "12px 12px",
+                borderRadius: "0px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "transparent", // Removes the border
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "transparent", // Removes border on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "transparent", // Removes border when focused
+                  },
+                },
+              }}
             />
             {adultCount < 1 && <FormHelperText error>Field is empty</FormHelperText>}
 
@@ -236,15 +342,32 @@ const BookingPage = () => {
               name="childrenCount"
               label="Number of Children"
               type="number"
-              variant="standard"
+              variant="outlined"
               value={childrenCount}
-              onChange={(e) => setChildrenCount(parseInt(e.target.value))}
+              onChange={(e) => setChildrenCount(e.target.value)}
               fullWidth
-              InputProps={{ inputProps: { min: 0 } }}
-              sx={{ marginBottom: 2, borderRadius: "0px" }}
+              required
+              sx={{
+                marginBottom: 2,
+                padding: "12px 12px",
+                borderRadius: "0px",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "transparent", // Removes the border
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "transparent", // Removes border on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "transparent", // Removes border when focused
+                  },
+                },
+              }}
             />
 
-            <Typography variant="h6">Total Cost: ${calculateTotalCost()}</Typography>
+            <Typography variant="h6">
+              {roomCount > 0 ? `Total Cost: $${calculateTotalCost()}` : "Select the room count to see the total cost."}
+            </Typography>
             <Button type="submit" variant="contained" color="primary" sx={{ marginTop: 2 }}>
               Book Now
             </Button>
