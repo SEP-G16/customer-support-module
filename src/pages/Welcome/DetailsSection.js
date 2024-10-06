@@ -1,8 +1,7 @@
 import * as React from "react";
-import styled from "styled-components";
-import Door from "./Images/door.jpg";
-import Table from "./Images/table.jpg";
-import './DetailSection.css'; // Import the CSS file
+import Door from "./assets/images/door.jpg";
+import Table from "./assets/images/table.jpg";
+import './assets/styles/DetailSection.css'; // Import the CSS file
 
 function DetailSection() {
   return (

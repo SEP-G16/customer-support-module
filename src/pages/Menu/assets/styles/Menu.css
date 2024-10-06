@@ -29,4 +29,12 @@
     object-position: center;
     width: 75px;
   }
+
+  
+.container {
+  background-color: white; /* Matches the PDF background color */
+  padding: 0; /* Removes any padding */
+  margin: 0; /* Removes any margin */
+  box-shadow: none; /* Remove box shadow if present */
+}
   

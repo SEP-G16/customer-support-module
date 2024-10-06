@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import maximize from './maximize.png';
-import user from './user.png';
-import bed from './bed.png';
+import maximize from './assets/images/maximize.png';
+import user from './assets/images/user.png';
+import bed from './assets/images/bed.png';
 
 // Styled components for the room card
 const CardContainer = styled.div`

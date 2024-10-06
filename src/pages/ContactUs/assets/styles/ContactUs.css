@@ -1,8 +1,8 @@
+
 .contact-us-page-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-image: url('./room.jpg'); 
     background-size: cover;
     background-position: center;
     padding: 50px;
