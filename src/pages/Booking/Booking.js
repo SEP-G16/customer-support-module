@@ -144,6 +144,7 @@ const BookingPage = () => {
               inputRef={(el) => (inputRefs.current.name = el)} // Set ref for scrolling
               sx={{
                 marginBottom: 2,
+                padding: "12px 12px",
                 borderRadius: "0px",
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
@@ -172,6 +173,7 @@ const BookingPage = () => {
               inputRef={(el) => (inputRefs.current.email = el)} // Set ref for scrolling
               sx={{
                 marginBottom: 2,
+                padding: "12px 12px",
                 borderRadius: "0px",
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
@@ -200,6 +202,7 @@ const BookingPage = () => {
               inputRef={(el) => (inputRefs.current.phone = el)} // Set ref for scrolling
               sx={{
                 marginBottom: 2,
+                padding: "12px 12px",
                 borderRadius: "0px",
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
@@ -231,6 +234,7 @@ const BookingPage = () => {
               inputProps={{ min: new Date().toISOString().split("T")[0] }} // Disable past dates
               sx={{
                 marginBottom: 2,
+                padding: "12px 12px",
                 borderRadius: "0px",
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
@@ -263,6 +267,7 @@ const BookingPage = () => {
               inputProps={{ min: new Date().toISOString().split("T")[0] }} // Disable past dates
               sx={{
                 marginBottom: 2,
+                padding: "12px 12px",
                 borderRadius: "0px",
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
@@ -290,6 +295,7 @@ const BookingPage = () => {
               required
               sx={{
                 marginBottom: 2,
+                padding: "12px 12px",
                 borderRadius: "0px",
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
@@ -315,6 +321,7 @@ const BookingPage = () => {
               required
               sx={{
                 marginBottom: 2,
+                padding: "12px 12px",
                 borderRadius: "0px",
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
@@ -342,6 +349,7 @@ const BookingPage = () => {
               required
               sx={{
                 marginBottom: 2,
+                padding: "12px 12px",
                 borderRadius: "0px",
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
