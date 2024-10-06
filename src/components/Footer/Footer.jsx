@@ -5,39 +5,6 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import styled from "styled-components";
 
-const FooterContainer = styled.div`
-  background-color: #000;
-  padding: 37px 70px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  overflow-x: hidden;
-
-  @media (max-width: 768px) {
-    padding: 0px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0px;
-  }
-`;
-
-const SocialMediaLinks = styled.a`
-  font-family: "Marcellus", serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: rgba(255, 255, 255, 1);
-  cursor: pointer;
-  margin-left: 15px;
-  margin-right: 15px;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
 const Footer = () => {
   return (
     <FooterContainer>
@@ -54,10 +21,10 @@ const Footer = () => {
           <Typography variant="h6" component="div" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>
             Quick Links
           </Typography>
-          <Link href="/about-us" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>About Us</Link>
-          <Link href="#" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>Terms & Conditions</Link>
-          <Link href="https://maps.app.goo.gl/hgNDHg4Utkv9QpNAA" target="_blank" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>Our Location</Link>
-          <Link href="/contact" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>Contact Us</Link>
+          <Link href="/about-us"  sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', textDecoration: 'none', '&:hover': { color: 'rgba(183, 153, 91, 1)', textDecoration: 'none' }  }}>About Us</Link>
+          <Link href="#"  sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', textDecoration: 'none', '&:hover': { color: 'rgba(183, 153, 91, 1)', textDecoration: 'none' }  }}>Terms & Conditions</Link>
+          <Link href="https://maps.app.goo.gl/hgNDHg4Utkv9QpNAA" target="_blank" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', textDecoration: 'none', '&:hover': { color: 'rgba(183, 153, 91, 1)', textDecoration: 'none' }  }}>Our Location</Link>
+          <Link href="/contact"  sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', textDecoration: 'none', '&:hover': { color: 'rgba(183, 153, 91, 1)', textDecoration: 'none' }  }}>Contact Us</Link>
         </Stack>
         <Stack
           direction="column"
@@ -126,5 +93,41 @@ const Footer = () => {
     </FooterContainer>
   );
 }
+
+const FooterContainer = styled.div`
+  background-color: #000;
+  padding: 37px 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    padding: 0px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0px;
+  }
+`;
+
+const SocialMediaLinks = styled.a`
+  font-family: "Marcellus", serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  margin-left: 15px;
+  margin-right: 15px;
+  text-decoration: none;
+  display: inline-block; /* Required for transform to work properly */
+  transition: transform 0.3s ease; /* Smooth transition */
+  &:hover {
+    transform: scale(1.2); /* Zoom in effect */
+  }
+
+`;
+
 
 export default Footer;

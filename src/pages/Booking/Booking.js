@@ -5,10 +5,13 @@ import ImageBox from "../../components/ImageBox/ImageBox";
 import RoomDetails from "../../components/RoomCard/RoomCard";
 import Booking from "./assets/images/woman.jpg";
 import { AxiosInstance } from "../../axios.config";
+import { useNavigate } from 'react-router-dom';
 import './assets/styles/Booking.css';
 
 const BookingPage = () => {
   const location = useLocation();
+
+  const navigate = useNavigate();
 
   // Memoize the initialFormData
   const initialFormData = useMemo(() => {
@@ -67,6 +70,7 @@ const BookingPage = () => {
         checkinDate: formData.checkIn,
         checkoutDate: formData.checkOut,
       });
+      navigate('../../Welcome/Home.js');  
     } catch (e) {
       console.error(e);
     }
@@ -99,7 +103,7 @@ const BookingPage = () => {
             <TextField
               name="name"
               label="Name"
-              variant="outlined"
+              variant="standard"
               value={formData.name}
               onChange={handleInputChange}
               fullWidth
@@ -109,7 +113,7 @@ const BookingPage = () => {
             <TextField
               name="email"
               label="Email"
-              variant="outlined"
+              variant="standard"
               value={formData.email}
               onChange={handleInputChange}
               fullWidth
@@ -119,7 +123,7 @@ const BookingPage = () => {
             <TextField
               name="phone"
               label="Phone"
-              variant="outlined"
+              variant="standard"
               value={formData.phone}
               onChange={handleInputChange}
               fullWidth
@@ -130,7 +134,7 @@ const BookingPage = () => {
               name="checkIn"
               label="Check-in Date"
               type="date"
-              variant="outlined"
+              variant="standard"
               value={formData.checkIn}
               onChange={handleInputChange}
               fullWidth
@@ -142,7 +146,7 @@ const BookingPage = () => {
               name="checkOut"
               label="Check-out Date"
               type="date"
-              variant="outlined"
+              variant="standard"
               value={formData.checkOut}
               onChange={handleInputChange}
               fullWidth
@@ -154,7 +158,7 @@ const BookingPage = () => {
               name="roomCount"
               label="Number of Rooms"
               type="number"
-              variant="outlined"
+              variant="standard"
               value={roomCount}
               onChange={(e) => setRoomCount(parseInt(e.target.value))}
               fullWidth
@@ -166,7 +170,7 @@ const BookingPage = () => {
               name="adultCount"
               label="Number of Adults"
               type="number"
-              variant="outlined"
+              variant="standard"
               value={adultCount}
               onChange={(e) => setAdultCount(parseInt(e.target.value))}
               fullWidth
@@ -178,7 +182,7 @@ const BookingPage = () => {
               name="childrenCount"
               label="Number of Children"
               type="number"
-              variant="outlined"
+              variant="standard"
               value={childrenCount}
               onChange={(e) => setChildrenCount(parseInt(e.target.value))}
               fullWidth
