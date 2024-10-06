@@ -59,11 +59,26 @@ const Footer = () => {
               WhatsApp: +94 71 470 9400
             </Typography>
           </Stack>
-          <Stack direction="column" spacing={1} sx={{ marginTop: '20px' }}>
-            <Typography variant="body1" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', marginLeft: '20px', marginTop: '20px' }}>
-              Email: reservations@hotelceylon.com
-            </Typography>
-          </Stack>
+          <Stack direction="row" spacing={1} sx={{ marginTop: '20px', marginLeft: '20px' }}>
+  <Typography variant="body2" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>
+    Email:
+  </Typography>
+  <Link
+    href="mailto:reservations@hotelceylon.com"
+    sx={{
+      fontFamily: 'Marcellus, serif',
+      color: 'rgba(255, 255, 255, 1)',
+      textDecoration: 'none',
+      '&:hover': {
+        color: 'rgba(183, 153, 91, 1)',
+        textDecoration: 'underline'
+      }
+    }}
+  >
+    reservations@hotelceylon.com
+  </Link>
+</Stack>
+
         </Stack>
         <Stack
           direction="column"
@@ -126,8 +141,6 @@ const SocialMediaLinks = styled.a`
   &:hover {
     transform: scale(1.2); /* Zoom in effect */
   }
-
 `;
-
 
 export default Footer;

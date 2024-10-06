@@ -95,7 +95,7 @@ const Review = () => {
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ padding: "10px", marginLeft: "170px" }}
+            sx={{ padding: "10px", marginLeft: "100px" }}
           >
             Submit Your Review
           </Typography>
@@ -128,32 +128,6 @@ const Review = () => {
                   },
                 }}
               />
-              {/* <TextField
-                fullWidth
-                label=""
-                name="date"
-                type="date"
-                value={formData.date}
-                onChange={handleChange}
-                margin="normal"
-                InputLabelProps={{ shrink: true }}
-                required
-                sx={{
-                  width: "487px",
-                  "& .MuiOutlinedInput-root": {
-                    borderRadius: "0px",
-                    "& fieldset": {
-                      borderColor: "black",
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "black",
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "black",
-                    },
-                  },
-                }}
-              /> */}
               <TextField
                 fullWidth
                 label="Your Feedback"
@@ -202,7 +176,7 @@ const Review = () => {
           <Typography
             variant="h4"
             gutterBottom
-            style={{ paddingBottom: "10px", marginLeft: "300px" }}
+            style={{ paddingBottom: "10px", marginLeft: "20px" }}
           >
             Reviews
           </Typography>

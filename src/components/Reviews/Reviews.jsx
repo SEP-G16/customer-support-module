@@ -41,10 +41,11 @@ const BlackLine = styled.div`
 `;
 
 const HeaderText = styled.span`
-  margin: 10px 0;
+  margin: 0px 0;
   color: #000;
   font-family: 'Marcellus, serif';
   font-size: 24px;
+  text-align: center;
 `;
 
 const ReviewCardsContainer = styled.div`
