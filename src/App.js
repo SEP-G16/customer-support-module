@@ -11,8 +11,6 @@ import About from './pages/About/about'; // Adjusted import path for 'about.jsx'
 import ContactUs from './pages/ContactUs/ContactUs'; // Adjusted import path for 'ContactUs.jsx'
 
 
-const Spacer = ({ height }) => <div style={{ height: `${height}px` }} />;
-
 
 const App = () => {
   return (

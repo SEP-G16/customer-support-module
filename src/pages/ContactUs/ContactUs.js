@@ -3,10 +3,8 @@ import { Stack, Typography, Link } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import './ContactUs.css';
-
-// Import the background image
-import backgroundImage from "./room.jpg"; // Ensure this path is correct
+import './assets/styles/ContactUs.css';
+import backgroundImage from "./assets/images/room.jpg"; 
 
 const ContactUsPage = () => {
   return (

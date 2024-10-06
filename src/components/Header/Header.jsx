@@ -41,7 +41,7 @@ const Header = () => {
     <HeaderContainer>
       <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
         <OptionsContainer>
-          <Link href="/" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link href="/" color="inherit" sx={{ fontFamily: 'Marcellus, serif', color: 'white',  }}>
             Home
           </Link>
           <Link href="/about-us" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>

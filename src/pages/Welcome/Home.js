@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Typography, Stack } from '@mui/material';
-import Welcome from './Welcome.jpg';
+import Welcome from './assets/images/Welcome.jpg';
 import ImageBox from '../../components/ImageBox/ImageBox';
 import Buttons from '../../components/Buttons/Buttons';
 import ImageTextSection from './ImageSection';
@@ -11,7 +11,8 @@ import ChatBot from './Chatbot';
 const CustomTextContent = () => {
   return (
     <Stack spacing={2}>
-        <Typography variant="h1" fontFamily="Marcellus, serif" style={{ color: 'white', padding: '0px', marginBottom: '15px', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)" }}>
+        <Typography variant="h1" fontFamily="Marcellus, serif" style={{ color: 'white', padding: '0px', marginBottom: '15px', textShadow: "2px 2px 4px rgba(0, 0, 0, 0.9)", // Optional gradient effect
+     }}>
           WELCOME TO CEYLON RESORT
         </Typography>
     </Stack>

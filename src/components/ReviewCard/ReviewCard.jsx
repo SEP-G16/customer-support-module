@@ -1,8 +1,7 @@
 // ReviewCard.js
 import React from 'react';
 import { Stack, Typography } from '@mui/material';
-import { FaUserCircle, FaStar } from 'react-icons/fa';
-import profile from './profile.png';
+import profile from './assets/images/profile.png';
 
 function ReviewCard({ name, months, feedback }) { // Assuming 'feedback' matches the key in formData
   return (
@@ -28,7 +27,7 @@ function ReviewCard({ name, months, feedback }) { // Assuming 'feedback' matches
             {months} months ago
           </Typography>
         </Stack>
-        
+      
       </Stack>
 
       {/* Display feedback/comment */}

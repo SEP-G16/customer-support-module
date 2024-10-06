@@ -1,19 +1,19 @@
 import React from "react";
 import { Typography, Stack } from "@mui/material";
-import Booking from "./Booking.jpg"; // Assuming Booking is the correct path to your image
+import Booking from "./assets/images/Booking.jpg"; // Assuming Booking is the correct path to your image
 import AvailabilityBar from "../../components/AvailabilityBar/AvailabilityBar";
 import ActivityCard from "../../components/ActivityCard/ActivityCard";
 import MyComponent from "../../components/RoomCard/RoomCard"; // Import MyComponent
 import ImageBox from "../../components/ImageBox/ImageBox";
-import LotusIcon from "./lotus.png"; // Assuming the correct path to your icon
-import ResortIcon from "./hotel.png"; // Assuming the correct path to your icon
-import room from "./room.jpg";
-import luxury from "./luxury.jpg";
-import suite from "./suite.jpg";
-import pool from "./pool.jpg";
-import spa from "./spa.jpg";
-import gym from "./gym.jpg";
-import './CheckAvailability.css';
+import LotusIcon from "./assets/images/lotus.png"; // Assuming the correct path to your icon
+import ResortIcon from "./assets/images/hotel.png"; // Assuming the correct path to your icon
+import room from "./assets/images/room.jpg";
+import luxury from "./assets/images/luxury.jpg";
+import suite from "./assets/images/suite.jpg";
+import pool from "./assets/images/pool.jpg";
+import spa from "./assets/images/spa.jpg";
+import gym from "./assets/images/gym.jpg";
+import './assets/styles/CheckAvailability.css';
 
 const CustomTextContent = () => {
   return (

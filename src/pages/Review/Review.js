@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import {
   Typography,
   Stack,
-  Box,
   TextField,
   Button,
 } from "@mui/material";
 import Header from "../../components/Header/Header";
 import ImageBox from "../../components/ImageBox/ImageBox";
-import ReviewImage from "./Reviews.jpg";
+import ReviewImage from "./assets/images/Reviews.jpg";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import formatDate from "../../date.formatter";
 import { AxiosInstance } from "../../axios.config";
-import "./Review.css"; // Import the CSS file
+import "./assets/styles/Review.css"; // Import the CSS file
 
 const CustomTextContent = () => {
   return (
@@ -57,7 +56,7 @@ const Review = () => {
   useEffect(() => {
     async function getReviews() {
       try {
-        let response = await AxiosInstance.get("/api/review/all?limit=4");
+        let response = await AxiosInstance.get("/api/review/all");
         setReviews(response.data);
       } catch (error) {
         console.error(error);
@@ -70,13 +69,9 @@ const Review = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     await sendData(formData);
-    
   };
 
   const sendData = async (data) => {
@@ -133,7 +128,7 @@ const Review = () => {
                   },
                 }}
               />
-              <TextField
+              {/* <TextField
                 fullWidth
                 label=""
                 name="date"
@@ -158,7 +153,7 @@ const Review = () => {
                     },
                   },
                 }}
-              />
+              /> */}
               <TextField
                 fullWidth
                 label="Your Feedback"
@@ -185,7 +180,7 @@ const Review = () => {
                   },
                 }}
               />
-              
+
             </Stack>
             <Button
               type="submit"

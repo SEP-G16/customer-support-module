@@ -1,10 +1,10 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import Img0 from "./Images/carousel-img-0.jpg";
-import Img1 from "./Images/carousel-img-1.jpg";
-import Img2 from "./Images/carousel-img-2.jpg";
-import Img3 from "./Images/carousel-img-3.jpg";
-import './ImageSection.css'; // Import the CSS file
+import Img0 from "./assets/images/carousel-img-0.jpg";
+import Img1 from "./assets/images/carousel-img-1.jpg";
+import Img2 from "./assets/images/carousel-img-2.jpg";
+import Img3 from "./assets/images/carousel-img-3.jpg";
+import './assets/styles/ImageSection.css'; // Import the CSS file
 
 const ImageTextSection = () => {
   return (

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Stack, Typography, Rating } from '@mui/material';
-import './about.css';
+import './assets/styles/about.css';
 import ImageBox from '../../components/ImageBox/ImageBox';
-import lobby from './resort.jpg';
+import lobby from './assets/images/resort.jpg';
 
 const CustomTextContent = () => {
   return (
