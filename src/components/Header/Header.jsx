@@ -41,35 +41,110 @@ const Header = () => {
     <HeaderContainer>
       <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
         <OptionsContainer>
-          <Link href="/" color="inherit" sx={{ fontFamily: 'Marcellus, serif', color: 'white',  }}>
+          <Link
+            href="/"
+            color="inherit"
+            sx={{
+              fontFamily: 'Marcellus, serif',
+              color: 'white',
+              textDecoration: 'none',
+              '&:hover': {
+                color: '#b99d75',
+              },
+            }}
+          >
             Home
           </Link>
-          <Link href="/about-us" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link
+            href="/about-us"
+            color="inherit"
+            sx={{
+              fontFamily: 'Marcellus, serif',
+              color: 'white',
+              textDecoration: 'none',
+              '&:hover': {
+                color: '#b99d75',
+              },
+            }}
+          >
             About Us
           </Link>
-          <Link href="/contact" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link
+            href="/contact"
+            color="inherit"
+            sx={{
+              fontFamily: 'Marcellus, serif',
+              color: 'white',
+              textDecoration: 'none',
+              '&:hover': {
+                color: '#b99d75',
+              },
+            }}
+          >
             Contact Us
           </Link>
         </OptionsContainer>
       </Stack>
-      <Typography variant="h4" component="div" sx={{ textAlign: "center", fontFamily: 'Marcellus, serif', color: "white", fontSize: { xs: '1.5rem', md: '2rem' } }}>
+      <Typography
+        variant="h4"
+        component="div"
+        sx={{
+          textAlign: "center",
+          fontFamily: 'Marcellus, serif',
+          color: "white",
+          fontSize: { xs: '1.5rem', md: '2rem' },
+        }}
+      >
         Ceylon Resort
       </Typography>
       <Stack direction="row" spacing={2} sx={{ alignItems: 'center', marginRight: { xs: '10px', md: '40px' } }}>
         <OptionsContainer>
-          <Link href="/checkAvailability" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link
+            href="/checkAvailability"
+            color="inherit"
+            sx={{
+              fontFamily: 'Marcellus, serif',
+              color: 'white',
+              textDecoration: 'none',
+              '&:hover': {
+                color: '#b99d75',
+              },
+            }}
+          >
             Booking
           </Link>
-          <Link href="/menu" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link
+            href="/menu"
+            color="inherit"
+            sx={{
+              fontFamily: 'Marcellus, serif',
+              color: 'white',
+              textDecoration: 'none',
+              '&:hover': {
+                color: '#b99d75',
+              },
+            }}
+          >
             Dining
           </Link>
-          <Link href="/review" color="inherit" underline="hover" sx={{ fontFamily: 'Marcellus, serif', color: 'white' }}>
+          <Link
+            href="/review"
+            color="inherit"
+            sx={{
+              fontFamily: 'Marcellus, serif',
+              color: 'white',
+              textDecoration: 'none',
+              '&:hover': {
+                color: '#b99d75',
+              },
+            }}
+          >
             Reviews
           </Link>
         </OptionsContainer>
       </Stack>
     </HeaderContainer>
   );
-}
+};
 
 export default Header;

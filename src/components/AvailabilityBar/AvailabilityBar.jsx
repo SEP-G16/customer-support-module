@@ -190,79 +190,6 @@ function AvailabilityBar() {
     variant="outlined"
   />
 </GridItem>
-
-        {/* <GridItem>
-          <ItemLabel>Rooms</ItemLabel>
-          <StyledTextField
-            select
-            fullWidth
-            label=""
-            name="rooms"
-            value={formData.rooms}
-            onChange={handleChange}
-            InputLabelProps={{
-              style: { color: "white" },
-            }}
-            InputProps={{
-              disableUnderline: true,
-            }}
-            variant="outlined"
-          >
-            {[...Array(5).keys()].map((num) => (
-              <MenuItem key={num + 1} value={`${num + 1}`}>
-                {`${num + 1}`}
-              </MenuItem>
-            ))}
-          </StyledTextField>
-        </GridItem> */}
-        {/* <GridItem>
-          <ItemLabel>Adults</ItemLabel>
-          <StyledTextField
-            select
-            fullWidth
-            label=""
-            name="adults"
-            value={formData.adults}
-            onChange={handleChange}
-            InputLabelProps={{
-              style: { color: "white" },
-            }}
-            InputProps={{
-              disableUnderline: true,
-            }}
-            variant="outlined"
-          >
-            {[...Array(5).keys()].map((num) => (
-              <MenuItem key={num + 1} value={`${num + 1}`}>
-                {`${num + 1}`}
-              </MenuItem>
-            ))}
-          </StyledTextField>
-        </GridItem> */}
-        {/* <GridItem>
-          <ItemLabel>Children</ItemLabel>
-          <StyledTextField
-            select
-            fullWidth
-            label=""
-            name="children"
-            value={formData.children}
-            onChange={handleChange}
-            InputLabelProps={{
-              style: { color: "white" },
-            }}
-            InputProps={{
-              disableUnderline: true,
-            }}
-            variant="outlined"
-          >
-            {[...Array(5).keys()].map((num) => (
-              <MenuItem key={num} value={`${num}`}>
-                {`${num}`}
-              </MenuItem>
-            ))}
-          </StyledTextField>
-        </GridItem> */}
         <ButtonGridItem>
           <ButtonWrapper>
             <StyledButton type="button" onClick={handleSubmit}>
@@ -280,28 +207,36 @@ function AvailabilityBar() {
       >
         <DialogTitle>Room Availability</DialogTitle>
         <DialogContent>
-          <DialogContentWrapper>
-            {available ? (
-              <RoomContainer>
-                {Object.entries(roomAvailability).map(([roomType, map]) => (
-                  <RoomBox
-                    key={roomType}
-                    onClick={() => handleRoomClick(roomType)}
-                  >
-                    <RoomImage src={roomImages[roomType]} alt={roomType} />
-                    <RoomContent>
-                      <Typography variant="h6">{roomType}</Typography>
-                      <Typography variant="body2">{`${map.roomCount} rooms available`}</Typography>
-                    </RoomContent>
-                  </RoomBox>
-                ))}
-              </RoomContainer>
-            ) : (
-              <Typography variant="body1">
-                Rooms are not available for the selected dates.
+        <DialogContentWrapper>
+  {available ? (
+    <RoomContainer>
+      {Object.entries(roomAvailability).map(([roomType, map]) => {
+        const isUnavailable = map.roomCount === 0; // Check if the room count is zero
+        return (
+          <RoomBox
+            key={roomType}
+            onClick={() => !isUnavailable && handleRoomClick(roomType)} // Disable click if room count is zero
+            disabled={isUnavailable} // Disable the button interaction
+            isUnavailable={isUnavailable} // Pass this prop to style conditionally
+          >
+            <RoomImage src={roomImages[roomType]} alt={roomType} />
+            <RoomContent>
+              <Typography variant="h6">{roomType}</Typography>
+              <Typography variant="body2">
+                {`${map.roomCount} rooms available`}
               </Typography>
-            )}
-          </DialogContentWrapper>
+            </RoomContent>
+          </RoomBox>
+        );
+      })}
+    </RoomContainer>
+  ) : (
+    <Typography variant="body1">
+      Rooms are not available for the selected dates.
+    </Typography>
+  )}
+</DialogContentWrapper>
+
         </DialogContent>
         <DialogActions>
           <MuiButton onClick={handleClosePopup} color="primary">
@@ -423,21 +358,21 @@ const DialogContentWrapper = styled.div`
   width: 100%;
 `;
 
-const RoomBox = styled(ButtonBase)`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border: 1px solid #b99d75;
-  border-radius: 5px;
-  overflow: hidden;
-  text-align: left;
-  transition: background-color 0.3s;
-  padding: 10px;
+// const RoomBox = styled(ButtonBase)`
+//   display: flex;
+//   align-items: center;
+//   width: 100%;
+//   border: 1px solid #b99d75;
+//   border-radius: 5px;
+//   overflow: hidden;
+//   text-align: left;
+//   transition: background-color 0.3s;
+//   padding: 10px;
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-`;
+//   &:hover {
+//     background-color: rgba(0, 0, 0, 0.1);
+//   }
+// `;
 
 const RoomImage = styled.img`
   width: 150px;
@@ -455,5 +390,26 @@ const RoomContent = styled(Box)`
   width: 100%;
   text-align: right; /* Aligns the content to the right */
 `;
+
+const RoomBox = styled(ButtonBase)`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #b99d75;
+  border-radius: 5px;
+  overflow: hidden;
+  text-align: left;
+  transition: background-color 0.3s;
+  padding: 10px;
+  cursor: ${({ isUnavailable }) => (isUnavailable ? "not-allowed" : "pointer")}; // Change cursor if unavailable
+  opacity: ${({ isUnavailable }) => (isUnavailable ? 0.5 : 1)}; // Make it greyed out when unavailable
+  pointer-events: ${({ isUnavailable }) => (isUnavailable ? "none" : "auto")}; // Disable interaction if unavailable
+
+  &:hover {
+    background-color: ${({ isUnavailable }) =>
+      isUnavailable ? "transparent" : "rgba(0, 0, 0, 0.1)"};
+  }
+`;
+
 
 export default AvailabilityBar;
