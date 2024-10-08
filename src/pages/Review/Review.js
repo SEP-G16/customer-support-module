@@ -80,7 +80,7 @@ const Review = () => {
       date: formatDate(new Date(data.date)),
       feedback: data.feedback,
     };
-    await AxiosInstance.post("/api/review/temp/add", reqBody);
+    await AxiosInstance.post("/api/review/add", reqBody);
   };
 
   return (
