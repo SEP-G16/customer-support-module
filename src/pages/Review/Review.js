@@ -4,6 +4,7 @@ import {
   Stack,
   TextField,
   Button,
+  //FormHelperText,
 } from "@mui/material";
 import Header from "../../components/Header/Header";
 import ImageBox from "../../components/ImageBox/ImageBox";
@@ -52,6 +53,10 @@ const Review = () => {
     date: "",
     feedback: "",
   });
+  const [errors, setErrors] = useState({
+    name: "",
+    feedback: "",
+  });
 
   useEffect(() => {
     async function getReviews() {
@@ -68,10 +73,21 @@ const Review = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await sendData(formData);
+    const newErrors = { ...errors };
+    if (formData.name === "") {
+      newErrors.name = "This field is required";
+    }
+    if (formData.feedback === "") {
+      newErrors.feedback = "This field is required";
+    }
+    setErrors(newErrors);
+    if (newErrors.name === "" && newErrors.feedback === "") {
+      await sendData(formData);
+    }
   };
 
   const sendData = async (data) => {
@@ -111,7 +127,8 @@ const Review = () => {
                 value={formData.name}
                 onChange={handleChange}
                 margin="normal"
-                required
+                error={errors.name !== ""}
+                helperText={errors.name}
                 sx={{
                   width: "487px",
                   "& .MuiOutlinedInput-root": {
@@ -137,7 +154,8 @@ const Review = () => {
                 margin="normal"
                 multiline
                 rows={4}
-                required
+                error={errors.feedback !== ""}
+                helperText={errors.feedback}
                 sx={{
                   width: "487px",
                   "& .MuiOutlinedInput-root": {
@@ -154,7 +172,6 @@ const Review = () => {
                   },
                 }}
               />
-
             </Stack>
             <Button
               type="submit"
