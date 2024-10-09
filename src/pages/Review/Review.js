@@ -107,6 +107,7 @@ const Review = () => {
     } catch (error) {
       console.error("Error submitting review:", error);
     }
+
   };
 
   return (

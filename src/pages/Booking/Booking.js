@@ -366,7 +366,7 @@ const BookingPage = () => {
             />
 
             <Typography variant="h6">
-              {roomCount > 0 ? `Total Cost: $${calculateTotalCost()}` : "Select the room count to see the total cost."}
+            {roomCount > 0 ? `Total Cost: $${calculateTotalCost()}` : "Select the room count to see the total cost."}
             </Typography>
             <Button type="submit" variant="contained" color="primary" sx={{ marginTop: 2 }}>
               Book Now
