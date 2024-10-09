@@ -32,7 +32,9 @@ const Image = styled.img`
   z-index: 1; /* Ensure the image is above the gradient overlay */
 `;
 
-const GradientOverlay = styled.div`
+const GradientOverlay = styled.div.attrs(() => ({
+  'data-testid': 'gradient-overlay',
+}))`
   position: absolute;
   top: 0;
   left: 0;

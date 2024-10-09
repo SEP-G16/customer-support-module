@@ -7,12 +7,12 @@ function Reviews({Review}) {
     <ReviewContainer>
       <ReviewHeader>
         <HeaderText>Reviews</HeaderText>
-        <BlackLine />
+        <BlackLine data-testid="black-line" />
       </ReviewHeader>
       <ReviewCardsContainer>
-        <ReviewCard />
-        <ReviewCard />
-        <ReviewCard />
+        <ReviewCard data-testid="mock-review-card" />
+        <ReviewCard data-testid="mock-review-card" />
+        <ReviewCard data-testid="mock-review-card" />
       </ReviewCardsContainer>
     </ReviewContainer>
   );
