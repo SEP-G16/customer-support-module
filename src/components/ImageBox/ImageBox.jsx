@@ -41,8 +41,8 @@ const GradientOverlay = styled.div`
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0) 20%,
-    rgba(0, 0, 0, 0) 80%,
+    rgba(0, 0, 0, 0.4) 20%,
+    rgba(0, 0, 0, 0.4) 80%,
     rgba(0, 0, 0, 0.85) 100%
   );
   z-index: 2; /* Ensure the gradient overlay is above the image */
