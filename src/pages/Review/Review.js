@@ -4,7 +4,6 @@ import {
   Stack,
   TextField,
   Button,
-  //FormHelperText,
 } from "@mui/material";
 import Header from "../../components/Header/Header";
 import ImageBox from "../../components/ImageBox/ImageBox";
@@ -53,6 +52,7 @@ const Review = () => {
     date: "",
     feedback: "",
   });
+
   const [errors, setErrors] = useState({
     name: "",
     feedback: "",
@@ -89,14 +89,13 @@ const Review = () => {
       await sendData(formData);
     }
   };
-
   const sendData = async (data) => {
     let reqBody = {
       name: data.name,
       date: formatDate(new Date(data.date)),
       feedback: data.feedback,
     };
-    await AxiosInstance.post("/api/review/temp/add", reqBody);
+    await AxiosInstance.post("/api/review/add", reqBody);
   };
 
   return (
@@ -171,7 +170,8 @@ const Review = () => {
                     },
                   },
                 }}
-              />
+                />
+
             </Stack>
             <Button
               type="submit"
