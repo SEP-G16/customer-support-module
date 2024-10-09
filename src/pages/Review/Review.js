@@ -11,6 +11,7 @@ import ReviewImage from "./assets/images/Reviews.jpg";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import formatDate from "../../date.formatter";
 import { AxiosInstance } from "../../axios.config";
+import { format } from "date-fns";
 import "./assets/styles/Review.css"; // Import the CSS file
 
 const CustomTextContent = () => {
@@ -62,6 +63,7 @@ const Review = () => {
     async function getReviews() {
       try {
         let response = await AxiosInstance.get("/api/review/all");
+        console.log("Reviews data:", response.data);
         setReviews(response.data);
       } catch (error) {
         console.error(error);
@@ -90,12 +92,22 @@ const Review = () => {
     }
   };
   const sendData = async (data) => {
-    let reqBody = {
+    // Format the date to match the required pattern "yyyy-MM-dd HH:mm:ss"
+    const formattedDate = format(new Date(data.date), "yyyy-MM-dd HH:mm:ss");
+  
+    const reqBody = {
       name: data.name,
-      date: formatDate(new Date(data.date)),
+      date: formattedDate, // Use the formatted date here
       feedback: data.feedback,
     };
-    await AxiosInstance.post("/api/review/add", reqBody);
+  
+    try {
+      await AxiosInstance.post("/api/review/add", reqBody);
+      console.log("Review submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
+
   };
 
   return (

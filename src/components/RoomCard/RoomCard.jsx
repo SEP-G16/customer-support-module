@@ -59,7 +59,7 @@ const Description = styled.div`
 `;
 
 
-function MyComponent({
+function RoomCard({
   roomImage,
   roomType,
   roomSize,
@@ -103,4 +103,4 @@ function MyComponent({
   );
 }
 
-export default MyComponent;
+export default RoomCard;

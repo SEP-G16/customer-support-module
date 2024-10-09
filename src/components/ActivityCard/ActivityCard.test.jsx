@@ -26,4 +26,6 @@ test('renders ActivityCard with correct content', () => {
   // Check if the description is rendered correctly
   const descriptionElement = screen.getByText(mockProps.description);
   expect(descriptionElement).toBeInTheDocument();
+
 });
+

@@ -93,13 +93,13 @@ const Footer = () => {
             FIND US ON
           </Typography>
           <Stack direction="row" justifyContent="center" alignItems="center" spacing={2} sx={{ marginTop: '40px' }}>
-            <SocialMediaLinks href="https://www.facebook.com">
+            <SocialMediaLinks href="https://www.facebook.com" aria-label="facebook">
               <FacebookIcon style={{ color: "white" }} />
             </SocialMediaLinks>
-            <SocialMediaLinks href="https://www.twitter.com">
+            <SocialMediaLinks href="https://www.twitter.com" aria-label="twitter">
               <TwitterIcon style={{ color: "white" }} />
             </SocialMediaLinks>
-            <SocialMediaLinks href="https://www.instagram.com">
+            <SocialMediaLinks href="https://www.instagram.com" aria-label="instagram">
               <InstagramIcon style={{ color: "white" }} />
             </SocialMediaLinks>
           </Stack>

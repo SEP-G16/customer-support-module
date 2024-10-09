@@ -147,7 +147,7 @@ function AvailabilityBar() {
   <ItemLabel>Check In</ItemLabel>
   <StyledTextField
     fullWidth
-    label=""
+    // label="Check-In"
     name="checkIn"
     type="date"
     value={formData.checkIn}
@@ -171,7 +171,7 @@ function AvailabilityBar() {
   <ItemLabel>Check Out</ItemLabel>
   <StyledTextField
     fullWidth
-    label=""
+    // label="Check-Out"
     name="checkOut"
     type="date"
     value={formData.checkOut}
@@ -192,9 +192,13 @@ function AvailabilityBar() {
 </GridItem>
         <ButtonGridItem>
           <ButtonWrapper>
-            <StyledButton type="button" onClick={handleSubmit}>
-              Check Availability
-            </StyledButton>
+          <StyledButton
+          type="button"
+          onClick={handleSubmit}
+          title="Click to check room availability" // Tooltip for more context
+          >
+  Check Availability
+</StyledButton>
           </ButtonWrapper>
         </ButtonGridItem>
       </GridContainer>
@@ -358,21 +362,6 @@ const DialogContentWrapper = styled.div`
   width: 100%;
 `;
 
-// const RoomBox = styled(ButtonBase)`
-//   display: flex;
-//   align-items: center;
-//   width: 100%;
-//   border: 1px solid #b99d75;
-//   border-radius: 5px;
-//   overflow: hidden;
-//   text-align: left;
-//   transition: background-color 0.3s;
-//   padding: 10px;
-
-//   &:hover {
-//     background-color: rgba(0, 0, 0, 0.1);
-//   }
-// `;
 
 const RoomImage = styled.img`
   width: 150px;

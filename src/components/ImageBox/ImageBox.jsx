@@ -32,7 +32,9 @@ const Image = styled.img`
   z-index: 1; /* Ensure the image is above the gradient overlay */
 `;
 
-const GradientOverlay = styled.div`
+const GradientOverlay = styled.div.attrs(() => ({
+  'data-testid': 'gradient-overlay',
+}))`
   position: absolute;
   top: 0;
   left: 0;
@@ -41,8 +43,13 @@ const GradientOverlay = styled.div`
   background: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.85) 0%,
+
     rgba(0, 0, 0, 0.4) 20%,
     rgba(0, 0, 0, 0.4) 80%,
+
+    rgba(0, 0, 0, 0.3) 20%,
+    rgba(0, 0, 0, 0.3) 80%,
+
     rgba(0, 0, 0, 0.85) 100%
   );
   z-index: 2; /* Ensure the gradient overlay is above the image */
