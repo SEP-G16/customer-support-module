@@ -1,97 +1,91 @@
+// AvailabilityBar.test.jsx
+
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import AvailabilityBar from "./AvailabilityBar";
-import { BrowserRouter as Router } from "react-router-dom";
-import AxiosInstance from "../../axios.config";
+import AvailabilityBar from "./AvailabilityBar"; // Adjust the import path as needed
+import { AxiosInstance } from "../../axios.config"; // Import Axios instance
 
-// Mock the AxiosInstance properly for API requests
-jest.mock("../../axios.config", () => ({
-  AxiosInstance: {
-    get: jest.fn(),  // Mock the AxiosInstance.get method
-  },
-}));
+jest.mock("../../axios.config"); // Mock the Axios instance
 
-test("renders the form correctly", () => {
-  render(
-    <Router>
-      <AvailabilityBar />
-    </Router>
-  );
+describe("AvailabilityBar", () => {
+  beforeEach(() => {
+    // Clear all instances and calls to constructor and all methods:
+    AxiosInstance.get.mockClear();
+  });
 
-  // Check that the required elements are rendered
-  expect(screen.getByLabelText(/check-in/i)).toBeInTheDocument();
-  expect(screen.getByLabelText(/check-out/i)).toBeInTheDocument();
-  expect(screen.getByText(/check availability/i)).toBeInTheDocument();
+  test("renders the availability form correctly", () => {
+    render(<AvailabilityBar />);
+
+    // Check if input fields are present
+    expect(screen.getByLabelText(/Check-In/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Check-Out/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /Check Availability/i })).toBeInTheDocument();
+  });
+
+  test("submits form and shows available rooms", async () => {
+    // Mock the Axios GET request to return dummy room availability data
+    AxiosInstance.get.mockResolvedValueOnce({
+      data: [
+        { roomTypeId: 1, roomCount: 5 }, // Standard rooms
+        { roomTypeId: 2, roomCount: 3 }, // Deluxe rooms
+        { roomTypeId: 3, roomCount: 0 }, // Suite rooms (unavailable)
+      ],
+    });
+
+    render(<AvailabilityBar />);
+
+    // Simulate user input for check-in and check-out dates
+    fireEvent.change(screen.getByLabelText(/Check-In/i), {
+      target: { value: new Date().toISOString().split("T")[0] },
+    });
+    fireEvent.change(screen.getByLabelText(/Check-Out/i), {
+      target: { value: new Date(Date.now() + 86400000).toISOString().split("T")[0] }, // +1 day
+    });
+
+    // Click the "Check Availability" button
+    fireEvent.click(screen.getByRole("button", { name: /Check Availability/i }));
+
+    // Wait for the dialog to show
+    await waitFor(() => {
+      expect(screen.getByText(/Room Availability/i)).toBeInTheDocument();
+      expect(screen.getByText(/Standard rooms/i)).toBeInTheDocument();
+      expect(screen.getByText(/5 rooms available/i)).toBeInTheDocument();
+      expect(screen.getByText(/Deluxe rooms/i)).toBeInTheDocument();
+      expect(screen.getByText(/3 rooms available/i)).toBeInTheDocument();
+      expect(screen.getByText(/Suite rooms/i)).toBeInTheDocument();
+      expect(screen.getByText(/0 rooms available/i)).toBeInTheDocument();
+    });
+  });
+
+  test("shows an alert when rooms are not available", async () => {
+    // Mock the Axios GET request to return zero available rooms
+    AxiosInstance.get.mockResolvedValueOnce({
+      data: [
+        { roomTypeId: 1, roomCount: 0 }, // Standard rooms (unavailable)
+        { roomTypeId: 2, roomCount: 0 }, // Deluxe rooms (unavailable)
+        { roomTypeId: 3, roomCount: 0 }, // Suite rooms (unavailable)
+      ],
+    });
+
+    render(<AvailabilityBar />);
+
+    // Simulate user input for check-in and check-out dates
+    fireEvent.change(screen.getByLabelText(/Check-In/i), {
+      target: { value: new Date().toISOString().split("T")[0] },
+    });
+    fireEvent.change(screen.getByLabelText(/Check-Out/i), {
+      target: { value: new Date(Date.now() + 86400000).toISOString().split("T")[0] }, // +1 day
+    });
+
+    // Mock the global alert function
+    global.alert = jest.fn();
+
+    // Click the "Check Availability" button
+    fireEvent.click(screen.getByRole("button", { name: /Check Availability/i }));
+
+    // Wait for the alert to be called
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalledWith("Rooms are not available for the selected dates.");
+    });
+  });
 });
-
-// // Test for successful form submission and showing room availability
-// test("submits form and shows room availability", async () => {
-//   // Mock the Axios call to return some room availability data
-//   AxiosInstance.get.mockResolvedValueOnce({
-//     data: [
-//       { roomTypeId: 1, roomCount: 2 }, // Standard rooms
-//       { roomTypeId: 2, roomCount: 1 }, // Deluxe rooms
-//       { roomTypeId: 3, roomCount: 0 }, // Suite rooms (unavailable)
-//     ],
-//   });
-
-//   render(
-//     <Router>
-//       <AvailabilityBar />
-//     </Router>
-//   );
-
-//   // Simulate user input for Check-In and Check-Out dates
-//   fireEvent.change(screen.getByLabelText(/check-in/i), {
-//     target: { value: "2024-10-10" },
-//   });
-//   fireEvent.change(screen.getByLabelText(/check-out/i), {
-//     target: { value: "2024-10-15" },
-//   });
-
-//   // Submit the form
-//   fireEvent.click(screen.getByText(/check availability/i));
-
-//   // Wait for the popup dialog to be rendered
-//   await waitFor(() => {
-//     expect(screen.getByText(/room availability/i)).toBeInTheDocument();
-//   });
-
-//   // Check the room availability in the dialog
-//   expect(screen.getByText(/Standard rooms/)).toBeInTheDocument();
-//   expect(screen.getByText(/2 rooms available/)).toBeInTheDocument();
-//   expect(screen.getByText(/Deluxe rooms/)).toBeInTheDocument();
-//   expect(screen.getByText(/1 room available/)).toBeInTheDocument();
-//   expect(screen.queryByText(/Suite rooms/)).toBeNull(); // Suite rooms are not available
-// });
-
-// // Test for handling API failure gracefully
-// test("handles API failure gracefully", async () => {
-//   // Mock the Axios call to simulate an error
-//   AxiosInstance.get.mockRejectedValueOnce(new Error("API Error"));
-
-//   render(
-//     <Router>
-//       <AvailabilityBar />
-//     </Router>
-//   );
-
-//   // Simulate user input for Check-In and Check-Out dates
-//   fireEvent.change(screen.getByLabelText(/check-in/i), {
-//     target: { value: "2024-10-10" },
-//   });
-//   fireEvent.change(screen.getByLabelText(/check-out/i), {
-//     target: { value: "2024-10-15" },
-//   });
-
-//   // Submit the form
-//   fireEvent.click(screen.getByText(/check availability/i));
-
-//   // Wait for the error alert to appear
-//   await waitFor(() => {
-//     expect(screen.getByText(/an unexpected error occurred/i)).toBeInTheDocument();
-//   });
-
-//   // Optionally, ensure that no room availability data is shown in case of failure
-//   expect(screen.queryByText(/room availability/i)).toBeNull();
-// });

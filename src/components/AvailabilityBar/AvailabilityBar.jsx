@@ -147,7 +147,7 @@ function AvailabilityBar() {
   <ItemLabel>Check In</ItemLabel>
   <StyledTextField
     fullWidth
-    label="Check-In"
+    // label="Check-In"
     name="checkIn"
     type="date"
     value={formData.checkIn}
@@ -171,7 +171,7 @@ function AvailabilityBar() {
   <ItemLabel>Check Out</ItemLabel>
   <StyledTextField
     fullWidth
-    label="Check-Out"
+    // label="Check-Out"
     name="checkOut"
     type="date"
     value={formData.checkOut}
