@@ -133,7 +133,7 @@ const BookingPage = () => {
           </Typography>
           <form className="form" onSubmit={handleFormSubmit}>
           <TextField
-              id="outlined-basic"
+              name = "name"
               label="Name"
               variant="outlined"
               value={formData.name}
@@ -366,7 +366,7 @@ const BookingPage = () => {
             />
 
             <Typography variant="h6">
-              {roomCount > 0 ? `Total Cost: $${calculateTotalCost()}` : "Select the room count to see the total cost."}
+            {roomCount > 0 ? `Total Cost: $${calculateTotalCost()}` : "Select the room count to see the total cost."}
             </Typography>
             <Button type="submit" variant="contained" color="primary" sx={{ marginTop: 2 }}>
               Book Now
@@ -377,7 +377,7 @@ const BookingPage = () => {
           <Dialog open={openPopup} onClose={handleClosePopup}>
             <DialogTitle>Booking Confirmed</DialogTitle>
             <DialogContent>
-              <Typography>Your booking has been confirmed!</Typography>
+              <Typography>Your booking has been recorded. Manager will contact You soon !</Typography>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClosePopup} color="primary">
