@@ -47,6 +47,12 @@ const bedTypes = {
   "Deluxe rooms": "2 Queen Beds",
   "Suite rooms": "2 Twin Beds",
 };
+const roomPrices = {
+  "Standard rooms": "Rs. 10,250 per night",
+  "Deluxe rooms": "Rs. 15,780 per night",
+  "Suite rooms": "Rs. 20,200 per night",
+};
+
 
 function AvailabilityBar() {
   const [formData, setFormData] = useState({
@@ -61,6 +67,7 @@ function AvailabilityBar() {
     roomSize: roomSizes["Standard rooms"], // Default room size
     guest: guests["Standard rooms"], // Default guest information
     bedType: bedTypes["Standard rooms"], // Default bed type
+    price: roomPrices["Standard rooms"],
   });
 
   const [showPopup, setShowPopup] = useState(false);
@@ -135,6 +142,7 @@ function AvailabilityBar() {
           roomSize: roomSizes[roomType],
           guest: guests[roomType],
           bedType: bedTypes[roomType],
+          price: roomPrices[roomType],
         },
       },
     });
@@ -218,19 +226,19 @@ function AvailabilityBar() {
         const isUnavailable = map.roomCount === 0; // Check if the room count is zero
         return (
           <RoomBox
-            key={roomType}
-            onClick={() => !isUnavailable && handleRoomClick(roomType)} // Disable click if room count is zero
-            disabled={isUnavailable} // Disable the button interaction
-            isUnavailable={isUnavailable} // Pass this prop to style conditionally
-          >
-            <RoomImage src={roomImages[roomType]} alt={roomType} />
-            <RoomContent>
-              <Typography variant="h6">{roomType}</Typography>
-              <Typography variant="body2">
-                {`${map.roomCount} rooms available`}
-              </Typography>
-            </RoomContent>
-          </RoomBox>
+  key={roomType}
+  onClick={() => !isUnavailable && handleRoomClick(roomType)}
+  disabled={isUnavailable}
+  isUnavailable={isUnavailable}
+>
+  <RoomImage src={roomImages[roomType]} alt={roomType} />
+  <RoomContent>
+    <Typography variant="h6">{roomType}</Typography>
+    <Typography variant="body2">{roomPrices[roomType]}</Typography> {/* Add price here */}
+    <Typography variant="body2">{`${map.roomCount} rooms available`}</Typography>
+  </RoomContent>
+</RoomBox>
+
         );
       })}
     </RoomContainer>
