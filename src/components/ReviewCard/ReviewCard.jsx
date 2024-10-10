@@ -5,7 +5,12 @@ import profile from './assets/images/profile.png';
 function ReviewCard({ name, createdAt, feedback }) {
   // Function to calculate the difference in months between the review date and the current date
   const calculateTimeAgo = (reviewDate) => {
-    const currentDate = new Date();
+    const usTimeZone = 'America/New_York'; // You can adjust this to any other US time zone
+    
+    // Create the current date in the desired US time zone
+    const currentDateObj = new Date().toLocaleString('en-US', { timeZone: usTimeZone });
+
+    const currentDate = new Date(currentDateObj);
     const reviewDateObj = new Date(reviewDate);
     const timeDiffInSeconds = Math.floor((currentDate - reviewDateObj) / 1000); // Get time difference in seconds
   
@@ -32,7 +37,7 @@ function ReviewCard({ name, createdAt, feedback }) {
       direction="column"
       spacing={2}
       sx={{
-        width: '100%',
+        width: '65%',
         maxWidth: 600,
         margin: '5px auto',
         padding: 2,
@@ -40,13 +45,13 @@ function ReviewCard({ name, createdAt, feedback }) {
         border: '1px solid black',
       }}
     >
-      <Stack direction="row" spacing={2} alignItems="center">
+      <Stack direction="row" spacing={2} alignItems="center" sx={{ width: '100%' }}>
         <img
           src={profile}
           alt="user"
           style={{ width: 50, height: 50, borderRadius: '50%' }}
         />
-        <Stack sx={{ width: 100, marginRight: '50px' }}>
+        <Stack sx={{ width: 'auto', flex: 1, whiteSpace: 'nowrap' }}>
           <Typography variant="h6" fontFamily="Marcellus, serif">
             {name}
           </Typography>

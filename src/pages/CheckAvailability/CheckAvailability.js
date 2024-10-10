@@ -78,6 +78,7 @@ const CheckAvailability = () => {
             <MyComponent
               roomImage={room}
               roomType="Standard Room"
+              price="Rs. 10,250 per night"
               roomSize="80m2"
               guests="2 Guests"
               bedType="1 King Bed"
@@ -88,6 +89,7 @@ const CheckAvailability = () => {
             <MyComponent
               roomImage={luxury}
               roomType="Deluxe Room"
+              price="Rs. 15,780 per night"
               roomSize="100m2"
               guests="3 Guests"
               bedType="2 Queen Beds"
@@ -98,6 +100,7 @@ const CheckAvailability = () => {
             <MyComponent
               roomImage={suite}
               roomType="Suite Room"
+              price="Rs. 20,200 per night"
               roomSize="120m2"
               guests="4 Guests"
               bedType="2 Twin Beds"

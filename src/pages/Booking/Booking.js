@@ -121,6 +121,7 @@ const BookingPage = () => {
           <RoomDetails
             roomImage={formData.roomImage}
             roomType={formData.room}
+            price={formData.price}
             roomSize={formData.roomSize}
             guests={formData.guest}
             bedType={formData.bedType}

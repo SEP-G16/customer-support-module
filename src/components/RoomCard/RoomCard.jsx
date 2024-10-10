@@ -9,14 +9,23 @@ const CardContainer = styled.div`
   background-color: rgba(255, 255, 255, 1);
   display: flex;
   flex-direction: column;
-  width: 300px;  /* Fixed width */
+  width: 250px;  /* Fixed width */
   height: 400px; /* Fixed height */
   font-size: 12px;
   color: #000;
   font-weight: 400;
   padding: 40px 40px 20px 40px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  // border: 2px solid #53624e; /* Add a green border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for scale and shadow */
+
+  &:hover {
+    transform: scale(1.05); /* Slightly scale up on hover */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4); /* Enhance shadow on hover */
+  }
 `;
+
+
 
 const RoomImage = styled.img`
   width: 100%;
@@ -30,6 +39,16 @@ const RoomType = styled.div`
   font-size: 24px;
   font-family: Marcellus, serif;
 `;
+
+const Price = styled.div`
+  text-align: center;
+  margin-top: 10px;
+  font-size: 17px;
+  color: #53624e; /* A nice green color for price */
+  font-family: Marcellus, serif;
+  font-weight: bold;
+`;
+
 
 const InfoSection = styled.div`
   display: flex;
@@ -62,6 +81,7 @@ const Description = styled.div`
 function RoomCard({
   roomImage,
   roomType,
+  price,
   roomSize,
   guests,
   bedType,
@@ -74,6 +94,9 @@ function RoomCard({
 
       {/* Room Type */}
       <RoomType>{roomType}</RoomType>
+
+      {/* Price */}
+      <Price>{price}</Price>  {/* Display the price */}
 
       {/* Information Section */}
       <InfoSection>
