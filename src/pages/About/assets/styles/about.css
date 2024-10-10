@@ -3,12 +3,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 80px;
   }
   
   .ContentContainer {
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     text-align: center;
   }
   

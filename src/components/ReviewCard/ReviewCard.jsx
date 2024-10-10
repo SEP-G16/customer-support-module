@@ -5,7 +5,12 @@ import profile from './assets/images/profile.png';
 function ReviewCard({ name, createdAt, feedback }) {
   // Function to calculate the difference in months between the review date and the current date
   const calculateTimeAgo = (reviewDate) => {
-    const currentDate = new Date();
+    const usTimeZone = 'America/New_York'; // You can adjust this to any other US time zone
+    
+    // Create the current date in the desired US time zone
+    const currentDateObj = new Date().toLocaleString('en-US', { timeZone: usTimeZone });
+
+    const currentDate = new Date(currentDateObj);
     const reviewDateObj = new Date(reviewDate);
     const timeDiffInSeconds = Math.floor((currentDate - reviewDateObj) / 1000); // Get time difference in seconds
   
