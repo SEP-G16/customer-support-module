@@ -1,0 +1,14 @@
+.container {
+    background-color: white;
+    overflow: hidden;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  
+  .custom-text {
+    color: white;
+    padding: 0px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+  }
+  

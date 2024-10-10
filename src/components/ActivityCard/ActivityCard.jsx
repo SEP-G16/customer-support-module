@@ -1,18 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
-import pool from "./pool.jpg";
 
-function ActivityCard() {
+function ActivityCard({ img, title, description }) {
   return (
     <Container>
       <Card>
-        <Img src={pool} alt={"pool activities"} />
-        <Title>Dive into Luxury With Our Infinity Pool</Title>
-        <Description>
-          Immerse yourself in crystal-clear waters with breathtaking views that
-          stretch to the horizon. Relax poolside with a refreshing cocktail and
-          let the tranquil ambiance whisk you away to paradise.
-        </Description>
+        <ImgContainer>
+        <Img src={img} alt={title} />
+        </ImgContainer>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
       </Card>
       <Overlay />
     </Container>
@@ -24,6 +21,7 @@ const Container = styled.div`
   width: 100%;
   margin: 0px 40px 0px 40px;
   max-width: 300px; /* Adjust as needed */
+  overflow: hidden;
   
   @media (max-width: 768px) {
     max-width: 200px; /* Adjust for smaller screens */
@@ -55,7 +53,19 @@ const Card = styled.div`
 
 const Img = styled.img`
   width: 100%;
-  border-radius: 5px; /* Example border radius */
+  border-radius: 0px; /* Example border radius */
+
+`;
+
+const ImgContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0px; /* Example border radius */
+   transition: transform 0.3s ease; /* Smooth transition for hover effect */
+
+  &:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
 `;
 
 const Title = styled.div`
@@ -104,7 +114,6 @@ const Overlay = styled.div`
     height: 42%; /* Adjust height for smaller screens */
     width: 85%; /* Adjust width for smaller screens */
   }
-
 `;
 
 export default ActivityCard;
