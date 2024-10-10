@@ -5,7 +5,9 @@ function ActivityCard({ img, title, description }) {
   return (
     <Container>
       <Card>
+        <ImgContainer>
         <Img src={img} alt={title} />
+        </ImgContainer>
         <Title>{title}</Title>
         <Description>{description}</Description>
       </Card>
@@ -52,6 +54,18 @@ const Card = styled.div`
 const Img = styled.img`
   width: 100%;
   border-radius: 0px; /* Example border radius */
+
+`;
+
+const ImgContainer = styled.div`
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0px; /* Example border radius */
+   transition: transform 0.3s ease; /* Smooth transition for hover effect */
+
+  &:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
 `;
 
 const Title = styled.div`

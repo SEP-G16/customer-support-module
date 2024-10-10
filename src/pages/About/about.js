@@ -114,6 +114,7 @@ function AboutUs() {
 
             For a more casual dining experience, enjoy light snacks and drinks at our stylish lounge or outdoor patio, where you can relax while taking in the stunning city views. Whether you’re a food connoisseur or simply in search of a satisfying meal, our culinary offerings are sure to leave a lasting impression.
           </Typography>
+      
         </div>
       </div>
     </div>

@@ -80,6 +80,7 @@
 
 /* MainContainer and ContentContainer Styles */
 .MainContainer {
+
   display: flex;
   flex-direction: column;
   align-items: center; /* Center horizontally */
@@ -111,6 +112,7 @@
   .carousel-control-next {
     font-size: 28px; /* Adjust control size on smaller screens */
     padding: 10px;
+
   }
 }
 
