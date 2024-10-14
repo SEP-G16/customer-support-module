@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - # host: "http://<your-domain.com>"
+  - host: "https://34.29.110.121"
     http:
       paths:
       - path: /()(.*)
