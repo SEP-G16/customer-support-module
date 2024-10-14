@@ -3,7 +3,7 @@ steps:
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/stone-album-437618-f8/hrmis-artifact-registry/customer-support-module', '.' ]
+  args: ['build', '-f', 'Dockerfile.dev', '-t', 'us-central1-docker.pkg.dev/stone-album-437618-f8/hrmis-artifact-registry/customer-support-module', '.' ]
   id: 'Build Customer Support Module Docker Image'
 
 - name: 'gcr.io/cloud-builders/docker'
