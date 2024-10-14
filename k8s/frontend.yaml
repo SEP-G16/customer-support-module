@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-support-module-deployment
+  labels:
+    app: customer-support-module
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-support-module
+  template:
+    metadata:
+      labels:
+        app: customer-support-module
+    spec:
+      containers:
+      - name: customer-support-module
+        image: us-central1-docker.pkg.dev/stone-album-437618-f8/hrmis-artifact-registry/customer-support-module
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+          - name: REACT_APP_RUNTIME_MODE
+            value: DEPLOYMENT
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "400m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-support-module
+spec:
+  selector:
+    app: customer-support-module
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
