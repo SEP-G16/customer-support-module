@@ -1,62 +1,79 @@
 .container {
-    background-color: white;
-    overflow-x: hidden;
-  }
-  
+  background-color: white;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  gap: 40px; /* Gap between the left and right sections */
+  width: 100%; /* Ensure it takes the full width */
+}
+
+/* Tablet View */
+@media (max-width: 1200px) {
   .content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
-    gap: 40px; /* Gap between the left and right sections */
-  }
-  
-  @media (max-width: 1200px) {
-    /* Tablet View */
-    .content {
       gap: 20px;
-    }
-    
-    .left-section,
-    .right-section {
-      flex: 0.45; /* Reduce width for tablet view */
-    }
   }
-  
-  @media (max-width: 960px) {
-    /* Mobile View */
-    .content {
-      flex-direction: column;
+
+  .left-section,
+  .right-section {
+      flex: 0.45; /* Adjust width for tablets */
+  }
+}
+
+/* Mobile View */
+@media (max-width: 960px) {
+  .content {
+      flex-direction: column; /* Stack sections vertically */
       gap: 20px;
-    }
-  
-    .left-section,
-    .right-section {
-      flex: 1;
+  }
+
+  .left-section,
+  .right-section {
+      flex: 1; /* Make both sections full width */
       padding-right: 0;
       padding-left: 0;
-    }
   }
-  
-  .left-section {
-    flex: 1;
-    padding-right: 40px;
-  }
-  
+
   .right-section {
-    flex: 1;
-    padding-left: 40px;
+      margin-top: 20px; /* Add space between the two sections */
   }
-  
-  @media (max-width: 960px) {
-    .right-section {
-      margin-top: 40px;
-    }
-  }
-  
+}
+
+.left-section {
+  flex: 1;
+  padding-right: 40px; /* Padding between left and right sections */
+}
+
+.right-section {
+  flex: 1;
+  padding-left: 40px; /* Padding between left and right sections */
+}
+
+.underline {
+  width: 70%;
+  border-bottom: 1px solid black;
+  margin-bottom: 20px;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 600px) {
   .underline {
-    width: 70%;
-    border-bottom: 1px solid black;
-    margin-bottom: 20px;
+      width: 90%; /* Adjust underline width for mobile */
   }
-  
+
+  .content {
+      padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .left-section,
+  .right-section {
+      padding-right: 0;
+      padding-left: 0;
+      padding-bottom: 20px; /* Add some spacing on mobile */
+  }
+}
