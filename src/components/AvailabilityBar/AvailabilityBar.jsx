@@ -274,7 +274,7 @@ const GridContainer = styled.div`
   @media (max-width: 991px) {
     grid-template-columns: repeat(2, 1fr);
   }
-  @media (max-width: 600px) {
+  @media (max-width: 517px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -284,6 +284,7 @@ const GridItem = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 10px;
+  width: 100%;
 `;
 
 const ButtonGridItem = styled.div`
@@ -297,8 +298,8 @@ const ButtonGridItem = styled.div`
   @media (max-width: 991px) {
     grid-column: span 2;
   }
-  @media (max-width: 600px) {
-    grid-column: span 3;
+  @media (max-width: 517px) {
+    grid-column: span 1;
   }
 `;
 
