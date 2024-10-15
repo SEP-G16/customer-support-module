@@ -75,7 +75,7 @@ const TextContainer = styled.div`
 
 const ButtonContainer = styled.div`
   position: absolute;
-  bottom: 50px; /* Adjust the position */
+  bottom: 15%; /* Adjust the position */
   display: flex;
   width: 600px;
   max-width: 100%;
@@ -83,7 +83,7 @@ const ButtonContainer = styled.div`
   z-index: 4;
 
   @media (max-width: 768px) {
-    bottom: 20px; /* Adjust for smaller screens */
+    bottom: 15%; /* Adjust for smaller screens */
     font-size: 28px;
     gap: 8px;
   }
