@@ -99,13 +99,15 @@ function AvailabilityBar() {
     console.log("Form submitted:", formData);
     setAvailable(true); // Simulated availability check
     try {
-      let response = await AxiosInstance.get(`/api/room-type/available-count?from=${formData.checkIn}&to=${formData.checkOut}`); 
+      let response = await AxiosInstance.get(
+        `/api/room-type/available-count?from=${formData.checkIn}&to=${formData.checkOut}`
+      );
       let [standardMap, deluxeMap, suiteMap] = response.data;
       console.log(response);
       const availabilityData = {
-        "Standard rooms": {roomTypeId : standardMap.roomTypeId, roomCount: standardMap.roomCount},
-        "Deluxe rooms": {roomTypeId : deluxeMap.roomTypeId, roomCount: deluxeMap.roomCount},
-        "Suite rooms": {roomTypeId : suiteMap.roomTypeId, roomCount: suiteMap.roomCount},
+        "Standard rooms": { roomTypeId: standardMap.roomTypeId, roomCount: standardMap.roomCount },
+        "Deluxe rooms": { roomTypeId: deluxeMap.roomTypeId, roomCount: deluxeMap.roomCount },
+        "Suite rooms": { roomTypeId: suiteMap.roomTypeId, roomCount: suiteMap.roomCount },
       };
       // Simulate room availability data
       setRoomAvailability(availabilityData);
@@ -208,12 +210,7 @@ function AvailabilityBar() {
         </ButtonGridItem>
       </GridContainer>
 
-      <Dialog
-        open={showPopup}
-        onClose={handleClosePopup}
-        maxWidth="sm"
-        fullWidth
-      >
+      <Dialog open={showPopup} onClose={handleClosePopup} maxWidth="sm" fullWidth>
         <DialogTitle>Room Availability</DialogTitle>
         <DialogContent>
           <DialogContentWrapper>
@@ -260,7 +257,7 @@ function AvailabilityBar() {
 const Container = styled.div`
   background-color: #53624e;
   padding: 10px 47px;
-  width: 45%;
+  width: 55%;
   border: 1px solid #b99d75;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   @media (max-width: 991px) {
@@ -295,6 +292,14 @@ const ButtonGridItem = styled.div`
   justify-content: center;
   flex-direction: column;
   grid-column: span 1;
+
+  /* Center the button for smaller screens */
+  @media (max-width: 991px) {
+    grid-column: span 2;
+  }
+  @media (max-width: 600px) {
+    grid-column: span 3;
+  }
 `;
 
 const ItemLabel = styled.div`
@@ -360,7 +365,7 @@ const RoomContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: flex-end; /* Aligns all content to the right */
+  align-items: flex-end;
   @media (max-width: 600px) {
     align-items: center;
   }
@@ -380,7 +385,7 @@ const RoomImage = styled.img`
   height: 100px;
   object-fit: cover;
   flex-shrink: 0;
-  margin-right: 200px; /* Adds a gap between image and content */
+  margin-right: 200px;
   @media (max-width: 600px) {
     margin-right: 0;
     margin-bottom: 10px;
@@ -393,7 +398,7 @@ const RoomContent = styled(Box)`
   justify-content: center;
   padding: 10px;
   width: 100%;
-  text-align: right; /* Aligns the content to the right */
+  text-align: right;
   @media (max-width: 600px) {
     text-align: center;
   }
@@ -409,9 +414,9 @@ const RoomBox = styled(ButtonBase)`
   text-align: left;
   transition: background-color 0.3s;
   padding: 10px;
-  cursor: ${({ isUnavailable }) => (isUnavailable ? "not-allowed" : "pointer")}; // Change cursor if unavailable
-  opacity: ${({ isUnavailable }) => (isUnavailable ? 0.5 : 1)}; // Make it greyed out when unavailable
-  pointer-events: ${({ isUnavailable }) => (isUnavailable ? "none" : "auto")}; // Disable interaction if unavailable
+  cursor: ${({ isUnavailable }) => (isUnavailable ? "not-allowed" : "pointer")};
+  opacity: ${({ isUnavailable }) => (isUnavailable ? 0.5 : 1)};
+  pointer-events: ${({ isUnavailable }) => (isUnavailable ? "none" : "auto")};
 
   &:hover {
     background-color: ${({ isUnavailable }) =>

@@ -159,7 +159,7 @@ const CheckAvailability = () => {
             <ActivityCard
               img={gym}
               title="Energize at Our Modern Fitness Center"
-              description="Stay fit with top-notch equipment and inspiring views. Maintain your routine or start anew in our state-of-the-art gym."
+              description="Stay fit with top-notch equipment and inspiring views. Maintain your routine or start anew in our state-of-the-art gym. Our fitness facility also offers personalized training sessions to help you achieve your goals and stay motivated."
             />
           </div>
         </div>

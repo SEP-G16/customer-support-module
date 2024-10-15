@@ -129,7 +129,7 @@ const FooterContainer = styled.div`
   background-color: #000;
   width: 100%;
   overflow-x: hidden;
-  padding: 1% 20%;
+  padding: 1% 15%;
 
   @media (max-width: 768px) {
     padding: 20px;
