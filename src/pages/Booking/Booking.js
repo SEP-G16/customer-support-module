@@ -262,8 +262,8 @@ const BookingPage = () => {
               onChange={handleInputChange}
               fullWidth
               required
-              error={!!errors.checkIn} // Show error state
-              inputRef={(el) => (inputRefs.current.checkIn = el)} // Set ref for scrolling
+              error={!!errors.checkOut} // Show error state
+              inputRef={(el) => (inputRefs.current.checkOut = el)} // Set ref for scrolling
               InputLabelProps={{ shrink: true }}
               inputProps={{ min: new Date().toISOString().split("T")[0] }} // Disable past dates
               sx={{
@@ -369,7 +369,18 @@ const BookingPage = () => {
             <Typography variant="h6">
             {roomCount > 0 ? `Total Cost: $${calculateTotalCost()}` : "Select the room count to see the total cost."}
             </Typography>
-            <Button type="submit" variant="contained" color="primary" sx={{ marginTop: 2 }}>
+            <Button 
+              type="submit" 
+              variant="contained" 
+              color="primary" 
+              sx={{ 
+                marginTop: 2, 
+                padding: "8px 24px", // Smaller padding for reduced size
+                fontSize: "0.875rem", // Smaller font size
+                width: "100%", // Adjust width to make it responsive
+                maxWidth: "200px" // Limit the button width on larger screens
+              }}
+            >
               Book Now
             </Button>
           </form>
