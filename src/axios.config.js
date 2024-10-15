@@ -11,6 +11,10 @@ if(process.env.REACT_APP_RUNTIME_MODE === 'DEPLOYMENT'){
   baseUrl = null;
 }
 
+console.log(baseUrl);
+
+console.log(process.env.REACT_APP_RUNTIME_MODE);
+
 export const AxiosInstance = axios.create({
   baseURL: baseUrl,
 });
