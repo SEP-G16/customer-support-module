@@ -12,8 +12,8 @@ const Footer = () => {
         direction={{ xs: "column", md: "row" }} 
         justifyContent="center" 
         alignItems={{ xs: "flex-start", md: "center" }} 
-        spacing={4} 
-        sx={{ width: '100%', maxWidth: '1449px', padding: { xs: "20px", md: "37px 70px" } }}
+        spacing={{ xs: 0, md: 15 }}   
+        sx={{ width: '100%', maxWidth: '1449px', padding: { xs: "20px", md: "20px 20px 20px 20px" } }}
       >
         <Stack
           direction="column"
@@ -129,7 +129,7 @@ const FooterContainer = styled.div`
   background-color: #000;
   width: 100%;
   overflow-x: hidden;
-  padding: 0px 160px;
+  padding: 1% 20%;
 
   @media (max-width: 768px) {
     padding: 20px;
