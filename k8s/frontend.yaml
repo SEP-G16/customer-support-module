@@ -19,14 +19,14 @@ spec:
         image: us-central1-docker.pkg.dev/stone-album-437618-f8/hrmis-artifact-registry/customer-support-module
         imagePullPolicy: Always
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         env:
           - name: REACT_APP_RUNTIME_MODE
             value: DEPLOYMENT
         resources:
           limits:
             memory: "512Mi"
-            cpu: "400m"
+            cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
@@ -38,4 +38,4 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3000
+      targetPort: 80
