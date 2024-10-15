@@ -1,9 +1,10 @@
-.container{
+.container {
     background-color: white;
     overflow: hidden;
-
+    width: 100%; /* Full width */
 }
-.content-container{
+
+.content-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0px 20px;
@@ -12,24 +13,28 @@
     align-items: center;
     overflow-x: hidden;
 }
-.room-cards{
+
+.room-cards {
     display: flex;
     justify-content: space-around;
     margin-bottom: 40px;
     margin-top: 40px;
     gap: 40px;
 }
+
 @media (max-width: 768px) {
-    .room-cards{
+    .room-cards {
         flex-direction: column;
         align-items: center;
-    }  
+    }
 }
-.my-component-wrapper{
+
+.my-component-wrapper {
     flex: 1;
     min-width: 300px;
 }
-.text-section{
+
+.text-section {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -37,54 +42,62 @@
     text-align: center;
     margin-bottom: 40px;
 }
+
 @media (max-width: 768px) {
-    .text-section{
+    .text-section {
         padding: 0px 20px;
-    }  
+    }
 }
-.img{
+
+.img {
     aspect-ratio: 1.1;
     object-fit: auto;
     object-position: center;
     width: 75px;
 }
-.activity-cards-wrapper{
+
+.activity-cards-wrapper {
     display: flex;
     justify-content: center;
     width: 100%;
     padding: 0px;
     margin-top: 0px;
 }
-.activity-cards{
+
+.activity-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin-left: 20px;
     margin-right: 20px;
     gap: 30px;
     margin-bottom: 40px;
-    display: flex;  
+    display: flex;
 }
+
 @media (max-width: 480px) {
-    .activity-cards{
+    .activity-cards {
         gap: 10px;
     }
 }
+
 @media (max-width: 768px) {
-    .activity-cards{
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0px;
+    .activity-cards {
+        flex-direction: column;
+        align-items: center;
     }
 }
-.availability-bar-wrapper{
+
+.availability-bar-wrapper {
     position: relative;
-    top: -70px; /* Adjust as needed to overlap with ImageBox */
+    top: -70px; /* Adjust as needed */
     display: flex;
     z-index: 4; /* Ensure the bar is above the ImageBox */
     justify-content: center;
 }
+
 @media (max-width: 768px) {
-    .availability-bar-wrapper{
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+    .availability-bar-wrapper {
+        top: 0; /* Reset top value for smaller screens */
+        margin-top: 20px;
     }
 }

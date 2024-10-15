@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Typography, Stack } from '@mui/material';
-import Welcome from './assets/images/pixel4.jpg';
+import Welcome from './assets/images/welcome_image.jpg';
 import ImageBox from '../../components/ImageBox/ImageBox';
 import Buttons from '../../components/Buttons/Buttons';
 import ImageTextSection from './ImageSection';

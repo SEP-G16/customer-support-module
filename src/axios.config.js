@@ -1,10 +1,7 @@
 import axios from "axios";
 
-let baseUrl = "http://34.171.120.235";
+let baseUrl = process.env.REACT_APP_BASE_URL 
 
 export const AxiosInstance = axios.create({
-  baseURL: baseUrl,
+  baseURL: baseUrl,
 });
-
-
-
