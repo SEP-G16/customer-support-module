@@ -14,7 +14,7 @@ const CardContainer = styled.div`
   font-size: 12px;
   color: #000;
   font-weight: 400;
-  padding: 40px 40px 20px 40px;
+  padding: 10% 10%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
   // border: 2px solid #53624e; /* Add a green border */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for scale and shadow */

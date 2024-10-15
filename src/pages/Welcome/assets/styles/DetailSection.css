@@ -31,7 +31,7 @@
 .img-container {
   position: relative;
   width: 100%;
-  max-width: 320px; /* Maximum image size */
+  /* max-width: 320px; Maximum image size */
   padding: 1%;
   overflow: hidden;
   border: 2px solid transparent;
@@ -68,7 +68,7 @@
 /* Text styling */
 .text {
   font-family: Marcellus, serif;
-  font-size: 22px;
+  font-size: 16px;
   line-height: 1.6;
   margin-left: 20px;
 }
