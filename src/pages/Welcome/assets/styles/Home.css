@@ -3,6 +3,7 @@
     overflow: hidden;
     align-items: center;
     padding-bottom: 20px;
+    width: 100%; /* Full width */
   }
   
   .custom-text {
@@ -12,3 +13,8 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
   }
   
+  @media (max-width: 768px) {
+    .custom-text {
+        padding: 0px 20px;
+    }
+}
