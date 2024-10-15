@@ -8,138 +8,161 @@ import styled from "styled-components";
 const Footer = () => {
   return (
     <FooterContainer>
-      <Stack direction="row" justifyContent="center" spacing={4} sx={{ width: '100%', maxWidth: '1449px' }}>
+      <Stack 
+        direction={{ xs: "column", md: "row" }} 
+        justifyContent="center" 
+        alignItems={{ xs: "flex-start", md: "center" }} 
+        spacing={4} 
+        sx={{ width: '100%', maxWidth: '1449px', padding: { xs: "20px", md: "37px 70px" } }}
+      >
         <Stack
           direction="column"
           spacing={2}
           sx={{
             width: { xs: '100%', md: '30%' },
-            paddingLeft: '80px',
-            paddingTop: '20px',
+            paddingLeft: { xs: "20px", md: '80px' },
+            paddingTop: { xs: '0', md: '20px' },
           }}
         >
-          <Typography variant="h6" component="div" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>
+          <Typography variant="h6" component="div" sx={titleStyle}>
             Quick Links
           </Typography>
-          <Link href="/about-us"  sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', textDecoration: 'none', '&:hover': { color: 'rgba(183, 153, 91, 1)', textDecoration: 'none' }  }}>About Us</Link>
-          <Link href="#"  sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', textDecoration: 'none', '&:hover': { color: 'rgba(183, 153, 91, 1)', textDecoration: 'none' }  }}>Terms & Conditions</Link>
-          <Link href="https://maps.app.goo.gl/hgNDHg4Utkv9QpNAA" target="_blank" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', textDecoration: 'none', '&:hover': { color: 'rgba(183, 153, 91, 1)', textDecoration: 'none' }  }}>Our Location</Link>
-          <Link href="/contact"  sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', textDecoration: 'none', '&:hover': { color: 'rgba(183, 153, 91, 1)', textDecoration: 'none' }  }}>Contact Us</Link>
+          {quickLinks.map((link) => (
+            <StyledLink key={link.href} href={link.href} target={link.target} sx= {{color: 'gold'}}>
+              {link.text}
+            </StyledLink>
+          ))}
         </Stack>
+
         <Stack
           direction="column"
           spacing={2}
           sx={{
             width: { xs: '100%', md: '30%' },
-            marginBottom: { xs: '20px', md: '0' },
-            padding: '20px'
+            padding: { xs: '20px', md: '20px' },
           }}
         >
+          <Typography variant="h6" component="div" sx={{ ...titleStyle, marginTop: "15px" }}>
+            Operating Hours
+          </Typography>
           <Stack direction="column" spacing={1} sx={{ marginTop: '20px' }}>
-            <Typography variant="h6" component="div" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', marginLeft: '20px', marginTop: '15px' }}>
-              Operating Hours
-            </Typography>
+            {operatingHours.map((time) => (
+              <Typography key={time} variant="body1" sx={textStyle}>
+                {time}
+              </Typography>
+            ))}
           </Stack>
-          <Stack direction="column" spacing={-1} sx={{ marginTop: '20px' }}>
-            <Typography variant="body1" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', marginLeft: '20px' }}>
-              MON - SAT - 8AM TO 6PM
-            </Typography>
-            <Typography variant="body1" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', marginLeft: '20px' }}>
-              SUN - 8AM TO 2PM
-            </Typography>
-          </Stack>
-          <Stack direction="column" spacing={-1} sx={{ marginTop: '20px' }}>
-            <Typography variant="body1" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', marginLeft: '20px' }}>
-              Telephone: +94 11 254 5700
-            </Typography>
-            <Typography variant="body1" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', marginLeft: '20px' }}>
-              Reservations: +94 11 450 9400
-            </Typography>
-            <Typography variant="body1" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', marginLeft: '20px' }}>
-              WhatsApp: +94 71 470 9400
-            </Typography>
+          <Stack direction="column" spacing={1} sx={{ marginTop: '20px' }}>
+            {contactInfo.map((info) => (
+              <Typography key={info} variant="body1" sx={textStyle}>
+                {info}
+              </Typography>
+            ))}
           </Stack>
           <Stack direction="row" spacing={1} sx={{ marginTop: '20px', marginLeft: '20px' }}>
-  <Typography variant="body2" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)' }}>
-    Email:
-  </Typography>
-  <Link
-    href="mailto:reservations@hotelceylon.com"
-    sx={{
-      fontFamily: 'Marcellus, serif',
-      color: 'rgba(255, 255, 255, 1)',
-      textDecoration: 'none',
-      '&:hover': {
-        color: 'rgba(183, 153, 91, 1)',
-        textDecoration: 'underline'
-      }
-    }}
-  >
-    reservations@hotelceylon.com
-  </Link>
-</Stack>
-
+            <Typography variant="body2" sx={textStyle}>
+              Email:
+            </Typography>
+            <StyledLink href="mailto:reservations@hotelceylon.com" sx= {{color: 'gold'}}>
+              reservations@hotelceylon.com
+            </StyledLink>
+          </Stack>
         </Stack>
+
         <Stack
           direction="column"
           spacing={2}
           sx={{
             width: { xs: '100%', md: '30%' },
-            marginBottom: { xs: '20px', md: '0' },
-            padding: '20px'
+            padding: { xs: '20px', md: '20px' },
           }}
         >
-          <Typography variant="h6" component="div" sx={{ fontFamily: 'Marcellus, serif', color: 'rgba(255, 255, 255, 1)', textAlign: 'center', marginTop: '20px' }}>
+          <Typography variant="h6" component="div" sx={{ ...titleStyle, marginTop: '20px' }}>
             FIND US ON
           </Typography>
-          <Stack direction="row" justifyContent="center" alignItems="center" spacing={2} sx={{ marginTop: '40px' }}>
-            <SocialMediaLinks href="https://www.facebook.com" aria-label="facebook">
-              <FacebookIcon style={{ color: "white" }} />
-            </SocialMediaLinks>
-            <SocialMediaLinks href="https://www.twitter.com" aria-label="twitter">
-              <TwitterIcon style={{ color: "white" }} />
-            </SocialMediaLinks>
-            <SocialMediaLinks href="https://www.instagram.com" aria-label="instagram">
-              <InstagramIcon style={{ color: "white" }} />
-            </SocialMediaLinks>
+          <Stack 
+            direction="row" 
+            justifyContent={{ xs: "flex-start" }} 
+            alignItems="center" 
+            spacing={2} 
+            sx={{ marginTop: '40px' }}
+          >
+            {socialMediaLinks.map(({ href, Icon, label }) => (
+              <SocialMediaLinks key={href} href={href} aria-label={label}>
+                <Icon style={{ color: "white" }} />
+              </SocialMediaLinks>
+            ))}
           </Stack>
         </Stack>
       </Stack>
     </FooterContainer>
   );
-}
+};
 
+// Data
+const quickLinks = [
+  { text: 'About Us', href: '/about-us' },
+  { text: 'Terms & Conditions', href: '#' },
+  { text: 'Our Location', href: 'https://maps.app.goo.gl/hgNDHg4Utkv9QpNAA', target: '_blank' },
+  { text: 'Contact Us', href: '/contact' },
+];
+
+const operatingHours = [
+  'MON - SAT - 8AM TO 6PM',
+  'SUN - 8AM TO 2PM',
+];
+
+const contactInfo = [
+  'Telephone: +94 11 254 5700',
+  'Reservations: +94 11 450 9400',
+  'WhatsApp: +94 71 470 9400',
+];
+
+const socialMediaLinks = [
+  { href: "https://www.facebook.com", Icon: FacebookIcon, label: "facebook" },
+  { href: "https://www.twitter.com", Icon: TwitterIcon, label: "twitter" },
+  { href: "https://www.instagram.com", Icon: InstagramIcon, label: "instagram" },
+];
+
+// Styles
 const FooterContainer = styled.div`
   background-color: #000;
-  padding: 37px 70px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   overflow-x: hidden;
+  padding: 0px 160px;
 
   @media (max-width: 768px) {
-    padding: 0px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 0px;
+    padding: 20px;
   }
 `;
 
 const SocialMediaLinks = styled.a`
-  font-family: "Marcellus", serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: rgba(255, 255, 255, 1);
   cursor: pointer;
-  margin-left: 15px;
-  margin-right: 15px;
   text-decoration: none;
-  display: inline-block; /* Required for transform to work properly */
-  transition: transform 0.3s ease; /* Smooth transition */
+  transition: transform 0.3s ease;
   &:hover {
-    transform: scale(1.2); /* Zoom in effect */
+    transform: scale(1.2);
+  }
+`;
+
+const titleStyle = {
+  fontFamily: 'Marcellus, serif',
+  color: 'rgba(255, 255, 255, 1)',
+};
+
+const textStyle = {
+  fontFamily: 'Marcellus, serif',
+  color: 'rgba(255, 255, 255, 1)',
+  marginLeft: '20px',
+};
+
+const StyledLink = styled(Link)`
+  font-family: 'Marcellus, serif';
+  color: rgba(255, 255, 255, 1);
+  text-decoration: none;
+  &:hover {
+    color: rgba(183, 153, 91, 1);
+    text-decoration: none;
   }
 `;
 
