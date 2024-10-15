@@ -9,8 +9,8 @@ const CardContainer = styled.div`
   background-color: rgba(255, 255, 255, 1);
   display: flex;
   flex-direction: column;
-  width: 250px;  /* Fixed width */
-  height: 400px; /* Fixed height */
+  width: 350px;  /* Fixed width */
+  height: 500px; /* Fixed height */
   font-size: 12px;
   color: #000;
   font-weight: 400;

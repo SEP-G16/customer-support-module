@@ -28,7 +28,7 @@ const Container = styled.div`
   }
   
   @media (max-width: 480px) {
-    max-width: 150px; /* Adjust for extra small screens */
+    max-width: 300px; /* Adjust for extra small screens */
   }
 `;
 
@@ -51,9 +51,26 @@ const Card = styled.div`
   }
 `;
 
+const Overlay = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 90%;
+  height: 62%;
+  border: 2px solid rgba(185, 157, 117, 1); /* Gold border */
+  z-index: 0; /* Ensure the overlay is behind the card content */
+
+  @media (max-width: 768px) {
+    top: 10px; /* Adjust top for smaller screens */
+    height: 420px; /* Adjust height for smaller screens */
+    width: 93%; /* Adjust width for smaller screens */
+  }
+`;
+
 const Img = styled.img`
   width: 100%;
   border-radius: 0px; /* Example border radius */
+  object-fit: cover;
 
 `;
 
@@ -97,22 +114,6 @@ const Description = styled.div`
   @media (max-width: 480px) {
     font-size: 10px; /* Adjust font size for extra small screens */
     margin-top: 6px; /* Adjust margin for extra small screens */
-  }
-`;
-
-const Overlay = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 0;
-  width: 90%;
-  height: 63%;
-  border: 2px solid rgba(185, 157, 117, 1); /* Gold border */
-  z-index: 0; /* Ensure the overlay is behind the card content */
-
-  @media (max-width: 768px) {
-    top: 15px; /* Adjust top for smaller screens */
-    height: 42%; /* Adjust height for smaller screens */
-    width: 85%; /* Adjust width for smaller screens */
   }
 `;
 
