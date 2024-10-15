@@ -14,30 +14,24 @@
     overflow-x: hidden;
 }
 
-/* Container to hold room cards */
-/* Container to hold room cards */
 .room-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
-    gap: 40px;
+    display: flex;
+    justify-content: space-around;
     margin-bottom: 40px;
     margin-top: 40px;
-    width: 100%;
-    justify-items: center;
+    gap: 40px;
 }
 
-/* For smaller screens, reduce gap */
 @media (max-width: 768px) {
     .room-cards {
-        grid-template-columns: 1fr; /* Stack one by one on smaller screens */
-        gap: 20px;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
-/* Individual room card styling */
 .my-component-wrapper {
-    width: 100%; /* Ensure it takes full available width */
-    max-width: 400px; /* Set a reasonable max width to prevent it from being too wide */
+    flex: 1;
+    min-width: 300px;
 }
 
 .text-section {
@@ -105,5 +99,7 @@
     .availability-bar-wrapper {
         top: 0; /* Reset top value for smaller screens */
         margin-top: 20px;
+        justify-content: center;
+        
     }
 }
