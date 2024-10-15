@@ -12,19 +12,21 @@ import ChatBot from './Chatbot';
 const CustomTextContent = () => {
   return (
     <Stack spacing={2}>
-      <Typography
-        variant="h1"
-        fontFamily="Marcellus, serif"
-        style={{
-          color: 'white',
-          padding: '0px',
-          marginBottom: '15px',
-          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)', // Text shadow effect
-        }}
-      >
-        WELCOME TO CEYLON RESORT
-      </Typography>
-    </Stack>
+  <Typography
+    variant="h1"
+    fontFamily="Marcellus, serif"
+    sx={{
+      color: 'white',
+      padding: '0px',
+      marginBottom: '15px',
+      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.9)', // Text shadow effect
+      fontSize: { xs: '4rem', sm: '5rem', md: '6rem' }, // Responsive font size
+    }}
+  >
+    WELCOME TO CEYLON RESORT
+  </Typography>
+</Stack>
+
   );
 };
 
