@@ -109,7 +109,7 @@ const CheckAvailability = () => {
               roomSize="80m2"
               guests="2 Guests"
               bedType="1 King Bed"
-              description="Experience ultimate comfort and relaxation..."
+              description="Experience ultimate comfort and relaxation in our Standard Room, featuring a breathtaking beach view. Perfect for unwinding after a sun-soaked day, this room provides everything you need for a delightful beachfront getaway."
             />
           </div>
           <div className="my-component-wrapper">
@@ -120,7 +120,7 @@ const CheckAvailability = () => {
               roomSize="100m2"
               guests="3 Guests"
               bedType="2 Queen Beds"
-              description="Indulge in luxury with our Deluxe Room..."
+              description="Indulge in luxury with our Deluxe Room, offering spacious accommodations and modern amenities. Ideal for families or couples looking for extra comfort and style during their stay."
             />
           </div>
           <div className="my-component-wrapper">
@@ -131,7 +131,7 @@ const CheckAvailability = () => {
               roomSize="120m2"
               guests="4 Guests"
               bedType="2 Twin Beds"
-              description="Discover the epitome of luxury in our Suite..."
+              description="Discover the epitome of luxury in our Suite, featuring expansive living space, stunning ocean views, and premium amenities. Perfect for those seeking a lavish retreat and unparalleled comfort."
             />
           </div>
         </div>
@@ -149,17 +149,17 @@ const CheckAvailability = () => {
             <ActivityCard
               img={pool}
               title="Dive into Luxury With Our Infinity Pool"
-              description="Immerse yourself in crystal-clear waters..."
+              description="Immerse yourself in crystal-clear waters with breathtaking views that stretch to the horizon. Relax poolside with a refreshing cocktail and let the tranquil ambiance whisk you away to paradise."
             />
             <ActivityCard
               img={spa}
               title="Rejuvenate at Our Luxurious Spa"
-              description="Indulge in soothing treatments and therapies..."
+              description="Indulge in soothing treatments and therapies designed to pamper your senses and rejuvenate your spirit. Escape into a world of tranquility, leaving you refreshed and revitalized."
             />
             <ActivityCard
               img={gym}
               title="Energize at Our Modern Fitness Center"
-              description="Stay fit with top-notch equipment and inspiring views..."
+              description="Stay fit with top-notch equipment and inspiring views. Maintain your routine or start anew in our state-of-the-art gym."
             />
           </div>
         </div>

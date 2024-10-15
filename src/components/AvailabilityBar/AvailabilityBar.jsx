@@ -260,7 +260,7 @@ function AvailabilityBar() {
 const Container = styled.div`
   background-color: #53624e;
   padding: 10px 47px;
-  width: 40%;
+  width: 45%;
   border: 1px solid #b99d75;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   @media (max-width: 991px) {

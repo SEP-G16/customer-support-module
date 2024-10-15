@@ -56,13 +56,13 @@ const Overlay = styled.div`
   top: 20px;
   left: 0;
   width: 90%;
-  height: 61%;
+  height: 62%;
   border: 2px solid rgba(185, 157, 117, 1); /* Gold border */
   z-index: 0; /* Ensure the overlay is behind the card content */
 
   @media (max-width: 768px) {
     top: 10px; /* Adjust top for smaller screens */
-    height: 423px; /* Adjust height for smaller screens */
+    height: 420px; /* Adjust height for smaller screens */
     width: 93%; /* Adjust width for smaller screens */
   }
 `;
