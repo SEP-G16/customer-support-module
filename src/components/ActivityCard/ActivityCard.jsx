@@ -24,12 +24,15 @@ const Container = styled.div`
   max-width: 300px; /* Adjust as needed */
   overflow: hidden;
 
+
   @media (max-width: 768px) {
     max-width: 300px; /* Adjust for smaller screens */
+    height: 620px;
   }
 
   @media (max-width: 480px) {
     max-width: 300px; /* Adjust for extra small screens */
+    height: 550px;
   }
 `;
 

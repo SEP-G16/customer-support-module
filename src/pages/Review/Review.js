@@ -111,14 +111,14 @@ const Review = () => {
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ padding: "10px", marginLeft: "100px" }}
+            sx={{ padding: "10px", marginLeft: "80px" }}
           >
             Submit Your Review
           </Typography>
           <form onSubmit={handleSubmit}>
             <Stack
               spacing={2}
-              sx={{ marginLeft: "100px", marginBottom: "30px" }}
+              sx={{ marginLeft: "100px", marginRight: "100px",marginBottom: "30px" }}
             >
               <TextField
                 fullWidth
@@ -184,6 +184,8 @@ const Review = () => {
                 borderRadius: "0px",
                 padding: "10px",
                 marginLeft: "220px",
+                display: "flex", 
+                justifyContent: "center" 
               }}
             >
               Submit Your Feedback

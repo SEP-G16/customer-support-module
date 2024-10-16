@@ -12,16 +12,18 @@
 }
 
 .content-container {
-    max-width: 100%; /* Ensure it takes full width */
-    margin: 0;
+    width: 90%; /* Set a specific width, adjusting the percentage as needed */
+    margin: 0 auto; /* Center the container horizontally */
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: transparent; /* Remove background color conflicts */
+    background-color: transparent; /* Ensure no background conflicts */
     overflow-x: hidden; /* Prevent horizontal overflow */
     z-index: 2;
+    
 }
+
 
 .img {
     aspect-ratio: 1.1;
@@ -37,7 +39,7 @@
     justify-content: space-around;
     margin-bottom: 40px;
     margin-top: 40px;
-    gap: 40px;
+    gap: 70px;
     flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
 }
 
@@ -89,8 +91,8 @@
     grid-template-columns: repeat(3, 1fr);
     margin-left: 20px;
     margin-right: 20px;
-    gap: 30px;
-    margin-bottom: 40px;
+    gap: 70px;
+    margin-bottom: 20px;
     display: flex;
 }
 
@@ -104,6 +106,7 @@
     .activity-cards {
         flex-direction: column;
         align-items: center;
+        gap: 0px;
     }
 }
 
