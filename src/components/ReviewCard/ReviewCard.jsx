@@ -5,11 +5,10 @@ import profile from './assets/images/profile.png';
 function ReviewCard({ name, createdAt, feedback }) {
   // Function to calculate the difference in months between the review date and the current date
   const calculateTimeAgo = (reviewDate) => {
-    const usTimeZone = 'America/New_York'; // You can adjust this to any other US time zone
+    const gmtTimeZone = 'GMT'; // You can adjust this to any other US time zone
     
     // Create the current date in the desired US time zone
-    const currentDateObj = new Date().toLocaleString('en-US', { timeZone: usTimeZone });
-
+    const currentDateObj = new Date().toLocaleString('en-US', { timeZone: gmtTimeZone });
     const currentDate = new Date(currentDateObj);
     const reviewDateObj = new Date(reviewDate);
     const timeDiffInSeconds = Math.floor((currentDate - reviewDateObj) / 1000); // Get time difference in seconds
@@ -31,7 +30,6 @@ function ReviewCard({ name, createdAt, feedback }) {
     return `${years} years ago`;
   };
   
-
   return (
     <Stack
       direction="column"
@@ -43,26 +41,65 @@ function ReviewCard({ name, createdAt, feedback }) {
         padding: 2,
         backgroundColor: '#fff',
         border: '1px solid black',
+        borderRadius: '8px', // Optional: Add some rounding for aesthetics
+        '@media (max-width: 768px)': {
+          width: '90%', // Adjust width on smaller screens
+          padding: '16px',
+        },
       }}
     >
       <Stack direction="row" spacing={2} alignItems="center" sx={{ width: '100%' }}>
         <img
           src={profile}
           alt="user"
-          style={{ width: 50, height: 50, borderRadius: '50%' }}
+          style={{ 
+            width: 50, 
+            height: 50, 
+            borderRadius: '50%',
+            '@media (max-width: 768px)': {
+              width: 40,  // Smaller image for smaller screens
+              height: 40,
+            },
+          }}
         />
         <Stack sx={{ width: 'auto', flex: 1, whiteSpace: 'nowrap' }}>
-          <Typography variant="h6" fontFamily="Marcellus, serif">
+          <Typography 
+            variant="h6" 
+            fontFamily="Marcellus, serif"
+            sx={{
+              '@media (max-width: 768px)': {
+                fontSize: '1rem', // Adjust font size for mobile
+              },
+            }}
+          >
             {name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" fontFamily="Marcellus, serif">
+          <Typography 
+            variant="body2" 
+            color="textSecondary" 
+            fontFamily="Marcellus, serif"
+            sx={{
+              '@media (max-width: 768px)': {
+                fontSize: '0.875rem', // Adjust time font size for mobile
+              },
+            }}
+          >
             {calculateTimeAgo(createdAt)} {/* Display the number of months ago */}
           </Typography>
         </Stack>
       </Stack>
 
       {/* Display feedback/comment */}
-      <Typography variant="body1" fontFamily="Marcellus, serif" sx={{ marginTop: 2 }}>
+      <Typography 
+        variant="body1" 
+        fontFamily="Marcellus, serif" 
+        sx={{ 
+          marginTop: 2,
+          '@media (max-width: 768px)': {
+            fontSize: '0.95rem', // Adjust feedback text size for mobile
+          },
+        }}
+      >
         {feedback} {/* Ensure 'feedback' matches the prop key */}
       </Typography>
     </Stack>

@@ -19,17 +19,20 @@ function ActivityCard({ img, title, description }) {
 const Container = styled.div`
   position: relative;
   width: 100%;
-  height: 600px;
+  height: 700px;
   margin: 0px 20px 0px 20px;
   max-width: 300px; /* Adjust as needed */
   overflow: hidden;
 
+
   @media (max-width: 768px) {
     max-width: 300px; /* Adjust for smaller screens */
+    height: 620px;
   }
 
   @media (max-width: 480px) {
     max-width: 300px; /* Adjust for extra small screens */
+    height: 550px;
   }
 `;
 

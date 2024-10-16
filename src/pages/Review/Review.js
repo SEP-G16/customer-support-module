@@ -5,7 +5,6 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import Header from "../../components/Header/Header";
 import ImageBox from "../../components/ImageBox/ImageBox";
 import ReviewImage from "./assets/images/Reviews.jpg";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
@@ -102,25 +101,24 @@ const Review = () => {
   };
 
   return (
-    <div className="container">
-      <Header />
-      <ImageBox
+    <div className="container" style={{ width: '100vw', padding: '0', margin: '0' }}>
+    <ImageBox
         imageSrc={ReviewImage}
         TextContentComponent={<CustomTextContent />}
-      />
+    />
       <div className="content">
         <div className="left-section">
           <Typography
             variant="h4"
             gutterBottom
-            sx={{ padding: "10px", marginLeft: "100px" }}
+            sx={{ padding: "10px", marginLeft: "80px" }}
           >
             Submit Your Review
           </Typography>
           <form onSubmit={handleSubmit}>
             <Stack
               spacing={2}
-              sx={{ marginLeft: "100px", marginBottom: "30px" }}
+              sx={{ marginLeft: "100px", marginRight: "100px",marginBottom: "30px" }}
             >
               <TextField
                 fullWidth
@@ -186,6 +184,8 @@ const Review = () => {
                 borderRadius: "0px",
                 padding: "10px",
                 marginLeft: "220px",
+                display: "flex", 
+                justifyContent: "center" 
               }}
             >
               Submit Your Feedback
