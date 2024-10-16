@@ -1,25 +1,41 @@
+/* Ensure full-width for the image box */
 .container {
-    background-color: white;
-    overflow: hidden;
+    background-color: rgb(209, 16, 16);
+    overflow: hidden; /* Remove horizontal scroll */
+    align-items: center;
+    padding-bottom: 20px;
     width: 100%; /* Full width */
+    margin: 0; /* Ensure no extra margin */
 }
 
 .content-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0px 20px;
+    max-width: 100%; /* Ensure it takes full width */
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden;
+    background-color: transparent; /* Remove background color conflicts */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    z-index: 2;
 }
 
+.img {
+    aspect-ratio: 1.1;
+    object-fit: cover; /* Ensure the image covers its container */
+    object-position: center;
+    width: 100%; /* Make the image take full width */
+    height: auto; /* Adjust height to maintain aspect ratio */
+}
+
+/* Handle layout adjustments for cards */
 .room-cards {
     display: flex;
     justify-content: space-around;
     margin-bottom: 40px;
     margin-top: 40px;
     gap: 40px;
+    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
 }
 
 @media (max-width: 768px) {
@@ -28,6 +44,7 @@
         align-items: center;
     }
 }
+
 
 .my-component-wrapper {
     flex: 1;

@@ -5,7 +5,6 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import Header from "../../components/Header/Header";
 import ImageBox from "../../components/ImageBox/ImageBox";
 import ReviewImage from "./assets/images/Reviews.jpg";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
@@ -103,7 +102,6 @@ const Review = () => {
 
   return (
     <div className="container">
-      <Header />
       <ImageBox
         imageSrc={ReviewImage}
         TextContentComponent={<CustomTextContent />}
