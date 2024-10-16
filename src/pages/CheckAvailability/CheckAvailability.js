@@ -91,11 +91,11 @@ const CustomTextContent = () => {
 
 const CheckAvailability = () => {
   return (
-    <div className="container">
-      <ImageBox
+    <div className="container" style={{ width: '100vw', padding: '0', margin: '0' }}>
+    <ImageBox
         imageSrc={Booking}
         TextContentComponent={<CustomTextContent />}
-      />
+    />
       <div className="availability-bar-wrapper">
         <AvailabilityBar />
       </div>

@@ -101,11 +101,11 @@ const Review = () => {
   };
 
   return (
-    <div className="container">
-      <ImageBox
+    <div className="container" style={{ width: '100vw', padding: '0', margin: '0' }}>
+    <ImageBox
         imageSrc={ReviewImage}
         TextContentComponent={<CustomTextContent />}
-      />
+    />
       <div className="content">
         <div className="left-section">
           <Typography

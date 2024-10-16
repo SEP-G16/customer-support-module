@@ -14,17 +14,16 @@ const ImageBox = ({ imageSrc, TextContentComponent, ButtonComponent }) => {
 
 const Container = styled.div`
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   padding: 0;
-  margin: 0;
 
   @media (max-width: 768px) {
-    height: 100vh; /* Adjust for smaller screens to prevent overlap */
+    height: 80vh; /* Adjust for smaller screens to prevent overlap */
   }
 `;
 
@@ -32,13 +31,15 @@ const Image = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw; /* Full viewport width */
-  height: 100vh; /* Full viewport height */
-  object-fit: cover; /* Ensure the image covers the entire container */
-  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the container */
+  z-index: 1; /* Image below other elements */
 `;
 
-const GradientOverlay = styled.div`
+const GradientOverlay = styled.div.attrs(() => ({
+  'data-testid': 'gradient-overlay',
+}))`
   position: absolute;
   top: 0;
   left: 0;
@@ -74,7 +75,7 @@ const TextContainer = styled.div`
 
 const ButtonContainer = styled.div`
   position: absolute;
-  bottom: 50px; /* Adjust the position */
+  bottom: 15%; /* Adjust the position */
   display: flex;
   width: 600px;
   max-width: 100%;
@@ -82,16 +83,23 @@ const ButtonContainer = styled.div`
   z-index: 4;
 
   @media (max-width: 768px) {
-    bottom: 20px; /* Adjust for smaller screens */
+    bottom: 15%; /* Adjust for smaller screens */
     font-size: 28px;
     gap: 8px;
   }
+
 
   @media (max-width: 991px) {
     flex-wrap: wrap;
     white-space: normal;
     justify-content: center;
   }
+
+  // @media (max-width: 768px) {
+  //   bottom: 30px;
+  //   font-size: 28px;
+  //   gap: 8px;
+  // }
 
   @media (max-width: 480px) {
     font-size: 22px;

@@ -1,10 +1,13 @@
 /* Ensure full-width for the image box */
 .container {
-    background-color: rgb(209, 16, 16);
+    width: 100vw; /* Make sure it takes the full viewport width */
+    max-width: none; /* Remove any max-width constraint */
+    padding: 0; /* No padding to avoid extra space */
+    background-color: white;
     overflow: hidden; /* Remove horizontal scroll */
     align-items: center;
     padding-bottom: 20px;
-    width: 100%; /* Full width */
+    /* width: 100%; Full width */
     margin: 0; /* Ensure no extra margin */
 }
 
@@ -105,6 +108,8 @@
 }
 
 .availability-bar-wrapper {
+    width: 100vw; /* Full viewport width */
+    margin: 0; /* Remove any margin */
     position: relative;
     top: -70px; /* Adjust as needed */
     display: flex;
