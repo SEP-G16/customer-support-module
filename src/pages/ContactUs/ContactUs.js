@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Stack, Typography} from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import './assets/styles/ContactUs.css';
-import backgroundImage from "./assets/images/room.jpg"; 
+import backgroundImage from "./assets/images/room.jpg";
 import styled from "styled-components";
 
 const ContactUsPage = () => {
@@ -71,15 +71,15 @@ const ContactUsPage = () => {
           spacing={2}
           sx={{ marginTop: "20px" }}
         >
-            <SocialMediaLinks href="https://www.facebook.com">
-              <FacebookIcon style={{ color: "black" }} />
-            </SocialMediaLinks>
-            <SocialMediaLinks href="https://www.twitter.com">
-              <TwitterIcon style={{ color: "black" }} />
-            </SocialMediaLinks>
-            <SocialMediaLinks href="https://www.instagram.com">
-              <InstagramIcon style={{ color: "black" }} />
-            </SocialMediaLinks>
+          <SocialMediaLinks href="https://www.facebook.com">
+            <FacebookIcon style={{ color: "black" }} />
+          </SocialMediaLinks>
+          <SocialMediaLinks href="https://www.twitter.com">
+            <TwitterIcon style={{ color: "black" }} />
+          </SocialMediaLinks>
+          <SocialMediaLinks href="https://www.instagram.com">
+            <InstagramIcon style={{ color: "black" }} />
+          </SocialMediaLinks>
         </Stack>
       </div>
 
@@ -136,6 +136,5 @@ const SocialMediaLinks = styled.a`
     transform: scale(1.2); /* Zoom in effect */
   }
 `;
-
 
 export default ContactUsPage;

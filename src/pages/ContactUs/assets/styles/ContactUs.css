@@ -1,63 +1,87 @@
-
+/* Main container for the Contact Us page */
 .contact-us-page-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    padding: 50px;
-    height: 100vh; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  padding: 50px;
+  height: 100vh;
+  flex-wrap: wrap; /* Allow wrapping of items */
+  position: relative; /* Ensures form and header are positioned correctly */
 }
 
-.contact-form-section{
-    width: 40%;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 0px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+/* Contact form section styling */
+.contact-form-section,
+.contact-info-section {
+  width: 45%;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 0px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px; /* Add some space between sections */
+  margin-top: 80px; /* Add margin to avoid overlap with the header */
 }
-.form{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  
-    input,
-    textarea,
-    button {
-      padding: 10px; /* Same padding as in your CSS */
-      border: 1px solid black;
-      border-radius: 0px;
-      font-size: 16px;
-      width: 90%;
-    }
-  
-    button {
-      background-color: #b99d75;
-      color: white;
-      cursor: pointer;
-      transition: background-color 0.5s ease;
-  
-      &:hover {
-        background-color: #0056b3;
-      }
-    }
+
+/* Ensure the form takes up appropriate width and has proper spacing */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.contact-info-section{
-    width: 45%;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 0px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    text-align: center; /* Center align text content */
+
+.form input,
+.form textarea,
+.form button {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 0px;
+  font-size: 16px;
+  width: 90%;
+  margin: 0 auto; /* Center the form elements */
 }
+
+.form button {
+  background-color: #b99d75;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.form button:hover {
+  background-color: #0056b3;
+}
+
+/* Media query for small screens */
+@media screen and (max-width: 768px) {
+  .contact-us-page-container {
+    flex-direction: column; /* Stack the sections vertically */
+    padding: 20px; /* Reduce padding for smaller screens */
+    height: auto; /* Allow height to adjust based on content */
+  }
+
+  .contact-form-section,
+  .contact-info-section {
+    width: 100%; /* Take full width on small screens */
+    margin-top: 120px; /* Increase top margin for smaller screens */
+  }
+
+  .form input,
+  .form textarea,
+  .form button {
+    width: 100%; /* Make form inputs take full width */
+  }
+}
+
+/* Social media links styling */
 .social-media-link {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.8s ease;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.8s ease;
 }
-  
+
 .social-media-link:hover {
-    color: #0056b3;
+  color: #0056b3;
 }
