@@ -70,7 +70,7 @@ function ReviewCard({ name, createdAt, feedback }) {
           <Typography variant="h6" fontFamily="Marcellus, serif" sx={{textAlign: 'left'}}>
             {name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" fontFamily="Marcellus, serif">
+          <Typography variant="body2" color="textSecondary" fontFamily="Marcellus, serif" sx={{textAlign: 'left'}}>
             {calculateTimeAgo(createdAt)}
 
           </Typography>
