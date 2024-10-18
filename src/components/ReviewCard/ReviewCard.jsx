@@ -34,10 +34,10 @@ function ReviewCard({ name, createdAt, feedback }) {
       direction="column"
       spacing={2}
       sx={{
-        width: '90%', // Adjusted to be more responsive
+        width: '65%',
         maxWidth: 600,
         margin: '5px auto',
-        padding: 2,
+        padding: 1,
         backgroundColor: '#fff',
         border: '1px solid black',
 
