@@ -73,30 +73,6 @@ function ReviewCard({ name, createdAt, feedback }) {
           <Typography variant="body2" color="textSecondary" fontFamily="Marcellus, serif">
             {calculateTimeAgo(createdAt)}
 
-//         <Stack sx={{ width: 'auto', flex: 1, whiteSpace: 'nowrap' }}>
-//           <Typography 
-//             variant="h6" 
-//             fontFamily="Marcellus, serif"
-//             sx={{
-//               '@media (max-width: 768px)': {
-//                 fontSize: '1rem', // Adjust font size for mobile
-//               },
-//             }}
-//           >
-//             {name}
-//           </Typography>
-//           <Typography 
-//             variant="body2" 
-//             color="textSecondary" 
-//             fontFamily="Marcellus, serif"
-//             sx={{
-//               '@media (max-width: 768px)': {
-//                 fontSize: '0.875rem', // Adjust time font size for mobile
-//               },
-//             }}
-//           >
-//             {calculateTimeAgo(createdAt)} {/* Display the number of months ago */}
-
           </Typography>
         </Stack>
       </Stack>
@@ -109,15 +85,6 @@ function ReviewCard({ name, createdAt, feedback }) {
         sx={{ marginTop: 2, wordWrap: 'break-word', overflowWrap: 'break-word' }} // Ensure long words break
       >
         {feedback}
-
-//         sx={{ 
-//           marginTop: 2,
-//           '@media (max-width: 768px)': {
-//             fontSize: '0.95rem', // Adjust feedback text size for mobile
-//           },
-//         }}
-//       >
-//         {feedback} {/* Ensure 'feedback' matches the prop key */}
 
       </Typography>
     </Stack>

@@ -73,7 +73,14 @@
 }
 
 .form .MuiTextField-root {
-  width: 100%; /* Make input fields take the full width of the form */
+  width: 100%; /* Full width of the form */
+  max-width: 1000px; /* Limit maximum width */
+  font-size: 1.2rem; /* Increase font size */
+  padding: 8px; /* Add padding inside the field */
+}
+
+.form .MuiInputLabel-outlined {
+  margin-left: 15px; /* Add space between the label and the text field */
 }
 
 .button-container {
