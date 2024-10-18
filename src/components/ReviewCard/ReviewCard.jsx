@@ -5,7 +5,7 @@ import profile from './assets/images/profile.png';
 function ReviewCard({ name, createdAt, feedback }) {
   const calculateTimeAgo = (reviewDate) => {
 
-    const gmtTimeZone = 'GMT'; // You can adjust this to any other US time zone
+    const gmtTimeZone = 'UTC'; // You can adjust this to any other US time zone
     
     // Create the current date in the desired US time zone
     const currentDateObj = new Date().toLocaleString('en-US', { timeZone: gmtTimeZone });
@@ -34,7 +34,7 @@ function ReviewCard({ name, createdAt, feedback }) {
       direction="column"
       spacing={2}
       sx={{
-        width: '65%',
+        width: '100%',
         maxWidth: 600,
         margin: '5px auto',
         padding: 1,
@@ -82,7 +82,7 @@ function ReviewCard({ name, createdAt, feedback }) {
         variant="body1" 
         fontFamily="Marcellus, serif" 
 
-        sx={{ marginTop: 2, wordWrap: 'break-word', overflowWrap: 'break-word' }} // Ensure long words break
+        sx={{ marginTop: 2, wordWrap: 'break-word', overflowWrap: 'break-word',textAlign: 'left' }} // Ensure long words break
       >
         {feedback}
 
