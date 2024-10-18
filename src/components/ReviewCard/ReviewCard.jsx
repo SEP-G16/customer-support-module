@@ -4,8 +4,12 @@ import profile from './assets/images/profile.png';
 
 function ReviewCard({ name, createdAt, feedback }) {
   const calculateTimeAgo = (reviewDate) => {
-    const usTimeZone = 'America/New_York';
-    const currentDateObj = new Date().toLocaleString('en-US', { timeZone: usTimeZone });
+
+    const gmtTimeZone = 'UTC'; // You can adjust this to any other US time zone
+    
+    // Create the current date in the desired US time zone
+    const currentDateObj = new Date().toLocaleString('en-US', { timeZone: gmtTimeZone });
+
     const currentDate = new Date(currentDateObj);
     const reviewDateObj = new Date(reviewDate);
     const timeDiffInSeconds = Math.floor((currentDate - reviewDateObj) / 1000);
@@ -30,10 +34,10 @@ function ReviewCard({ name, createdAt, feedback }) {
       direction="column"
       spacing={2}
       sx={{
-        width: '90%', // Adjusted to be more responsive
+        width: '100%',
         maxWidth: 600,
         margin: '5px auto',
-        padding: 2,
+        padding: 1,
         backgroundColor: '#fff',
         border: '1px solid black',
         wordWrap: 'break-word', // Ensures text breaks at the end of the line
@@ -47,11 +51,12 @@ function ReviewCard({ name, createdAt, feedback }) {
           style={{ width: 50, height: 50, borderRadius: '50%' }}
         />
         <Stack sx={{ width: 'auto', flex: 1 }}>
-          <Typography variant="h6" fontFamily="Marcellus, serif">
+          <Typography variant="h6" fontFamily="Marcellus, serif" sx={{textAlign: 'left'}}>
             {name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" fontFamily="Marcellus, serif">
+          <Typography variant="body2" color="textSecondary" fontFamily="Marcellus, serif" sx={{textAlign: 'left'}}>
             {calculateTimeAgo(createdAt)}
+
           </Typography>
         </Stack>
       </Stack>
@@ -60,9 +65,11 @@ function ReviewCard({ name, createdAt, feedback }) {
       <Typography 
         variant="body1" 
         fontFamily="Marcellus, serif" 
-        sx={{ marginTop: 2, wordWrap: 'break-word', overflowWrap: 'break-word' }} // Ensure long words break
+
+        sx={{ marginTop: 2, wordWrap: 'break-word', overflowWrap: 'break-word',textAlign: 'left' }} // Ensure long words break
       >
         {feedback}
+
       </Typography>
     </Stack>
   );

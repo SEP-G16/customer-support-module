@@ -109,7 +109,7 @@ const BookingPage = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container"style={{ width: '100vw', padding: '0', margin: '0' }}>
       <div className="image-box-wrapper">
         <ImageBox imageSrc={Booking} />
       </div>

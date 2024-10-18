@@ -1,40 +1,62 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-x: hidden;
-  }
-  
-
-  .menu-container {
-    display: flex;
-    flex-wrap: wrap; /* Allows items to wrap to the next line */
-    gap: 20px; /* Adjust the gap between MenuCards */
-    width: 100%;
-    max-width: 1400px;
-    margin-top: 20px;
-    overflow-x: hidden;
-  }
-  
-  @media (max-width: 800px) {
-    .menu-container {
-      flex-direction: column; /* Display items in a column on smaller screens */
-    }
-  }
-  
- 
-  .img {
-    aspect-ratio: 1.1;
-    object-fit: auto;
-    object-position: center;
-    width: 75px;
-  }
-
-  
-.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
   background-color: white; /* Matches the PDF background color */
-  padding: 0; /* Removes any padding */
-  margin: 0; /* Removes any margin */
+  padding: 0;
+  margin: 0;
   box-shadow: none; /* Remove box shadow if present */
+  width: 100%; /* Full width to be responsive */
 }
-  
+
+/* Responsive iframe for different screen sizes */
+iframe {
+  width: 100%;
+  height: 750px; /* Default height for larger screens */
+}
+
+/* Adjust iframe height for smaller screens */
+@media (max-width: 1024px) {
+  iframe {
+    height: 600px; /* Adjust height for tablet-sized screens */
+  }
+}
+
+@media (max-width: 768px) {
+  iframe {
+    height: 500px; /* Adjust height for smaller screens (mobile) */
+  }
+}
+
+/* Menu container responsiveness */
+.menu-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap to the next line */
+  gap: 20px; /* Adjust the gap between MenuCards */
+  width: 100%;
+  max-width: 1400px;
+  margin-top: 20px;
+  overflow-x: hidden;
+}
+
+/* On smaller screens, stack the menu items vertically */
+@media (max-width: 800px) {
+  .menu-container {
+    flex-direction: column; /* Display items in a column on smaller screens */
+  }
+}
+
+/* Image responsiveness */
+.img {
+  aspect-ratio: 1.1;
+  object-fit: cover;
+  object-position: center;
+  width: 75px;
+}
+
+@media (max-width: 600px) {
+  .img {
+    width: 50px; /* Make images smaller on small screens */
+  }
+}
