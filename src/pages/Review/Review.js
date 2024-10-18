@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { Typography, Stack, TextField, Button } from "@mui/material";
 
 import ImageBox from "../../components/ImageBox/ImageBox";
@@ -99,12 +100,11 @@ const Review = () => {
   };
 
   return (
-    <div className="container">
-      <Header />
-      <ImageBox
+    <div className="container" style={{ width: '100vw', padding: '0', margin: '0' }}>
+    <ImageBox
         imageSrc={ReviewImage}
         TextContentComponent={<CustomTextContent />}
-      />
+    />
       <div className="content">
         <div className="left-section">
           
@@ -124,7 +124,7 @@ const Review = () => {
               <Typography
             variant="h4"
             gutterBottom
-            sx={{ padding: "10px", marginLeft: "100px" }}
+            sx={{ padding: "10px", marginLeft: "80px" }}
           >
             Submit Your Review
           </Typography>
