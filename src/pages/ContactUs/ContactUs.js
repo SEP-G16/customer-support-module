@@ -41,14 +41,14 @@ const ContactUsPage = () => {
         </form>
       </div>
       <div className="contact-info-section">
-        <h2>Contact Information</h2>
+        <h2 style={{ marginBottom: "30px" }}>Contact Information</h2>
         <div>
-          <h3>Restaurant Reservations</h3>
+          <h3 style={{ marginBottom: "15px" }}>Restaurant Reservations</h3>
           <p>0112 452 361</p>
           <p>0112 568 566</p>
         </div>
         <div>
-          <h3>Room Reservations</h3>
+          <h3 style={{ marginBottom: "15px" }}>Room Reservations</h3>
           <p>0112 556 333</p>
           <p>0112 556 334</p>
         </div>
