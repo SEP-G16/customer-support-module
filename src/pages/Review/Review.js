@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Typography,
-  Stack,
-  TextField,
-  Button,
-} from "@mui/material";
+import { Typography, Stack, TextField, Button } from "@mui/material";
 import Header from "../../components/Header/Header";
 import ImageBox from "../../components/ImageBox/ImageBox";
 import ReviewImage from "./assets/images/Reviews.jpg";
@@ -77,6 +72,7 @@ const Review = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setErrors({ ...errors, [e.target.name]: "" });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = { ...errors };
@@ -91,6 +87,7 @@ const Review = () => {
       await sendData(formData);
     }
   };
+
   const sendData = async (data) => {
     let reqBody = {
       name: data.name,
@@ -110,20 +107,31 @@ const Review = () => {
       />
       <div className="content">
         <div className="left-section">
-          <Typography
+          
+          <form onSubmit={handleSubmit}>
+            <Stack
+              spacing={2}
+              alignItems="center"
+              justifyContent="center" // Added to center the content
+              sx={{ 
+                width: "100%",         // Make it responsive by setting width to 100%
+                maxWidth: "500px",      // Optional: max width to limit form size on larger screens
+                margin: "0 auto",       // Center the form horizontally
+                padding: "0 20px",      // Add padding for mobile view to prevent edges cutoff
+                marginBottom: "30px"
+              }}
+            >
+              <Typography
             variant="h4"
             gutterBottom
             sx={{ padding: "10px", marginLeft: "100px" }}
           >
             Submit Your Review
           </Typography>
-          <form onSubmit={handleSubmit}>
-            <Stack
-              spacing={2}
-              sx={{ marginLeft: "100px", marginBottom: "30px" }}
-            >
+          
               <TextField
                 fullWidth
+                className="text-field"
                 label="Your Name"
                 name="name"
                 value={formData.name}
@@ -149,6 +157,7 @@ const Review = () => {
               />
               <TextField
                 fullWidth
+                className="text-field"
                 label="Your Feedback"
                 name="feedback"
                 value={formData.feedback}
@@ -173,23 +182,24 @@ const Review = () => {
                     },
                   },
                 }}
-                />
-
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                sx={{
+                  mt: 2,
+                  backgroundColor: "rgba(185, 157, 117, 1)",
+                  borderRadius: "0px",
+                  padding: "10px",
+                  width: "300px", // Same width as the text fields
+                  margin: "0 auto",
+                  textAlign: "center",
+                }}
+              >
+                Submit Your Feedback
+              </Button>
             </Stack>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              sx={{
-                mt: 2,
-                backgroundColor: "rgba(185, 157, 117, 1)",
-                borderRadius: "0px",
-                padding: "10px",
-                marginLeft: "220px",
-              }}
-            >
-              Submit Your Feedback
-            </Button>
           </form>
         </div>
         <div className="right-section">
