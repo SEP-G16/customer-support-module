@@ -68,15 +68,15 @@
 /* Text styling */
 .text {
   font-family: Marcellus, serif;
-  font-size: 22px;
+  font-size: 16px;
   line-height: 1.6;
   margin-left: 20px;
 }
 
 /* Responsive layout for smaller screens */
-@media (max-width: 991px) {
+@media (max-width: 650px) {
   .section-container {
-    padding: 50px;
+    padding: 20px;
   }
 
   .image-description-row {
@@ -93,8 +93,8 @@
 
   .img-container {
     order: 1; /* Move image below description */
-    max-width: 65%; /* Full width for mobile */
-    padding: 30px;
+    max-width: 80%; /* Full width for mobile */
+    padding: 10px;
   }
 
   .text, .title {
@@ -103,6 +103,6 @@
   }
 
   .img-container img {
-    border-radius: 8px; /* Add border-radius for mobile look */
+    border-radius: 0px; /* Add border-radius for mobile look */
   }
 }

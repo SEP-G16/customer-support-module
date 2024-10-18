@@ -91,11 +91,11 @@ const CustomTextContent = () => {
 
 const CheckAvailability = () => {
   return (
-    <div className="container">
-      <ImageBox
+    <div className="container" style={{ width: '100vw', padding: '0', margin: '0' }}>
+    <ImageBox
         imageSrc={Booking}
         TextContentComponent={<CustomTextContent />}
-      />
+    />
       <div className="availability-bar-wrapper">
         <AvailabilityBar />
       </div>
@@ -154,12 +154,12 @@ const CheckAvailability = () => {
             <ActivityCard
               img={spa}
               title="Rejuvenate at Our Luxurious Spa"
-              description="Indulge in soothing treatments and therapies designed to pamper your senses and rejuvenate your spirit. Escape into a world of tranquility, leaving you refreshed and revitalized."
+              description="Indulge in soothing treatments and therapies that pamper your senses and rejuvenate your spirit. Escape into tranquility, leaving you refreshed, renewed, and completely restored. Discover the perfect sanctuary for your well-being."
             />
             <ActivityCard
               img={gym}
               title="Energize at Our Modern Fitness Center"
-              description="Stay fit with top-notch equipment and inspiring views. Maintain your routine or start anew in our state-of-the-art gym."
+              description="Stay fit with top-notch equipment and inspiring views. Maintain your routine or start anew in our state-of-the-art gym. Our fitness facility also offers personalized training sessions to help you achieve your goals and stay motivated."
             />
           </div>
         </div>

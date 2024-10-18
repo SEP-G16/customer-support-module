@@ -1,25 +1,46 @@
+/* Ensure full-width for the image box */
 .container {
+    width: 100vw; /* Make sure it takes the full viewport width */
+    max-width: none; /* Remove any max-width constraint */
+    padding: 0; /* No padding to avoid extra space */
     background-color: white;
-    overflow: hidden;
-    width: 100%; /* Full width */
+    overflow: hidden; /* Remove horizontal scroll */
+    align-items: center;
+    padding-bottom: 20px;
+    /* width: 100%; Full width */
+    margin: 0; /* Ensure no extra margin */
 }
 
 .content-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0px 20px;
+    width: 90%; /* Set a specific width, adjusting the percentage as needed */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden;
+    background-color: transparent; /* Ensure no background conflicts */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    z-index: 2;
+    
 }
 
+
+.img {
+    aspect-ratio: 1.1;
+    object-fit: cover; /* Ensure the image covers its container */
+    object-position: center;
+    width: 100%; /* Make the image take full width */
+    height: auto; /* Adjust height to maintain aspect ratio */
+}
+
+/* Handle layout adjustments for cards */
 .room-cards {
     display: flex;
     justify-content: space-around;
     margin-bottom: 40px;
     margin-top: 40px;
-    gap: 40px;
+    gap: 70px;
+    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
 }
 
 @media (max-width: 768px) {
@@ -28,6 +49,7 @@
         align-items: center;
     }
 }
+
 
 .my-component-wrapper {
     flex: 1;
@@ -69,8 +91,8 @@
     grid-template-columns: repeat(3, 1fr);
     margin-left: 20px;
     margin-right: 20px;
-    gap: 30px;
-    margin-bottom: 40px;
+    gap: 70px;
+    margin-bottom: 20px;
     display: flex;
 }
 
@@ -84,10 +106,13 @@
     .activity-cards {
         flex-direction: column;
         align-items: center;
+        gap: 0px;
     }
 }
 
 .availability-bar-wrapper {
+    width: 100vw; /* Full viewport width */
+    margin: 0; /* Remove any margin */
     position: relative;
     top: -70px; /* Adjust as needed */
     display: flex;
@@ -99,5 +124,10 @@
     .availability-bar-wrapper {
         top: 0; /* Reset top value for smaller screens */
         margin-top: 20px;
+        justify-content: center;
+        
     }
 }
+
+
+
