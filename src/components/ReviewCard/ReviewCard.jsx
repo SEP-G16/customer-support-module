@@ -67,7 +67,7 @@ function ReviewCard({ name, createdAt, feedback }) {
           }}
         />
         <Stack sx={{ width: 'auto', flex: 1 }}>
-          <Typography variant="h6" fontFamily="Marcellus, serif">
+          <Typography variant="h6" fontFamily="Marcellus, serif" sx={{textAlign: 'left'}}>
             {name}
           </Typography>
           <Typography variant="body2" color="textSecondary" fontFamily="Marcellus, serif">
