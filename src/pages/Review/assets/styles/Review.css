@@ -19,57 +19,64 @@
   margin: 0 auto; /* Center the content horizontally */
 }
 
-/* Tablet and smaller screens */
+
+/* Tablet View (Under 1200px) */
 @media (max-width: 1200px) {
   .content {
-      gap: 20px; /* Increase gap for medium screens */
+    gap: 20px;
 
   }
 
   .left-section,
   .right-section {
 
-      flex: 0.45; /* Adjust column width for medium screens */
+    flex: 0.45; /* Adjust width for tablets */
   }
 }
 
-/* Mobile view and smaller screens */
+/* View Between 600px and 960px */
 @media (max-width: 960px) {
   .content {
-      flex-direction: column; /* Stack columns vertically */
-      gap: 20px; /* Vertical gap between stacked sections */
+    flex-direction: row; /* Keep sections horizontal in row */
+    gap: 20px;
+
   }
 
   .left-section,
   .right-section {
-      flex: 1; /* Full width for both sections */
-      padding: 0; /* Remove side paddings */
+
+    flex: 1;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .left-section .text-field {
+    width:90%; /* Reduce width for screens between 600px and 960px */
+  }
+}
+
+/* Mobile View (Under 600px) */
+@media (max-width: 600px) {
+  .content {
+    flex-direction: column; /* Stack sections vertically for mobile */
+    gap: 20px;
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .left-section,
+  .right-section {
+    flex: 1; /* Make both sections full width */
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 20px; /* Add some spacing on mobile */
   }
 
   .right-section {
-      margin-top: 20px; /* Add some space between sections */
+    margin-top: 20px; /* Add space between the two sections */
+  }
+
+  /* Reduce text field width more on smaller screens */
+  .left-section .text-field {
+    width: 100%; /* Ensure text fields are full-width */
   }
 }
-
-.left-section {
-  flex: 1; /* Take full width in desktop view */
-  padding-right: 40px; /* Space between sections */
-}
-
-.right-section {
-  flex: 1; /* Take full width in desktop view */
-  padding-left: 40px;
-}
-
-@media (max-width: 960px) {
-  .right-section {
-      margin-top: 40px; /* Space between sections when stacked */
-  }
-}
-
-.underline {
-  width: 70%;
-  border-bottom: 1px solid black;
-  margin-bottom: 20px;
-}
-
