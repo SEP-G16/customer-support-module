@@ -40,31 +40,15 @@ function ReviewCard({ name, createdAt, feedback }) {
         padding: 1,
         backgroundColor: '#fff',
         border: '1px solid black',
-
         wordWrap: 'break-word', // Ensures text breaks at the end of the line
         overflowWrap: 'break-word', // Alternative property for older browsers
-
-//         borderRadius: '8px', // Optional: Add some rounding for aesthetics
-//         '@media (max-width: 768px)': {
-//           width: '90%', // Adjust width on smaller screens
-//           padding: '16px',
-//         },
-
       }}
     >
       <Stack direction="row" spacing={2} alignItems="center" sx={{ width: '100%' }}>
         <img
           src={profile}
           alt="user"
-          style={{ 
-            width: 50, 
-            height: 50, 
-            borderRadius: '50%',
-            '@media (max-width: 768px)': {
-              width: 40,  // Smaller image for smaller screens
-              height: 40,
-            },
-          }}
+          style={{ width: 50, height: 50, borderRadius: '50%' }}
         />
         <Stack sx={{ width: 'auto', flex: 1 }}>
           <Typography variant="h6" fontFamily="Marcellus, serif" sx={{textAlign: 'left'}}>
