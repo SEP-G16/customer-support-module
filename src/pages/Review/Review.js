@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import { Typography, Stack, TextField, Button } from "@mui/material";
-import Header from "../../components/Header/Header";
-
-// import {
-//   Typography,
-//   Stack,
-//   TextField,
-//   Button,
-// } from "@mui/material";
 
 import ImageBox from "../../components/ImageBox/ImageBox";
 import ReviewImage from "./assets/images/Reviews.jpg";
@@ -136,15 +128,6 @@ const Review = () => {
           >
             Submit Your Review
           </Typography>
-
-          
-=======
-//           <form onSubmit={handleSubmit}>
-//             <Stack
-//               spacing={2}
-//               sx={{ marginLeft: "100px", marginRight: "100px",marginBottom: "30px" }}
-//             >
-
               <TextField
                 fullWidth
                 className="text-field"
@@ -216,24 +199,6 @@ const Review = () => {
                 Submit Your Feedback
               </Button>
             </Stack>
-
-//             <Button
-//               type="submit"
-//               variant="contained"
-//               color="primary"
-//               sx={{
-//                 mt: 2,
-//                 backgroundColor: "rgba(185, 157, 117, 1)",
-//                 borderRadius: "0px",
-//                 padding: "10px",
-//                 marginLeft: "220px",
-//                 display: "flex", 
-//                 justifyContent: "center" 
-//               }}
-//             >
-//               Submit Your Feedback
-//             </Button>
-
           </form>
         </div>
         <div className="right-section">
