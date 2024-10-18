@@ -63,12 +63,14 @@
     padding: 10px; /* Reduce padding for smaller screens */
   }
 
-.right-section {
-  flex: 1; /* Take full width in desktop view */
-  padding-left: 40px;
-}
+  .left-section,
+  .right-section {
+    flex: 1; /* Make both sections full width */
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 20px; /* Add some spacing on mobile */
+  }
 
-@media (max-width: 960px) {
   .right-section {
     margin-top: 20px; /* Add space between the two sections */
   }
