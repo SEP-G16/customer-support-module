@@ -5,7 +5,7 @@ import profile from './assets/images/profile.png';
 function ReviewCard({ name, createdAt, feedback }) {
   const calculateTimeAgo = (reviewDate) => {
 
-    const gmtTimeZone = 'GMT'; // You can adjust this to any other US time zone
+    const gmtTimeZone = 'UTC'; // You can adjust this to any other US time zone
     
     // Create the current date in the desired US time zone
     const currentDateObj = new Date().toLocaleString('en-US', { timeZone: gmtTimeZone });
@@ -34,10 +34,10 @@ function ReviewCard({ name, createdAt, feedback }) {
       direction="column"
       spacing={2}
       sx={{
-        width: '90%', // Adjusted to be more responsive
+        width: '100%',
         maxWidth: 600,
         margin: '5px auto',
-        padding: 2,
+        padding: 1,
         backgroundColor: '#fff',
         border: '1px solid black',
 
@@ -67,35 +67,11 @@ function ReviewCard({ name, createdAt, feedback }) {
           }}
         />
         <Stack sx={{ width: 'auto', flex: 1 }}>
-          <Typography variant="h6" fontFamily="Marcellus, serif">
+          <Typography variant="h6" fontFamily="Marcellus, serif" sx={{textAlign: 'left'}}>
             {name}
           </Typography>
-          <Typography variant="body2" color="textSecondary" fontFamily="Marcellus, serif">
+          <Typography variant="body2" color="textSecondary" fontFamily="Marcellus, serif" sx={{textAlign: 'left'}}>
             {calculateTimeAgo(createdAt)}
-
-//         <Stack sx={{ width: 'auto', flex: 1, whiteSpace: 'nowrap' }}>
-//           <Typography 
-//             variant="h6" 
-//             fontFamily="Marcellus, serif"
-//             sx={{
-//               '@media (max-width: 768px)': {
-//                 fontSize: '1rem', // Adjust font size for mobile
-//               },
-//             }}
-//           >
-//             {name}
-//           </Typography>
-//           <Typography 
-//             variant="body2" 
-//             color="textSecondary" 
-//             fontFamily="Marcellus, serif"
-//             sx={{
-//               '@media (max-width: 768px)': {
-//                 fontSize: '0.875rem', // Adjust time font size for mobile
-//               },
-//             }}
-//           >
-//             {calculateTimeAgo(createdAt)} {/* Display the number of months ago */}
 
           </Typography>
         </Stack>
@@ -106,18 +82,9 @@ function ReviewCard({ name, createdAt, feedback }) {
         variant="body1" 
         fontFamily="Marcellus, serif" 
 
-        sx={{ marginTop: 2, wordWrap: 'break-word', overflowWrap: 'break-word' }} // Ensure long words break
+        sx={{ marginTop: 2, wordWrap: 'break-word', overflowWrap: 'break-word',textAlign: 'left' }} // Ensure long words break
       >
         {feedback}
-
-//         sx={{ 
-//           marginTop: 2,
-//           '@media (max-width: 768px)': {
-//             fontSize: '0.95rem', // Adjust feedback text size for mobile
-//           },
-//         }}
-//       >
-//         {feedback} {/* Ensure 'feedback' matches the prop key */}
 
       </Typography>
     </Stack>
