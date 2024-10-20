@@ -17,7 +17,6 @@ import suite from "./assets/images/suite.jpg";
 import deluxe from "./assets/images/luxury.jpg";
 import { AxiosInstance } from "../../axios.config";
 
-
 const roomImages = {
   "Standard rooms": room,
   "Deluxe rooms": deluxe,
@@ -52,7 +51,6 @@ const roomPrices = {
   "Deluxe rooms": "Rs. 15,780 per night",
   "Suite rooms": "Rs. 20,200 per night",
 };
-
 
 function AvailabilityBar() {
   const [formData, setFormData] = useState({
@@ -101,13 +99,15 @@ function AvailabilityBar() {
     console.log("Form submitted:", formData);
     setAvailable(true); // Simulated availability check
     try {
-      let response = await AxiosInstance.get(`/api/room-type/available-count?from=${formData.checkIn}&to=${formData.checkOut}`); 
+      let response = await AxiosInstance.get(
+        `/api/room-type/available-count?from=${formData.checkIn}&to=${formData.checkOut}`
+      );
       let [standardMap, deluxeMap, suiteMap] = response.data;
       console.log(response);
       const availabilityData = {
-        "Standard rooms": {roomTypeId : standardMap.roomTypeId, roomCount: standardMap.roomCount},
-        "Deluxe rooms": {roomTypeId : deluxeMap.roomTypeId, roomCount: deluxeMap.roomCount},
-        "Suite rooms": {roomTypeId : suiteMap.roomTypeId, roomCount: suiteMap.roomCount},
+        "Standard rooms": { roomTypeId: standardMap.roomTypeId, roomCount: standardMap.roomCount },
+        "Deluxe rooms": { roomTypeId: deluxeMap.roomTypeId, roomCount: deluxeMap.roomCount },
+        "Suite rooms": { roomTypeId: suiteMap.roomTypeId, roomCount: suiteMap.roomCount },
       };
       // Simulate room availability data
       setRoomAvailability(availabilityData);
@@ -151,104 +151,96 @@ function AvailabilityBar() {
   return (
     <Container>
       <GridContainer>
-      <GridItem>
-  <ItemLabel>Check In</ItemLabel>
-  <StyledTextField
-    fullWidth
-    // label="Check-In"
-    name="checkIn"
-    type="date"
-    value={formData.checkIn}
-    onChange={handleChange}
-    InputLabelProps={{
-      shrink: true,
-      style: { color: "white" },
-    }}
-    required
-    InputProps={{
-      disableUnderline: true,
-      inputProps: {
-        min: new Date().toISOString().split("T")[0], // Set the minimum selectable date to today
-      },
-    }}
-    variant="outlined"
-  />
-</GridItem>
+        <GridItem>
+          <ItemLabel>Check In</ItemLabel>
+          <StyledTextField
+            fullWidth
+            name="checkIn"
+            type="date"
+            value={formData.checkIn}
+            onChange={handleChange}
+            InputLabelProps={{
+              shrink: true,
+              style: { color: "white" },
+            }}
+            required
+            InputProps={{
+              disableUnderline: true,
+              inputProps: {
+                min: new Date().toISOString().split("T")[0], // Set the minimum selectable date to today
+              },
+            }}
+            variant="outlined"
+          />
+        </GridItem>
 
         <GridItem>
-  <ItemLabel>Check Out</ItemLabel>
-  <StyledTextField
-    fullWidth
-    // label="Check-Out"
-    name="checkOut"
-    type="date"
-    value={formData.checkOut}
-    onChange={handleChange}
-    InputLabelProps={{
-      shrink: true,
-      style: { color: "white" },
-    }}
-    required
-    InputProps={{
-      disableUnderline: true,
-      inputProps: {
-        min: new Date().toISOString().split("T")[0], // This sets the minimum date to today's date
-      },
-    }}
-    variant="outlined"
-  />
-</GridItem>
+          <ItemLabel>Check Out</ItemLabel>
+          <StyledTextField
+            fullWidth
+            name="checkOut"
+            type="date"
+            value={formData.checkOut}
+            onChange={handleChange}
+            InputLabelProps={{
+              shrink: true,
+              style: { color: "white" },
+            }}
+            required
+            InputProps={{
+              disableUnderline: true,
+              inputProps: {
+                min: new Date().toISOString().split("T")[0], // This sets the minimum date to today's date
+              },
+            }}
+            variant="outlined"
+          />
+        </GridItem>
+
         <ButtonGridItem>
           <ButtonWrapper>
-          <StyledButton
-          type="button"
-          onClick={handleSubmit}
-          title="Click to check room availability" // Tooltip for more context
-          >
-  Check Availability
-</StyledButton>
+            <StyledButton
+              type="button"
+              onClick={handleSubmit}
+              title="Click to check room availability"
+            >
+              Check Availability
+            </StyledButton>
           </ButtonWrapper>
         </ButtonGridItem>
       </GridContainer>
 
-      <Dialog
-        open={showPopup}
-        onClose={handleClosePopup}
-        maxWidth="sm"
-        fullWidth
-      >
+      <Dialog open={showPopup} onClose={handleClosePopup} maxWidth="sm" fullWidth>
         <DialogTitle>Room Availability</DialogTitle>
         <DialogContent>
-        <DialogContentWrapper>
-  {available ? (
-    <RoomContainer>
-      {Object.entries(roomAvailability).map(([roomType, map]) => {
-        const isUnavailable = map.roomCount === 0; // Check if the room count is zero
-        return (
-          <RoomBox
-  key={roomType}
-  onClick={() => !isUnavailable && handleRoomClick(roomType)}
-  disabled={isUnavailable}
-  isUnavailable={isUnavailable}
->
-  <RoomImage src={roomImages[roomType]} alt={roomType} />
-  <RoomContent>
-    <Typography variant="h6">{roomType}</Typography>
-    <Typography variant="body2">{roomPrices[roomType]}</Typography> {/* Add price here */}
-    <Typography variant="body2">{`${map.roomCount} rooms available`}</Typography>
-  </RoomContent>
-</RoomBox>
-
-        );
-      })}
-    </RoomContainer>
-  ) : (
-    <Typography variant="body1">
-      Rooms are not available for the selected dates.
-    </Typography>
-  )}
-</DialogContentWrapper>
-
+          <DialogContentWrapper>
+            {available ? (
+              <RoomContainer>
+                {Object.entries(roomAvailability).map(([roomType, map]) => {
+                  const isUnavailable = map.roomCount === 0; // Check if the room count is zero
+                  return (
+                    <RoomBox
+                      key={roomType}
+                      onClick={() => !isUnavailable && handleRoomClick(roomType)}
+                      disabled={isUnavailable}
+                      isUnavailable={isUnavailable}
+                    >
+                      <RoomImage src={roomImages[roomType]} alt={roomType} />
+                      <RoomContent>
+                        <Typography variant="h6">{roomType}</Typography>
+                        <Typography variant="body2">{roomPrices[roomType]}</Typography>
+                        <Typography variant="body2">{`${map.roomCount} rooms available`}</Typography>
+                      </RoomContent>
+                    </RoomBox>
+                  );
+                })}
+              </RoomContainer>
+            ) : (
+              <Typography variant="body1">
+                Rooms are not available for the selected dates.
+              </Typography>
+            )}
+          </DialogContentWrapper>
         </DialogContent>
         <DialogActions>
           <MuiButton onClick={handleClosePopup} color="primary">
@@ -260,25 +252,30 @@ function AvailabilityBar() {
   );
 }
 
+// Styles with responsive media queries
+
 const Container = styled.div`
   background-color: #53624e;
   padding: 10px 47px;
-  width: 35%;
+  width: 55%;
   border: 1px solid #b99d75;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
   @media (max-width: 991px) {
-    padding: 20px;
-    width: 90%;
+    padding: 15px;
+    width: 65%;
   }
 `;
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr) auto;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   color: #fff;
   @media (max-width: 991px) {
     grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 517px) {
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -287,6 +284,7 @@ const GridItem = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 10px;
+  width: 100%;
 `;
 
 const ButtonGridItem = styled.div`
@@ -295,6 +293,14 @@ const ButtonGridItem = styled.div`
   justify-content: center;
   flex-direction: column;
   grid-column: span 1;
+
+  /* Center the button for smaller screens */
+  @media (max-width: 991px) {
+    grid-column: span 2;
+  }
+  @media (max-width: 517px) {
+    grid-column: span 1;
+  }
 `;
 
 const ItemLabel = styled.div`
@@ -323,7 +329,6 @@ const StyledButton = styled(MuiButton)`
     @media (max-width: 991px) {
       padding: 10px 20px;
     }
-
     &:hover {
       background-color: #a38863;
     }
@@ -361,22 +366,31 @@ const RoomContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: flex-end; /* Aligns all content to the right */
+  align-items: flex-end;
+  @media (max-width: 600px) {
+    align-items: center;
+  }
 `;
 
 const DialogContentWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
 `;
-
 
 const RoomImage = styled.img`
   width: 150px;
   height: 100px;
   object-fit: cover;
   flex-shrink: 0;
-  margin-right: 200px; /* Adds a gap between image and content */
+  margin-right: 200px;
+  @media (max-width: 600px) {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 `;
 
 const RoomContent = styled(Box)`
@@ -385,7 +399,10 @@ const RoomContent = styled(Box)`
   justify-content: center;
   padding: 10px;
   width: 100%;
-  text-align: right; /* Aligns the content to the right */
+  text-align: right;
+  @media (max-width: 600px) {
+    text-align: center;
+  }
 `;
 
 const RoomBox = styled(ButtonBase)`
@@ -398,15 +415,19 @@ const RoomBox = styled(ButtonBase)`
   text-align: left;
   transition: background-color 0.3s;
   padding: 10px;
-  cursor: ${({ isUnavailable }) => (isUnavailable ? "not-allowed" : "pointer")}; // Change cursor if unavailable
-  opacity: ${({ isUnavailable }) => (isUnavailable ? 0.5 : 1)}; // Make it greyed out when unavailable
-  pointer-events: ${({ isUnavailable }) => (isUnavailable ? "none" : "auto")}; // Disable interaction if unavailable
+  cursor: ${({ isUnavailable }) => (isUnavailable ? "not-allowed" : "pointer")};
+  opacity: ${({ isUnavailable }) => (isUnavailable ? 0.5 : 1)};
+  pointer-events: ${({ isUnavailable }) => (isUnavailable ? "none" : "auto")};
 
   &:hover {
     background-color: ${({ isUnavailable }) =>
       isUnavailable ? "transparent" : "rgba(0, 0, 0, 0.1)"};
   }
-`;
 
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+  }
+`;
 
 export default AvailabilityBar;

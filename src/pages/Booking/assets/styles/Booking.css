@@ -1,60 +1,101 @@
 .container {
-    font-family: 'Marcellus', serif;
-    overflow-x: hidden;
-  }
-  
-  .image-box-wrapper {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .image-box-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
-    z-index: 1; /* Ensure the overlay is above the image */
-  }
-  
+  font-family: 'Marcellus', serif;
+  overflow-x: hidden;
+  padding: 0 20px; /* Add some padding to avoid edge clipping on smaller screens */
+}
+
+.image-box-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px; /* Add margin to separate image from content */
+}
+
+.image-box-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+  z-index: 1; /* Ensure the overlay is above the image */
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Ensure items are vertically centered */
+  padding: 20px;
+  max-width: 1200px; /* Set a maximum width for the content */
+  margin: 0 auto; /* Center the content container */
+}
+
+@media (max-width: 900px) {
   .content {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+    flex-direction: column; /* Stack sections vertically */
+    align-items: center; /* Center items when stacked */
+    padding: 20px; /* Adjust padding */
   }
-  
-  @media (max-width: 768px) {
-    .content {
-      flex-direction: column;
-      align-items: center; /* Centers content on smaller screens */
-    }
+}
+
+.left-section, .right-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px; /* Adjust padding for uniformity */
+}
+
+.left-section {
+  margin-right: 20px;
+}
+
+.right-section {
+  margin-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .left-section, .right-section {
+    padding: 20px; /* Reduce padding on smaller screens */
+    margin: 0; /* Remove margins to ensure proper centering */
   }
-  
-  .left-section {
-    flex: 1;
-    padding: 50px 0; /* Adjusted padding for better centering */
-    margin-right: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+}
+
+.form {
+  width: 100%; /* Ensure form takes full width of its container */
+  max-width: 500px; /* Limit form width on larger screens */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Add spacing between form elements */
+}
+
+.form .MuiTextField-root {
+  width: 100%; /* Full width of the form */
+  max-width: 1000px; /* Limit maximum width */
+  font-size: 1.2rem; /* Increase font size */
+  padding: 8px; /* Add padding inside the field */
+}
+
+.form .MuiInputLabel-outlined {
+  margin-left: 15px; /* Add space between the label and the text field */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.button-container button {
+  max-width: 200px; /* Limit button width */
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .button-container button {
+    width: 100%; /* Ensure button takes full width on smaller screens */
   }
-  
-  .right-section {
-    flex: 1;
-    padding: 50px; /* Adjusted padding for better centering */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .form {
-    width: 100%; /* Ensures form takes full width of its container */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
+}

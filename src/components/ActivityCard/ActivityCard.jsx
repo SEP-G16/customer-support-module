@@ -6,12 +6,12 @@ function ActivityCard({ img, title, description }) {
     <Container>
       <Card>
         <ImgContainer>
-        <Img src={img} alt={title} />
+          <Img src={img} alt={title} />
+          <Overlay />
         </ImgContainer>
         <Title>{title}</Title>
         <Description>{description}</Description>
       </Card>
-      <Overlay />
     </Container>
   );
 }
@@ -19,16 +19,20 @@ function ActivityCard({ img, title, description }) {
 const Container = styled.div`
   position: relative;
   width: 100%;
-  margin: 0px 40px 0px 40px;
+  height: 700px;
+  margin: 0px 20px 0px 20px;
   max-width: 300px; /* Adjust as needed */
   overflow: hidden;
-  
+
+
   @media (max-width: 768px) {
-    max-width: 200px; /* Adjust for smaller screens */
+    max-width: 300px; /* Adjust for smaller screens */
+    height: 620px;
   }
-  
+
   @media (max-width: 480px) {
-    max-width: 150px; /* Adjust for extra small screens */
+    max-width: 300px; /* Adjust for extra small screens */
+    height: 550px;
   }
 `;
 
@@ -41,27 +45,45 @@ const Card = styled.div`
   text-align: center;
   padding: 35px 13px;
   z-index: 1; /* Ensure card content is on top */
-  
+
   @media (max-width: 768px) {
-    padding: 25px 10px; /* Adjust padding for smaller screens */
+    padding: 1% 2%; /* Adjust padding for smaller screens */
   }
-  
+
   @media (max-width: 480px) {
-    padding: 20px 8px; /* Adjust padding for extra small screens */
+    padding: 5% 5%; /* Adjust padding for extra small screens */
+  }
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: -3%; /* Adjust positioning based on your needs */
+  left: -2%;
+  width: 97%; /* Adjust the width to your desired percentage of ImgContainer */
+  height: 98%; /* Adjust the height to your desired percentage of ImgContainer */
+  border: 2px solid rgba(185, 157, 117, 1); /* Gold border */
+  z-index: 0; /* Ensure the overlay is behind the card content */
+ 
+
+  @media (max-width: 768px) {
+    top: 10px; /* Adjust top for smaller screens */
+    height: 420px; /* This may need to be changed as it should be relative to ImgContainer */
+    width: 93%; /* Adjust width for smaller screens */
   }
 `;
 
 const Img = styled.img`
   width: 100%;
   border-radius: 0px; /* Example border radius */
-
+  object-fit: cover;
 `;
 
 const ImgContainer = styled.div`
   width: 100%;
   overflow: hidden;
   border-radius: 0px; /* Example border radius */
-   transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  position: relative; /* Make this relative to position Overlay correctly */
 
   &:hover {
     transform: scale(1.05); /* Slight zoom effect on hover */
@@ -97,22 +119,6 @@ const Description = styled.div`
   @media (max-width: 480px) {
     font-size: 10px; /* Adjust font size for extra small screens */
     margin-top: 6px; /* Adjust margin for extra small screens */
-  }
-`;
-
-const Overlay = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 0;
-  width: 90%;
-  height: 63%;
-  border: 2px solid rgba(185, 157, 117, 1); /* Gold border */
-  z-index: 0; /* Ensure the overlay is behind the card content */
-
-  @media (max-width: 768px) {
-    top: 15px; /* Adjust top for smaller screens */
-    height: 42%; /* Adjust height for smaller screens */
-    width: 85%; /* Adjust width for smaller screens */
   }
 `;
 

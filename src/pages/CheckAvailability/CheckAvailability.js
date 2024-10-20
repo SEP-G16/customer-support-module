@@ -23,9 +23,16 @@ const CustomTextContent = () => {
       >
         <img src={ResortIcon} alt="Resort icon" />
         <Typography
-          variant="h8"
+          variant="h6"
           fontFamily="Marcellus, serif"
-          style={{ color: "white", padding: "2px", marginBottom: "50px" }}
+          sx={{
+            color: "white",
+            padding: "2px",
+            marginBottom: "50px",
+            "@media (max-width: 768px)": {
+              fontSize: "1rem", // Reduce font size for smaller screens
+            },
+          }}
         >
           WELCOME TO CEYLON RESORT
         </Typography>
@@ -34,21 +41,41 @@ const CustomTextContent = () => {
         <Typography
           variant="h2"
           fontFamily="Marcellus, serif"
-          style={{ color: "white", padding: "0px", marginBottom: "0px" }}
+          sx={{
+            color: "white",
+            padding: "0px",
+            marginBottom: "0px",
+            "@media (max-width: 768px)": {
+              fontSize: "1.75rem", // Adjust font size on smaller screens
+            },
+          }}
         >
           In the heart of the Indian Ocean
         </Typography>
         <Typography
           variant="h2"
           fontFamily="Marcellus, serif"
-          style={{ color: "white", padding: "0px", marginBottom: "30px" }}
+          sx={{
+            color: "white",
+            padding: "0px",
+            marginBottom: "30px",
+            "@media (max-width: 768px)": {
+              fontSize: "1.5rem", // Adjust font size on smaller screens
+            },
+          }}
         >
           Outstanding Views
         </Typography>
         <Typography
           variant="h6"
           fontFamily="Marcellus, serif"
-          style={{ color: "white", padding: "0px" }}
+          sx={{
+            color: "white",
+            padding: "0px",
+            "@media (max-width: 768px)": {
+              fontSize: "0.875rem", // Adjust body text font size
+            },
+          }}
         >
           Nestled in the heart of the Pacific Islands resort, on the edge of a
           tranquil and beautiful Garden Island, Ceylon is a haven of warmth,
@@ -61,19 +88,19 @@ const CustomTextContent = () => {
   );
 };
 
+
 const CheckAvailability = () => {
   return (
-    <div className="container">
-      <ImageBox
+    <div className="container" style={{ width: '100vw', padding: '0', margin: '0' }}>
+    <ImageBox
         imageSrc={Booking}
         TextContentComponent={<CustomTextContent />}
-      />
+    />
       <div className="availability-bar-wrapper">
         <AvailabilityBar />
       </div>
       <div className="content-container">
         <div className="room-cards">
-          {/* Example of using MyComponent for multiple room cards */}
           <div className="my-component-wrapper">
             <MyComponent
               roomImage={room}
@@ -110,20 +137,10 @@ const CheckAvailability = () => {
         </div>
         <div className="text-section">
           <img src={LotusIcon} alt="Lotus icon" style={{ width: "75px", height: "auto", objectFit: "contain" }} />
-          <Typography
-            variant="h3"
-            fontFamily="Marcellus, serif"
-            paddingTop={2}
-            paddingBottom={-100}
-          >
+          <Typography variant="h3" fontFamily="Marcellus, serif" paddingTop={2}>
             Unlock Unmatched Luxury
           </Typography>
-          <Typography
-            variant="h3"
-            fontFamily="Marcellus, serif"
-            paddingTop={2}
-            paddingBottom={5}
-          >
+          <Typography variant="h3" fontFamily="Marcellus, serif" paddingTop={2}>
             Dive, Rejuvenate, and Energize with Us
           </Typography>
         </div>
@@ -137,12 +154,12 @@ const CheckAvailability = () => {
             <ActivityCard
               img={spa}
               title="Rejuvenate at Our Luxurious Spa"
-              description="Indulge in soothing treatments and therapies designed to pamper your senses and rejuvenate your spirit. Escape into a world of tranquility, leaving you refreshed and revitalized."
+              description="Indulge in soothing treatments and therapies that pamper your senses and rejuvenate your spirit. Escape into tranquility, leaving you refreshed, renewed, and completely restored. Discover the perfect sanctuary for your well-being."
             />
             <ActivityCard
               img={gym}
               title="Energize at Our Modern Fitness Center"
-              description="Stay fit with top-notch equipment and inspiring views. Maintain your routine or start anew in our state-of-the-art gym."
+              description="Stay fit with top-notch equipment and inspiring views. Maintain your routine or start anew in our state-of-the-art gym. Our fitness facility also offers personalized training sessions to help you achieve your goals and stay motivated."
             />
           </div>
         </div>

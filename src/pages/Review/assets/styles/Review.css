@@ -1,62 +1,81 @@
 .container {
-    background-color: white;
-    overflow-x: hidden;
-  }
-  
+  background-color: white;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Default alignment for larger screens */
+  padding: 20px;
+  gap: 40px; /* Gap between the left and right sections */
+  width: 100%;
+}
+
+/* Tablet View (Under 1200px) */
+@media (max-width: 1200px) {
   .content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px;
-    gap: 40px; /* Gap between the left and right sections */
+    gap: 20px;
   }
-  
-  @media (max-width: 1200px) {
-    /* Tablet View */
-    .content {
-      gap: 20px;
-    }
-    
-    .left-section,
-    .right-section {
-      flex: 0.45; /* Reduce width for tablet view */
-    }
-  }
-  
-  @media (max-width: 960px) {
-    /* Mobile View */
-    .content {
-      flex-direction: column;
-      gap: 20px;
-    }
-  
-    .left-section,
-    .right-section {
-      flex: 1;
-      padding-right: 0;
-      padding-left: 0;
-    }
-  }
-  
-  .left-section {
-    flex: 1;
-    padding-right: 40px;
-  }
-  
+
+  .left-section,
   .right-section {
-    flex: 1;
-    padding-left: 40px;
+    flex: 0.45; /* Adjust width for tablets */
   }
-  
-  @media (max-width: 960px) {
-    .right-section {
-      margin-top: 40px;
-    }
+}
+
+/* View Between 600px and 960px */
+@media (max-width: 960px) {
+  .content {
+    flex-direction: column; /* Stack sections vertically */
+    align-items: center; /* Center the sections */
+    gap: 20px;
+    padding: 20px;
   }
-  
-  .underline {
-    width: 70%;
-    border-bottom: 1px solid black;
-    margin-bottom: 20px;
+
+  .left-section,
+  .right-section {
+    width: 90%; /* Ensure both sections take 90% of the container width */
+    padding-right: 0;
+    padding-left: 0;
   }
-  
+
+  .left-section .text-field {
+    width: 100%; /* Ensure text fields are full-width in left section */
+  }
+}
+
+/* Mobile View (Under 600px) */
+@media (max-width: 600px) {
+  .content {
+    flex-direction: column; /* Keep sections stacked vertically */
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .left-section,
+  .right-section {
+    width: 100%; /* Full width for smaller screens */
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 20px;
+  }
+
+  .right-section {
+    margin-top: 20px; /* Space between sections */
+  }
+
+  .left-section .text-field {
+    width: 100%;
+  }
+}
+
+/* Ensure sections align at the top for larger screens */
+.left-section {
+  align-self: flex-start;
+}
+
+.right-section {
+  flex-grow: 1;
+}
