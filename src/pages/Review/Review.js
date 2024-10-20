@@ -80,6 +80,11 @@ const Review = () => {
     if (formData.name === "") {
       newErrors.name = "This field is required";
     }
+    if (formData.name === "") {
+      newErrors.name = "This field is required";
+    } else if (!/^[a-zA-Z]+(?:[\s'-][a-zA-Z]+)*$/.test(formData.name)) {
+      newErrors.name = "Invalid name";
+    }
     if (formData.feedback === "") {
       newErrors.feedback = "This field is required";
     }
