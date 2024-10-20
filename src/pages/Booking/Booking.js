@@ -56,11 +56,32 @@ const BookingPage = () => {
 
   const validateFields = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = "Field is empty";
-    if (!formData.email) newErrors.email = "Field is empty";
-    if (!formData.phone) newErrors.phone = "Field is empty";
-    if (!formData.checkIn) newErrors.checkIn = "Field is empty";
-    if (!formData.checkOut) newErrors.checkOut = "Field is empty";
+    if (!formData.name) {newErrors.name = "Field is empty";
+    } else if (!/^[a-zA-Z]+(?:[\s'-][a-zA-Z]+)*$/.test(formData.name)) {
+      newErrors.name = "Invalid name";
+    }
+
+    if (!formData.email) {newErrors.email = "Field is empty";
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) {
+      newErrors.email = "Invalid email address";
+    }
+
+    if (!formData.phone) {newErrors.phone = "Field is empty";
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      newErrors.phone = "Invalid phone number";
+    }
+
+    if (!formData.checkIn) {newErrors.checkIn = "Field is empty";}
+
+    if (!formData.checkOut) {newErrors.checkOut = "Field is empty";}
+
+    if (new Date(formData.checkOut) <= new Date(formData.checkIn)) {
+      newErrors.checkOut = "Check-out date must be after check-in date";
+    }
+    if (roomCount < 1) newErrors.roomCount = "Room count must be at least 1";
+    if (adultCount < 1) newErrors.adultCount = "Adult count must be at least 1"; // Error for adult count
+    if (childrenCount < 0) newErrors.childrenCount = "Children count is invalid"; // Error for children count
+
 
     // Set the errors in the state
     setErrors(newErrors);
