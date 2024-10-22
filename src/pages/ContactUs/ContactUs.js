@@ -5,7 +5,6 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import './assets/styles/ContactUs.css';
 import backgroundImage from "./assets/images/room.jpg";
-import styled from "styled-components";
 import { AxiosInstance } from "../../axios.config";
 
 const ContactUsPage = () => {
@@ -98,7 +97,7 @@ const ContactUsPage = () => {
             value={formData.name} 
             onChange={handleChange} 
           />
-          <span className="error">{errors.name}</span> {/* Error display for name */}
+          <span className="error">{errors.name}</span>
           
           <input 
             type="email" 
@@ -108,7 +107,7 @@ const ContactUsPage = () => {
             value={formData.email} 
             onChange={handleChange} 
           />
-          <span className="error">{errors.email}</span> {/* Error display for email */}
+          <span className="error">{errors.email}</span>
           
           <textarea 
             name="description" 
@@ -117,7 +116,7 @@ const ContactUsPage = () => {
             value={formData.description} 
             onChange={handleChange}
           ></textarea>
-          <span className="error">{errors.description}</span> {/* Error display for description */}
+          <span className="error">{errors.description}</span>
           
           <button type="submit">Send</button>
         </form>
@@ -153,70 +152,24 @@ const ContactUsPage = () => {
           spacing={2}
           sx={{ marginTop: "20px" }}
         >
-          <SocialMediaLinks href="https://www.facebook.com">
-            <FacebookIcon style={{ color: "black" }} />
-          </SocialMediaLinks>
-          <SocialMediaLinks href="https://www.twitter.com">
-            <TwitterIcon style={{ color: "black" }} />
-          </SocialMediaLinks>
-          <SocialMediaLinks href="https://www.instagram.com">
-            <InstagramIcon style={{ color: "black" }} />
-          </SocialMediaLinks>
+          <a href="https://www.facebook.com" className="social-media-links">
+            <FacebookIcon />
+          </a>
+          <a href="https://www.twitter.com" className="social-media-links">
+            <TwitterIcon />
+          </a>
+          <a href="https://www.instagram.com" className="social-media-links">
+            <InstagramIcon />
+          </a>
         </Stack>
       </div>
-
-      {/* Popup Component */}
       {isPopupOpen && (
         <div className="popup">
-          <div className="popup-content">
-            <p>We received your query. Thank you for contacting us.</p>
-          </div>
+          Message sent successfully! We'll contact you soon.
         </div>
       )}
-
-      {/* Styles for Popup (you can move this to your CSS file) */}
-      <style jsx>{`
-        .popup {
-          position: fixed;
-          bottom: 20px; 
-          right: 20px; 
-          background: green; 
-          color: white; 
-          padding: 20px;
-          border-radius: 5px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          transform: translateX(100%); 
-          animation: slideIn 0.5s forwards; 
-          z-index: 1000; 
-        }
-
-        @keyframes slideIn {
-          from {
-            transform: translateX(100%); 
-          }
-          to {
-            transform: translateX(0); 
-          }
-        }
-      `}</style>
     </div>
   );
 };
-
-const SocialMediaLinks = styled.a`
-  font-family: "Marcellus", serif;
-  font-weight: 400;
-  font-size: 16px;
-  color: rgba(255, 255, 255, 1);
-  cursor: pointer;
-  margin-left: 15px;
-  margin-right: 15px;
-  text-decoration: none;
-  display: inline-block; 
-  transition: transform 0.3s ease; 
-  &:hover {
-    transform: scale(1.2); 
-  }
-`;
 
 export default ContactUsPage;

@@ -12,7 +12,6 @@ import "./assets/styles/Review.css"; // Import the CSS file
 
 const CustomTextContent = () => {
   return (
-    <Stack>
       <Stack spacing={2}>
         <Typography
           variant="h1"
@@ -38,7 +37,6 @@ const CustomTextContent = () => {
           "Hear what our guests have to say about their experience with us."
         </Typography>
       </Stack>
-    </Stack>
   );
 };
 
@@ -60,7 +58,8 @@ const Review = () => {
       try {
         let response = await AxiosInstance.get("/api/review/all");
         console.log("Reviews data:", response.data);
-        setReviews(response.data);
+        const acceptedReviews = response.data.filter(review => review.status === "Approved");
+        setReviews(acceptedReviews);
       } catch (error) {
         console.error(error);
       }
@@ -71,15 +70,12 @@ const Review = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = { ...errors };
-    if (formData.name === "") {
-      newErrors.name = "This field is required";
-    }
+    
     if (formData.name === "") {
       newErrors.name = "This field is required";
     } else if (!/^[a-zA-Z]+(?:[\s'-][a-zA-Z]+)*$/.test(formData.name)) {

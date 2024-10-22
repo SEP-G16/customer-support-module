@@ -63,72 +63,81 @@ const BookingPage = () => {
   const calculateTotalCost = () => {
     let baseCostPerNight;
 
+    // Set the base cost per night depending on the room type
     if (formData.room === "Standard rooms") {
-        baseCostPerNight = 10250;
+      baseCostPerNight = 10250;
     } else if (formData.room === "Deluxe rooms") {
-        baseCostPerNight = 15780;
+      baseCostPerNight = 15780;
     } else if (formData.room === "Suite rooms") {
-        baseCostPerNight = 20200;
+      baseCostPerNight = 20200;
     } else {
-        baseCostPerNight = 0; // Handle unexpected room types
+      baseCostPerNight = 0; // Handle unexpected room types
     }
 
-    const totalCost = baseCostPerNight * roomCount;
+    // Calculate the number of days between check-in and check-out
+    const checkInDate = new Date(formData.checkIn); // Assuming formData contains check-in date
+    const checkOutDate = new Date(formData.checkOut); // Assuming formData contains check-out date
+
+    const timeDiff = checkOutDate - checkInDate; // Difference in milliseconds
+    const numberOfDays = timeDiff / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+
+    // Calculate total cost based on base cost, room count, and number of days
+    const totalCost = baseCostPerNight * roomCount * numberOfDays;
+
     return totalCost;
-};
+  };
 
+  const validateFields = () => {
+    const newErrors = {};
 
-const validateFields = () => {
-  const newErrors = {};
+    // Name validation
+    if (!formData.name) {
+      newErrors.name = "Field is empty";
+    } else if (!/^[a-zA-Z]+(?:[\s'-][a-zA-Z]+)*$/.test(formData.name)) {
+      newErrors.name = "Invalid name";
+    }
 
-  // Name validation
-  if (!formData.name) {
-    newErrors.name = "Field is empty";
-  } else if (!/^[a-zA-Z]+(?:[\s'-][a-zA-Z]+)*$/.test(formData.name)) {
-    newErrors.name = "Invalid name";
-  }
+    // Email validation
+    if (!formData.email) {
+      newErrors.email = "Field is empty";
+    } else if (
+      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
+    ) {
+      newErrors.email = "Invalid email address";
+    }
 
-  // Email validation
-  if (!formData.email) {
-    newErrors.email = "Field is empty";
-  } else if (
-    !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)
-  ) {
-    newErrors.email = "Invalid email address";
-  }
+    // Phone validation
+    if (!formData.phone) {
+      newErrors.phone = "Field is empty";
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      newErrors.phone = "Invalid phone number";
+    }
 
-  // Phone validation
-  if (!formData.phone) {
-    newErrors.phone = "Field is empty";
-  } else if (!/^\d{10}$/.test(formData.phone)) {
-    newErrors.phone = "Invalid phone number";
-  }
+    // Check-in and check-out validation
+    if (!formData.checkIn) {
+      newErrors.checkIn = "Field is empty";
+    }
 
-  // Check-in and check-out validation
-  if (!formData.checkIn) {
-    newErrors.checkIn = "Field is empty";
-  }
+    if (!formData.checkOut) {
+      newErrors.checkOut = "Field is empty";
+    } else if (new Date(formData.checkOut) <= new Date(formData.checkIn)) {
+      newErrors.checkOut = "Check-out date must be after check-in date";
+    }
 
-  if (!formData.checkOut) {
-    newErrors.checkOut = "Field is empty";
-  } else if (new Date(formData.checkOut) <= new Date(formData.checkIn)) {
-    newErrors.checkOut = "Check-out date must be after check-in date";
-  }
+    // Room count validation
+    if (roomCount < 1) newErrors.roomCount = "Room count must be at least 1";
 
-  // Room count validation
-  if (roomCount < 1) newErrors.roomCount = "Room count must be at least 1";
+    // Adult count validation
+    if (adultCount < 1) newErrors.adultCount = "Adult count must be at least 1";
 
-  // Adult count validation
-  if (adultCount < 1) newErrors.adultCount = "Adult count must be at least 1";
+    // Children count validation
+    if (childrenCount < 0)
+      newErrors.childrenCount = "Children count cannot be negative"; // Error for children count
 
-  // Children count validation
-  if (childrenCount < 0) newErrors.childrenCount = "Children count cannot be negative"; // Error for children count
-
-  // Set the errors in the state
-  setErrors(newErrors);
-  return Object.keys(newErrors).length === 0; // Return true if no errors
-};
-
+    // Set the errors in the state
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -382,11 +391,10 @@ const validateFields = () => {
               }}
             />
             {childrenCount < 0 && (
-              <FormHelperText error>Children count cannot be negative</FormHelperText>
+              <FormHelperText error>
+                Children count cannot be negative
+              </FormHelperText>
             )}
-
-
-
 
             <Typography variant="h6">
               {roomCount > 0
